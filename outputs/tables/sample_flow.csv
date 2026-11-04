@@ -1,0 +1,15 @@
+﻿Schritt,Basis,N,Anteil_am_Rohdatensatz,Entfernt_gegenueber_Vorzeile
+Rohdatensatz,sequenzielle Bereinigung,125855,1.0,0.0
+Besitzerangabe vorhanden (nicht '0 - 0'),sequenzielle Bereinigung,101276,0.8047038258313138,24579.0
+Veroeffentlichung 1997-2025,sequenzielle Bereinigung,100976,0.8023201303086885,300.0
+ohne Demo/Playtest/Soundtrack/DLC usw.,sequenzielle Bereinigung,100874,0.801509673830996,102.0
+ohne Software/Utilities,sequenzielle Bereinigung,99799,0.7929680982082555,1075.0
+Analysestichprobe (ohne Namens-/Editionsduplikate),sequenzielle Bereinigung,99397,0.7897739462079377,402.0
+"Teilstichprobe: mind. 10 Reviews (F3, Bewertungsanalysen)",Teilmenge der Analysestichprobe,55806,0.44341504111874774,
+Teilstichprobe: mind. 50 Reviews (Robustheit F3),Teilmenge der Analysestichprobe,30214,0.24006992173533034,
+Teilstichprobe: FronkonGames-Metacritic vorhanden (nur Vergleich),Teilmenge der Analysestichprobe,4169,0.0331254221127488,
+Teilstichprobe: Peak CCU > 0 (ergaenzende Zielgroesse),Teilmenge der Analysestichprobe,19301,0.15335902427396608,
+Teilstichprobe: IGDB-Match vorhanden,Teilmenge der Analysestichprobe,66354,0.5272257756942513,
+Teilstichprobe: externe Metacritic-Daten vorhanden,Teilmenge der Analysestichprobe,3056,0.024281911723809144,
+Teilstichprobe: Preishistorie vorhanden,Teilmenge der Analysestichprobe,645,0.005124945373644273,
+Teilstichprobe: alle vier Datenquellen vorhanden,Teilmenge der Analysestichprobe,290,0.002304239005204402,

@@ -1,0 +1,5 @@
+﻿Test,Merkmal,Gruppe,N,Effekt,Effekt_typ,CI_unten,CI_oben,p,Median_Gruppe,Median_Referenz,Mittelwert_Gruppe,Mittelwert_Referenz,p_adj
+Mann-Whitney-U,Besitzer: IGDB-Match vorhanden vs. nicht,has_igdb = ja (n=66354) vs. nein (n=33043),99397,0.05279935384317391,Cliff's Delta,,,1.2958085500971332e-70,10000.0,10000.0,110592.88061006118,91498.04799806314,1.2958085500971332e-70
+Mann-Whitney-U,Besitzer: externer Metacritic-Match vorhanden vs. nicht,has_mc_external = ja (n=3056) vs. nein (n=96341),99397,0.7711729071164157,Cliff's Delta,,,0.0,350000.0,10000.0,1147048.4293193717,71166.68915622632,0.0
+Mann-Whitney-U,Besitzer: Preishistorie-Match vorhanden vs. nicht,has_price_history = ja (n=645) vs. nein (n=98752),99397,0.8067146515647059,Cliff's Delta,,,0.0,750000.0,10000.0,2084279.0697674418,91312.47974724563,0.0
+Mann-Whitney-U,Besitzer: FronkonGames-Metacritic vorhanden vs. nicht,has_metacritic = ja (n=4169) vs. nein (n=95228),99397,0.741487073283402,Cliff's Delta,,,0.0,150000.0,10000.0,1016345.6464379947,64314.11979669845,0.0

@@ -1,0 +1,31 @@
+﻿Variable,Beschreibung,Typ,Rolle
+owners_low,Untere Grenze der Besitzer-Spanne,metrisch,Zielgroesse (Schwellen)
+owners_mid,Mittelpunkt der Besitzer-Spanne,metrisch,Zielgroesse (log-transformiert)
+log_owners,log10(owners_mid),metrisch,Zielgroesse in Korrelationen/Tests
+peak_ccu,Peak Concurrent Players,metrisch,ergaenzende Zielgroesse
+release_year,Veroeffentlichungsjahr,metrisch,Kontrollvariable / F1
+n_platforms,Anzahl unterstuetzter Plattformen,metrisch,F1
+genre_*,Genre-Indikatoren,binaer,F1
+mode,Single-/Multiplayer-Kategorie,kategorial,F1
+price,Aktueller Preis in USD,metrisch,F2
+is_free,Free-to-Play-Indikator,binaer,F2
+discount,Aktueller Rabatt in Prozent,metrisch,F2
+dlc_count,Anzahl DLCs,metrisch,F2
+wilson,Wilson-Untergrenze der positiven Bewertungen,metrisch,F3
+positive_ratio,Anteil positiver Bewertungen,metrisch,F3 (Robustheit)
+metacritic,Metacritic-Score aus FronkonGames,metrisch,Vergleichswert
+mc_metascore,Externer Metacritic-Kritikerscore,metrisch,F3 (externe Quelle)
+mc_user_score,Externer Metacritic-Nutzerscore,metrisch,F3 (externe Quelle)
+igdb_rating,IGDB-Nutzerbewertung,metrisch,externe Validierung
+igdb_aggregated_rating,IGDB-Kritikerbewertung,metrisch,externe Validierung
+igdb_multiplayer,IGDB: Multiplayer-Modus,binaer,externe Validierung
+igdb_singleplayer,IGDB: Singleplayer-Modus,binaer,externe Validierung
+igdb_n_genres,Anzahl IGDB-Genres,metrisch,externe Validierung
+ph_max_discount_pct,Maximaler Preisnachlass in der Preishistorie,metrisch,F2 (externe Quelle)
+ph_share_months_on_sale,Anteil Monate mit Rabatt,metrisch,F2 (externe Quelle)
+ph_price_changes_total,Preisaenderungen in der Preishistorie,metrisch,F2 (externe Quelle)
+n_sources,Anzahl verfuegbarer Datenquellen,metrisch,Datenabdeckung
+review_count,Anzahl Reviews,metrisch,"nur Stichprobenrestriktion, kein Praediktor"
+success_top25,Erfolg: oberes Quartil der Besitzer,binaer,Erfolgsziel (deskriptiv)
+success_top10,Erfolg: obere 10-%-Schwelle,binaer,Robustheitsziel
+success_100k,Erfolg: mind. 100.000 Besitzer,binaer,Robustheitsziel

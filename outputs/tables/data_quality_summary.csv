@@ -1,0 +1,24 @@
+﻿Pruefung,Wert,Anteil
+Zeilen im Rohdatensatz,125855,1.0
+Eindeutige AppIDs,125855,1.0
+Doppelte AppIDs,0,0.0
+Fehlender Name,1,7.945651742084144e-06
+Fehlendes Release-Datum,0,0.0
+Release-Jahr nach 2025,3316,0.026347781176751024
+Besitzer '0 - 0' (fehlend),24579,0.1952961741686862
+Preis = 0,26661,0.21183902109570538
+Preis fehlend/negativ,0,0.0
+Keine Reviews,42899,0.3408605140836677
+Kein Metacritic-Score,121597,0.9661674148822057
+Peak CCU = 0,106175,0.8436295737157841
+Keine Genre-Angabe,10134,0.08052123475428072
+Keine Kategorie-Angabe,8966,0.07124071351952643
+Software/Utilities,1208,0.009598347304437647
+Nicht-Spiel-Name (Demo/Playtest usw.),8310,0.06602836597671924
+Namens-/Editionsduplikate (entfernt),402,0.003194152000317826
+Analysestichprobe,99397,0.7897739462079377
+IGDB-Match in Analysestichprobe,66354,0.5272257756942513
+Externer Metacritic-Match in Analysestichprobe,3056,0.024281911723809144
+Preishistorie-Match in Analysestichprobe,645,0.005124945373644273
+Mindestens zwei Datenquellen,66783,0.5306344602916054
+Alle vier Datenquellen,290,0.002304239005204402
