@@ -1,5 +1,5 @@
 ﻿Quelle,Datensatz,N_Quelle,N_gematcht_gesamt,Match_Rate_gesamt,N_gematcht_analytisch,Match_Rate_analytisch,Schluessel,Hinweis
 FronkonGames (Steam),"steam-games-dataset, Version 57",125855,125855,1.0,99397,1.0,AppID,Basisdatensatz
-IGDB,emirshn/igdb-dataset-for-data-mining-projects,230201,72731,0.5778951968535219,66354,0.6675654194794611,normalisierter Name + Jahr,ein IGDB-Treffer pro Name/Jahr
-Metacritic extern,stadynromn/metacritic-video-games-reviews-up-to-sep-2025,6277,3125,0.02483016169401295,3056,0.030745394730223245,normalisierter Name + Jahr (nur PC),nur PC-Versionen des Metacritic-Datensatzes
-Preishistorie,andrii222/steam-price-history-nov-2023-oct-2025,651,650,0.005164673632354694,645,0.00648912945058704,Steam-AppID,monatliche Preishistorie 2023-11 bis 2025-11
+IGDB,"emirshn/igdb-dataset-for-data-mining-projects, Version 1",230201,72731,0.5778951968535219,66354,0.6675654194794611,normalisierter Name + Jahr,ein IGDB-Treffer pro Name/Jahr
+Metacritic extern,"stadynromn/metacritic-video-games-reviews-up-to-sep-2025, Version 1",6277,3125,0.02483016169401295,3056,0.030745394730223245,normalisierter Name + Jahr (nur PC),nur PC-Versionen des Metacritic-Datensatzes
+Preishistorie,"andrii222/steam-price-history-nov-2023-oct-2025, Version 1",651,650,0.005164673632354694,645,0.00648912945058704,Steam-AppID,monatliche Preishistorie 2023-11 bis 2025-11

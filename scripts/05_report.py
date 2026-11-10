@@ -104,6 +104,32 @@ def main() -> None:
     n_peak = int(analytic["peak_sample"].sum())
     n_meta_fronk = int(analytic["meta_sample"].sum())
 
+    n_100_200 = int(
+        ((analytic["owners_mid"] >= 100_000_000) & (analytic["owners_mid"] < 200_000_000)).sum()
+    )
+    share_100_200 = n_100_200 / n_analytic if n_analytic else float("nan")
+
+    mc_both = analytic.dropna(subset=["mc_metascore", "metacritic"])
+    n_mc_overlap = len(mc_both)
+    n_mc_exact = int((mc_both["mc_metascore"] == mc_both["metacritic"]).sum())
+    mc_agreement_rho = (
+        mc_both["mc_metascore"].corr(mc_both["metacritic"], method="spearman")
+        if n_mc_overlap > 2
+        else float("nan")
+    )
+
+    igdb_rating_values = analytic.loc[analytic["igdb_sample"], "igdb_rating"].dropna()
+    igdb_tie_share = (
+        float((igdb_rating_values == 70.0).mean()) if len(igdb_rating_values) else float("nan")
+    )
+
+    igdb_df = analytic.loc[analytic["igdb_sample"]].dropna(subset=["igdb_rating"])
+    igdb_integer_mask = igdb_df["igdb_rating"].mod(1) == 0
+    n_igdb_integer = int(igdb_integer_mask.sum())
+    n_igdb_decimal = int((~igdb_integer_mask).sum())
+    succ_igdb_integer = igdb_df.loc[igdb_integer_mask, "success_top25"].mean()
+    succ_igdb_decimal = igdb_df.loc[~igdb_integer_mask, "success_top25"].mean()
+
     top25 = thresholds.loc[thresholds["Kriterium"].str.startswith("Top 25"), "Anteil_der_analysestichprobe"].iloc[0]
     top10 = thresholds.loc[thresholds["Kriterium"].str.startswith("Top 10"), "Anteil_der_analysestichprobe"].iloc[0]
     top100k = thresholds.loc[thresholds["Kriterium"].str.startswith("Mindestens 100.000"), "Anteil_der_analysestichprobe"].iloc[0]
@@ -198,6 +224,7 @@ def main() -> None:
     ratings_tbl = ratings.copy()
     ratings_tbl["Erfolgsquote"] = ratings_tbl["Erfolgsquote"].map(pct)
     ratings_tbl["CI"] = ratings_tbl.apply(lambda r: f"[{pct(r['CI_unten'])}; {pct(r['CI_oben'])}]", axis=1)
+    ratings_tbl["N"] = ratings_tbl["N"].map(lambda x: de(x, 0))
     ratings_tbl = ratings_tbl[["Bewertungsmaß", "Quartil", "N", "Erfolgsquote", "CI"]].rename(
         columns={"Erfolgsquote": "Erfolgsquote", "CI": "95-%-KI"}
     )
@@ -262,6 +289,7 @@ def main() -> None:
         out["Erfolgsquote"] = out["Erfolgsquote"].map(pct)
         out["CI"] = out.apply(lambda r: f"[{pct(r['CI_unten'])}; {pct(r['CI_oben'])}]", axis=1)
         out["Median_Besitzer"] = out["Median_Besitzer"].map(lambda x: de(x, 0))
+        out["N"] = out["N"].map(lambda x: de(x, 0))
         return out[["Bewertungsmaß", "Quartil", "N", "Erfolgsquote", "CI", "Median_Besitzer"]].rename(
             columns={"Erfolgsquote": "Erfolgsquote", "CI": "95-%-KI", "Median_Besitzer": "Median Besitzer"}
         )
@@ -281,7 +309,25 @@ def main() -> None:
 
     def format_test_table(df: pd.DataFrame, family: str) -> str:
         part = df[df["Familie"] == family].copy()
-        part["Effekt"] = part.apply(lambda r: eff_ci(r["Effekt"], r["CI_unten"], r["CI_oben"], 2), axis=1)
+
+        def effect_cell(row: pd.Series) -> str:
+            test = str(row["Test"])
+            if test.startswith("Chi2 (kategorial)") and pd.notna(row.get("Zusatz_Effekt")):
+                return de(row["Zusatz_Effekt"], 2)
+            if test.startswith("Kruskal") and pd.notna(row.get("Zusatz_Effekt")):
+                return de(row["Zusatz_Effekt"], 3)
+            return eff_ci(row["Effekt"], row["CI_unten"], row["CI_oben"], 2)
+
+        def effect_label(row: pd.Series) -> str:
+            test = str(row["Test"])
+            if test.startswith("Chi2 (kategorial)") and pd.notna(row.get("Zusatz_Effekt")):
+                return "Cramér's V"
+            if test.startswith("Kruskal") and pd.notna(row.get("Zusatz_Effekt")):
+                return "ε²"
+            return str(row["Effekt_typ"])
+
+        part["Effekt"] = part.apply(effect_cell, axis=1)
+        part["Effekt_typ"] = part.apply(effect_label, axis=1)
         part["p_adj"] = part["p_adj"].map(pval)
         part["N"] = part["N"].map(lambda x: de(x, 0))
         cols = ["Merkmal", "Test", "Effekt_typ", "N", "Effekt", "p_adj"]
@@ -304,7 +350,7 @@ def main() -> None:
     )
     selection_tbl["p_adj"] = selection_tbl["p_adj"].map(pval)
     selection_tbl = selection_tbl[["Merkmal", "N", "Effekt", "p_adj"]].rename(
-        columns={"Effekt": "Cliff's Delta [95-%-KI]", "p_adj": "p (BH-korrigiert)"}
+        columns={"Effekt": "Cliff's Delta", "p_adj": "p (BH-korrigiert)"}
     )
 
     # Zentrale Effekte fuer den Fliesstext.
@@ -328,7 +374,7 @@ def main() -> None:
     text = f"""# Umsetzung der Analyse: Erfolgsfaktoren von Videospielen auf Steam
 
 *Ergebnisbericht zur empirischen Umsetzung des Forschungsvorhabens.*  
-*Datengrundlage: FronkonGames Steam Games Dataset (Version 57) sowie externe IGDB-, Metacritic- und Preishistorien-Daten. Auswertungsstand: 3. November 2026.*
+*Datengrundlage: FronkonGames Steam Games Dataset (Version 57) sowie externe IGDB-, Metacritic- und Preishistorien-Daten. Auswertungsstand: 10. November 2026.*
 
 ## 0. Kurzfassung
 
@@ -353,6 +399,8 @@ Verwendet werden:
 2. **IGDB-Spielemetadaten** (Kaggle: `emirshn/igdb-dataset-for-data-mining-projects`, Version 1): 232.595 Rohzeilen (230.201 nach Name/Jahr-Deduplizierung) mit IGDB-ID, Name, Release-Datum, Nutzer- und Kritikerbewertung, Genres, Spielmodi, Plattformen, Entwicklern und Publishern.
 3. **Externer Metacritic-Datensatz** (Kaggle: `stadynromn/metacritic-video-games-reviews-up-to-sep-2025`, Version 1): 22.224 Plattform-Einträge, davon 6.387 PC-Einträge (6.277 nach Name/Jahr-Deduplizierung) mit Metascore, Nutzerscore, Genre, Entwickler und Publisher.
 4. **Steam-Preishistorie** (Kaggle: `andrii222/steam-price-history-nov-2023-oct-2025`, Version 1): 651 Apps mit monatlichen Preisinformationen von November 2023 bis November 2025 (Basispreis, niedrigster Preis, Preisänderungen, Rabatttage).
+
+Hinweis: Der externe Metacritic-Datensatz und die Metacritic-Spalte von FronkonGames sind weitgehend deckungsgleich. Der externe Datensatz dient daher dem Quellenabgleich und der PC-spezifischen Ergänzung, nicht als unabhängige Validierung.
 
 Die Verknüpfung erfolgt über:
 
@@ -404,7 +452,7 @@ Die starke Konzentration in der untersten Klasse (0–20.000) ist eine zentrale 
 
 {md(owners_tbl)}
 
-Die Verteilung ist stark rechtsschief: 74,5 % der Spiele liegen in der untersten Klasse, während nur 0,04 % (4 Spiele) die Klasse 100–200 Mio. erreichen. Für Korrelationen und Gruppenvergleiche wird daher `log10(owners_mid)` verwendet.
+Die Verteilung ist stark rechtsschief: 74,5 % der Spiele liegen in der untersten Klasse, während nur {pct(share_100_200, 3)} ({de(n_100_200, 0)} Spiele) die Klasse 100–200 Mio. erreichen. Für Korrelationen und Gruppenvergleiche wird daher `log10(owners_mid)` verwendet.
 
 ![Verteilung der geschätzten Besitzer](../figures/fig_01_owners_distribution.png)
 
@@ -448,6 +496,8 @@ Die externe Metacritic-Teilstichprobe ist stark selektiert; die Erfolgsquoten un
 
 {md(mc_ext_tbl)}
 
+**Wichtig:** Der externe Metacritic-Datensatz ist keine unabhängige zweite Quelle. Von den {de(n_mc_overlap, 0)} Spielen mit beiden Scores stimmen {de(n_mc_exact, 0)} exakt mit der FronkonGames-Spalte überein (Spearman ρ = {de(mc_agreement_rho, 4)}). Der Abgleich prüft daher das Matching, nicht die externe Validität.
+
 {md(meta_cov_tbl)}
 
 ![Bewertungen und Besitzer](../figures/fig_07_ratings.png)
@@ -469,6 +519,8 @@ Erfolgsquote nach IGDB-Spielmodus:
 {md(igdb_mode_tbl)}
 
 Erfolgsquote nach IGDB-Bewertungsquartilen:
+
+Die IGDB-Nutzerbewertung ist stark gebunden: {pct(igdb_tie_share)} der Spiele mit IGDB-Bewertung haben exakt 70/100. Die Quartile werden daher rangbasiert gebildet; bei Gleichständen entscheidet eine feste Zufallsreihenfolge (Seed 42), welchem Quartil ein Spiel zugeordnet wird. Dadurch sind die vier Gruppen gleich groß und die Erfolgsquoten vergleichbar, die Quartilsgrenzen selbst sind wegen der Bindungen aber nicht inhaltlich interpretierbar. Zusätzlich hängt die Nachkommastelle der IGDB-Bewertung vom Bewertungsvolumen ab: Spiele mit ganzzahliger Bewertung ({de(n_igdb_integer, 0)}; Erfolgsquote {pct(succ_igdb_integer)}) unterscheiden sich deutlich von Spielen mit nicht-ganzzahliger Bewertung ({de(n_igdb_decimal, 0)}; {pct(succ_igdb_decimal)}). Die IGDB-Nutzerbewertung ist daher als ordinale Erfolgskennzahl nur eingeschränkt interpretierbar; die Quartilstabelle zeigt entsprechend kein monotones Muster.
 
 {md(igdb_rating_tbl)}
 
@@ -494,7 +546,7 @@ Die meisten Spiele stammen aus dem Basisdatensatz; 66.354 Spiele haben zusätzli
 
 ## 3. Statistische Tests
 
-Alle Tests berichten Effektstärken und 95-%-Konfidenzintervalle. p-Werte werden innerhalb jeder Hypothese per **Benjamini-Hochberg**-Verfahren korrigiert. Wegen der großen Stichprobe sind viele p-Werte extrem klein; die inhaltliche Bewertung stützt sich daher auf Effektgrößen und Konfidenzintervalle.
+Die Tests berichten Effektstärken. 95-%-Konfidenzintervalle werden für Odds Ratios und Spearman-Korrelationen ausgewiesen; für Chi²-, Kruskal-Wallis- und Cliff's-Delta-Maße werden die Effektstärken (Cramér's V, ε², Cliff's Delta) ohne Konfidenzintervall angegeben. p-Werte werden innerhalb jeder Hypothese per **Benjamini-Hochberg**-Verfahren korrigiert. Wegen der großen Stichprobe sind viele p-Werte extrem klein; die inhaltliche Bewertung stützt sich daher auf Effektgrößen.
 
 ### 3.1 H1 – Spieleigenschaften
 
@@ -531,7 +583,7 @@ Kernergebnisse:
 
 - **Steam-Nutzerbewertungen:** Der Wilson-Score korreliert positiv mit Besitzern ({wilson_rho}) und Peak CCU. Die **Positive Ratio** – der reine Anteil positiver Bewertungen – korreliert dagegen praktisch nicht mit Besitzern ({positive_ratio_rho}). Mit Peak CCU besteht ein schwacher positiver Zusammenhang. Nach Kontrolle des Veröffentlichungsjahres wird die Positive-Ratio-Korrelation mit Besitzern leicht positiv, bleibt aber klein.
 - **Externes Metacritic:** In der Teilstichprobe korreliert der externe Metacritic-Score positiv mit Besitzern ({mc_ext_rho}) und Peak CCU. Die Übereinstimmung zwischen Steam-Wilson und externem Metacritic ist moderat. Wegen der starken Selektion (nur {pct(n_mc_ext / n_analytic)} der Analysestichprobe haben externe Metacritic-Daten) sind diese Werte nicht auf alle Spiele verallgemeinerbar.
-- **Vergleich der Metacritic-Quellen:** Der externe Metacritic-Score und die FronkonGames-eigene Metacritic-Spalte werden direkt gegeneinander geprüft; die Übereinstimmung ist ein Validitätsindikator für das Matching.
+- **Vergleich der Metacritic-Quellen:** Der externe Metacritic-Score und die FronkonGames-eigene Metacritic-Spalte werden direkt gegeneinander geprüft. Da {de(n_mc_exact, 0)} von {de(n_mc_overlap, 0)} Werten exakt übereinstimmen (ρ = {de(mc_agreement_rho, 4)}), ist das faktisch dieselbe Quelle; der Abgleich ist ein Matching-Check, kein unabhängiger Validitätsnachweis.
 
 **H3 wird für Kritikerbewertungen gestützt, für Steam-Nutzerbewertungen nur eingeschränkt:** Die Bewertungshöhe der Steam-Nutzer hängt nicht mit der Reichweite zusammen; der positive Wilson-Besitzer-Zusammenhang ist größtenteils ein Volumenartefakt.
 
@@ -543,7 +595,7 @@ Die folgende Tabelle prüft, ob die externen Quellen die Befunde stützen. IGDB-
 
 Kernergebnisse:
 
-- **IGDB-Bewertungen:** IGDB-Nutzerbewertungen korrelieren mit Besitzern ({igdb_rating_rho}), IGDB-Kritikerbewertungen ebenfalls ({igdb_agg_rho}). Die Effekte sind kleiner als beim externen Metacritic, aber konsistent in der Richtung.
+- **IGDB-Bewertungen:** IGDB-Nutzerbewertungen korrelieren mit Besitzern ({igdb_rating_rho}), IGDB-Kritikerbewertungen ebenfalls ({igdb_agg_rho}). Die Rangkorrelationen sind kleiner als beim externen Metacritic, aber konsistent in der Richtung. Bei der Nutzerbewertung ist zu beachten, dass die Bewertungspräzision mit dem Bewertungsvolumen zusammenhängt (Abschnitt 2.6); der Zusammenhang ist daher teilweise ein Popularitätsartefakt.
 - **IGDB-Spielmodi:** IGDB-Multiplayer ist positiv mit Erfolg assoziiert (adjustierte OR {igdb_mp_or}); die übrigen Modi zeigen ebenfalls positive, aber unterschiedlich starke Assoziationen.
 - **Preishistorie:** Der maximale Rabatt korreliert roh mit Besitzern ({ph_discount_rho}), nach Alterskontrolle jedoch nicht mehr ({ph_discount_partial}). Die Rabatthäufigkeit ist roh ({ph_share_rho}) und partiell ({ph_share_partial}) schwach. Die Anzahl der Preisänderungen korreliert roh ({ph_changes_rho}) und auch nach Alterskontrolle ({ph_changes_partial}) positiv. Die bivariaten Rabattmuster sind damit stark durch die selektive Stichprobe und das Alter der Spiele geprägt.
 - **Quellenübereinstimmung:** IGDB-Kritikerbewertungen, externes Metacritic und Steam-Wilson zeigen positive Übereinstimmungen. Die externen Quellen widersprechen den Steam-Befunden nicht, messen aber unterschiedliche Konstrukte (Kritikerurteil, Nutzerurteil, Reichweite).
@@ -552,7 +604,7 @@ Kernergebnisse:
 
 ### 3.5 Selektionsverzerrung der externen Teilstichproben
 
-Spiele mit externen Daten sind größer und populärer als Spiele ohne externe Daten. Die folgende Tabelle vergleicht die Besitzerverteilung zwischen gematchten und nicht gematchten Spielen:
+Spiele mit externen Daten sind im Mittel größer und populärer als Spiele ohne externe Daten; der Unterschied ist für Metacritic (Cliff's Delta 0,77) und Preishistorie (0,81) stark, für IGDB nur schwach (0,05). Die folgende Tabelle vergleicht die Besitzerverteilung zwischen gematchten und nicht gematchten Spielen:
 
 {md(selection_tbl)}
 
@@ -564,7 +616,7 @@ Die folgende Diagnose trennt Bewertungshöhe und Bewertungsvolumen:
 
 {md(diag_tbl)}
 
-Die Review-Anzahl korreliert sehr stark mit Besitzern und mit dem Wilson-Score. Wird das Review-Volumen herauspartialisiert, wird die Wilson-Besitzer-Korrelation **negativ**. Der Wilson-Score misst daher nicht nur Zufriedenheit, sondern auch, wie viele Reviews ein Spiel hat – und die Review-Anzahl ist selbst ein Popularitätsmaß. Aus diesem Grund wird die **Positive Ratio** als inhaltlich saubere Bewertungsvariable verwendet; der Wilson-Score dient nur als Sensitivitätsanalyse.
+Die Review-Anzahl korreliert sehr stark mit Besitzern und mit dem Wilson-Score. Wird das Review-Volumen herauspartialisiert, wird die Wilson-Besitzer-Korrelation **negativ** (−0,087 bei mind. 10, −0,197 bei mind. 50 Reviews). Der Wilson-Score misst daher nicht nur Zufriedenheit, sondern auch, wie viele Reviews ein Spiel hat – und die Review-Anzahl ist selbst ein Popularitätsmaß. Die **Positive Ratio** ist davon weniger betroffen, aber nicht frei davon: Nach Kontrolle des Review-Volumens ist auch ihr Zusammenhang mit Besitzern negativ (−0,057 bzw. −0,193). Sie wird daher als näher an der reinen Bewertungshöhe verwendet; der Wilson-Score dient nur als Sensitivitätsanalyse.
 
 ## 4. Beantwortung der Forschungsfragen
 
@@ -584,7 +636,7 @@ Free-to-Play-Spiele erreichen häufiger hohe Besitzerzahlen. Unter kostenpflicht
 
 **Wie stark hängen Nutzer- und Kritikerbewertungen mit Popularität zusammen?**
 
-Die Steam-Bewertungshöhe (Positive Ratio) hängt praktisch nicht mit der Reichweite zusammen; mit der Spieleraktivität besteht ein schwacher positiver Zusammenhang. Der Wilson-Score zeigt nur deshalb einen positiven Besitzer-Zusammenhang, weil er das Review-Volumen enthält. Externe Metacritic-Scores und IGDB-Bewertungen korrelieren in den jeweiligen Teilstichproben moderat positiv mit Besitzern und Peak CCU; die Übereinstimmung zwischen den Bewertungsquellen ist moderat. H3 wird für Kritikerbewertungen gestützt, für Steam-Nutzerbewertungen nur eingeschränkt.
+Die Steam-Bewertungshöhe (Positive Ratio) hängt roh praktisch nicht mit der Reichweite zusammen; nach Kontrolle des Review-Volumens ist der Zusammenhang sogar leicht negativ. Mit der Spieleraktivität besteht ein schwacher positiver Zusammenhang. Der Wilson-Score zeigt nur deshalb einen positiven Besitzer-Zusammenhang, weil er das Review-Volumen enthält. Externe Metacritic-Scores und IGDB-Bewertungen korrelieren in den jeweiligen Teilstichproben moderat positiv mit Besitzern und Peak CCU; die Übereinstimmung zwischen den Bewertungsquellen ist moderat. H3 wird für Kritikerbewertungen gestützt, für Steam-Nutzerbewertungen nur eingeschränkt.
 
 ### Quellenübergreifende Einordnung
 
@@ -597,10 +649,10 @@ Die vier Quellen messen unterschiedliche Dinge: Steam liefert Reichweite und Nut
 - **Matching-Fehler:** IGDB und Metacritic werden über normalisierten Namen und Jahr verknüpft. Editionsvarianten, Remakes, abweichende Schreibweisen und fehlende Jahresangaben können zu Fehltreffern oder Nicht-Treffern führen. Die IGDB-Abdeckung ist gut, die Metacritic- und Preishistorien-Abdeckung klein.
 - **Selektionsverzerrung:** Die Review-Schwelle verschiebt die Stichprobe zu populäreren Spielen. Externe Metacritic-Daten liegen nur für 3,1 % der Analysestichprobe vor, Preishistorien nur für 0,6 %. Die Selektions-Tests zeigen systematische Unterschiede bei den Besitzern.
 - **Preishistorie:** Nur 651 Apps, monatliche Aggregation, keine täglichen Preisänderungen und keine Repräsentation des gesamten Steam-Katalogs. Die Ergebnisse sind eine Fallstudie für populäre Titel.
-- **IGDB-Datenqualität:** Der Kaggle-Dump enthält viele Editionen und Mehrfacheinträge; die Deduplizierung ist konservativ, kann aber falsche Einträge auswählen. Die IGDB-Bewertungen haben eine andere Skala und Nutzerbasis als Steam.
-- **Externes Metacritic:** Nur PC-Einträge, stark selektiv, andere Plattform- und Zeitabdeckung. Die Übereinstimmung mit der FronkonGames-Spalte ist ein Validitätsindikator, aber kein Beweis für Messäquivalenz.
+- **IGDB-Datenqualität:** Der Kaggle-Dump enthält viele Editionen und Mehrfacheinträge; die Deduplizierung ist konservativ, kann aber falsche Einträge auswählen. Die IGDB-Bewertungen haben eine andere Skala und Nutzerbasis als Steam; zudem korreliert die Bewertungspräzision mit dem Bewertungsvolumen.
+- **Externes Metacritic:** Nur PC-Einträge, stark selektiv, andere Plattform- und Zeitabdeckung. Die hohe Übereinstimmung mit der FronkonGames-Spalte ({de(n_mc_exact, 0)} von {de(n_mc_overlap, 0)} exakt) zeigt vor allem, dass beide Felder aus derselben Quelle stammen; sie ist kein unabhängiger Beleg für Messäquivalenz.
 - **Keine Prognose:** Es werden bewusst **keine Klassifikations- oder Vorhersagemodelle** geschätzt. Die Aussagen sind deskriptiv und assoziativ; sie sind keine Erfolgsprognose für neue Spiele.
-- **Wilson-Score:** Der Wilson-Score enthält das Review-Volumen und damit ein Popularitätsmaß. Er wird nur als Sensitivitätsanalyse berichtet; die Positive Ratio ist die inhaltlich saubere Bewertungsvariable.
+- **Wilson-Score:** Der Wilson-Score enthält das Review-Volumen und damit ein Popularitätsmaß. Er wird nur als Sensitivitätsanalyse berichtet; die Positive Ratio liegt näher an der reinen Bewertungshöhe, ist aber ebenfalls nicht vollständig vom Review-Volumen unabhängig.
 
 ## 6. Reproduzierbarkeit
 
@@ -622,7 +674,7 @@ python scripts/03_tests.py
 python scripts/05_report.py
 ```
 
-Falls die Rohdaten nicht vorhanden sind, laden `01_prepare_data.py` und `external_data.py` die Datensätze automatisch über `kagglehub`. Die bereinigten Daten werden als Parquet in `data/` gespeichert; Tabellen liegen in `outputs/tables/`, Abbildungen in `figures/`.
+Falls die Rohdaten nicht vorhanden sind, laden `01_prepare_data.py` und `external_data.py` die Datensätze automatisch über `kagglehub`. Die Downloads sind auf feste Versionen gepinnt (FronkonGames Version 57; IGDB, Metacritic und Preishistorie jeweils Version 1), damit ein erneuter Lauf dieselben Rohdaten verwendet. Die bereinigten Daten werden als Parquet in `data/` gespeichert; Tabellen liegen in `outputs/tables/`, Abbildungen in `figures/`.
 
 ## Anhang: Zentrale Output-Dateien
 
@@ -653,7 +705,7 @@ Falls die Rohdaten nicht vorhanden sind, laden `01_prepare_data.py` und `externa
 | `outputs/tables/review_volume_diagnostic.csv` | Diagnose Bewertungsvolumen |
 | `data/external_features.parquet` | Externe Merkmale je AppID |
 
-*Hinweis: Die im Text genannten Zahlen stammen aus den zum Auswertungszeitpunkt erzeugten Tabellen. Bei erneuter Ausführung können sie sich durch Aktualisierungen der Kaggle-Datensätze oder Bibliotheksversionen geringfügig ändern.*
+*Hinweis: Die im Text genannten Zahlen stammen aus den zum Auswertungszeitpunkt erzeugten Tabellen. Die Kaggle-Rohdaten sind auf feste Versionen gepinnt; bei erneuter Ausführung können sich Werte durch abweichende Bibliotheksversionen geringfügig ändern.*
 """
 
     text = text.replace("Veroeffentlichung 1997-2025", "Veröffentlichung 1997–2025")

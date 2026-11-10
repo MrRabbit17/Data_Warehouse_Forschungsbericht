@@ -1,7 +1,8 @@
 """Statistische Tests fuer H1 (Spieleigenschaften), H2 (Preis) und H3 (Bewertungen).
 
 Alle p-Werte werden innerhalb jeder Hypothese per Benjamini-Hochberg korrigiert.
-Neben p-Werten werden Effektstaerken und Konfidenzintervalle berichtet.
+Neben p-Werten werden Effektstaerken berichtet; Konfidenzintervalle werden
+fuer Odds Ratios und Spearman-Korrelationen ausgewiesen, wo sie schaetzbar sind.
 """
 
 from __future__ import annotations
@@ -20,6 +21,7 @@ from common import (
     cliffs_delta_from_mannwhitney,
     odds_ratio_ci,
     partial_spearman,
+    ranked_quartiles,
     save_table,
 )
 
@@ -185,7 +187,7 @@ def spearman_row(df: pd.DataFrame, x: str, y: str, label: str, partial: bool = F
 
 def quartile_or(df: pd.DataFrame, value: str, label: str) -> dict:
     d = df[[value, "success_top25"]].dropna().copy()
-    d["quartil"] = pd.qcut(d[value], 4, labels=["Q1", "Q2", "Q3", "Q4"], duplicates="drop")
+    d["quartil"] = ranked_quartiles(d[value], labels=("Q1", "Q2", "Q3", "Q4"))
     labels = list(d["quartil"].cat.categories)
     if len(labels) < 2:
         return {"Test": "Chi2 / Odds Ratio (Q4 vs. Q1)", "Merkmal": label,

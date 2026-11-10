@@ -12,7 +12,7 @@ import seaborn as sns
 from matplotlib.ticker import FuncFormatter
 from statsmodels.stats.proportion import proportion_confint
 
-from common import DATA, FIG, REFERENCE_YEAR, STANDARD_GENRES, save_table
+from common import DATA, FIG, REFERENCE_YEAR, STANDARD_GENRES, ranked_quartiles, save_table
 from common import TAB
 
 sns.set_theme(style="whitegrid", context="notebook")
@@ -197,7 +197,7 @@ def main() -> None:
     # Bewertungen
     rating_rows = []
     for col, label in [("wilson", "Wilson-Score"), ("positive_ratio", "Positive Ratio")]:
-        bins = pd.qcut(rating[col], 4, labels=["Q1 (niedrig)", "Q2", "Q3", "Q4 (hoch)"], duplicates="drop")
+        bins = ranked_quartiles(rating[col])
         for value, group in rating.groupby(bins, observed=True):
             rate, low, high, n = proportion_ci(group["success_top25"])
             rating_rows.append(
@@ -211,7 +211,7 @@ def main() -> None:
                     "Median_Besitzer": group["owners_mid"].median(),
                 }
             )
-    meta_q = pd.qcut(meta["mc_metascore"], 4, labels=["Q1 (niedrig)", "Q2", "Q3", "Q4 (hoch)"], duplicates="drop")
+    meta_q = ranked_quartiles(meta["mc_metascore"])
     for value, group in meta.groupby(meta_q, observed=True):
         rate, low, high, n = proportion_ci(group["success_top25"])
         rating_rows.append(
@@ -301,7 +301,7 @@ def main() -> None:
         d = igdb.dropna(subset=[var])
         if d.empty:
             continue
-        quartile = pd.qcut(d[var], 4, labels=["Q1 (niedrig)", "Q2", "Q3", "Q4 (hoch)"], duplicates="drop")
+        quartile = ranked_quartiles(d[var])
         for value, group in d.groupby(quartile, observed=True):
             rate, low, high, n = proportion_ci(group["success_top25"])
             igdb_rating_rows.append(
@@ -326,7 +326,7 @@ def main() -> None:
         d = price_hist.dropna(subset=[var])
         if d.empty:
             continue
-        quartile = pd.qcut(d[var], 4, labels=["Q1 (niedrig)", "Q2", "Q3", "Q4 (hoch)"], duplicates="drop")
+        quartile = ranked_quartiles(d[var])
         for value, group in d.groupby(quartile, observed=True):
             rate, low, high, n = proportion_ci(group["success_top25"])
             price_hist_rows.append(
@@ -350,7 +350,7 @@ def main() -> None:
         d = meta.dropna(subset=[var])
         if d.empty:
             continue
-        quartile = pd.qcut(d[var], 4, labels=["Q1 (niedrig)", "Q2", "Q3", "Q4 (hoch)"], duplicates="drop")
+        quartile = ranked_quartiles(d[var])
         for value, group in d.groupby(quartile, observed=True):
             rate, low, high, n = proportion_ci(group["success_top25"])
             mc_rows.append(

@@ -1,7 +1,7 @@
 # Umsetzung der Analyse: Erfolgsfaktoren von Videospielen auf Steam
 
 *Ergebnisbericht zur empirischen Umsetzung des Forschungsvorhabens.*  
-*Datengrundlage: FronkonGames Steam Games Dataset (Version 57) sowie externe IGDB-, Metacritic- und Preishistorien-Daten. Auswertungsstand: 3. November 2026.*
+*Datengrundlage: FronkonGames Steam Games Dataset (Version 57) sowie externe IGDB-, Metacritic- und Preishistorien-Daten. Auswertungsstand: 10. November 2026.*
 
 ## 0. Kurzfassung
 
@@ -27,6 +27,8 @@ Verwendet werden:
 3. **Externer Metacritic-Datensatz** (Kaggle: `stadynromn/metacritic-video-games-reviews-up-to-sep-2025`, Version 1): 22.224 Plattform-Einträge, davon 6.387 PC-Einträge (6.277 nach Name/Jahr-Deduplizierung) mit Metascore, Nutzerscore, Genre, Entwickler und Publisher.
 4. **Steam-Preishistorie** (Kaggle: `andrii222/steam-price-history-nov-2023-oct-2025`, Version 1): 651 Apps mit monatlichen Preisinformationen von November 2023 bis November 2025 (Basispreis, niedrigster Preis, Preisänderungen, Rabatttage).
 
+Hinweis: Der externe Metacritic-Datensatz und die Metacritic-Spalte von FronkonGames sind weitgehend deckungsgleich. Der externe Datensatz dient daher dem Quellenabgleich und der PC-spezifischen Ergänzung, nicht als unabhängige Validierung.
+
 Die Verknüpfung erfolgt über:
 
 - **IGDB:** normalisierter Spielname plus Veröffentlichungsjahr; pro Name/Jahr wird ein IGDB-Treffer ausgewählt.
@@ -35,12 +37,12 @@ Die Verknüpfung erfolgt über:
 
 Die Matching-Ergebnisse:
 
-| Quelle               | Datensatz                                                | N_Quelle   | N in Analysestichprobe   | Match-Rate   | Matching-Schlüssel                  |
-|:---------------------|:---------------------------------------------------------|:-----------|:-------------------------|:-------------|:------------------------------------|
-| FronkonGames (Steam) | steam-games-dataset, Version 57                          | 125.855    | 99.397                   | 100,0 %      | AppID                               |
-| IGDB                 | emirshn/igdb-dataset-for-data-mining-projects            | 230.201    | 66.354                   | 66,8 %       | normalisierter Name + Jahr          |
-| Metacritic extern    | stadynromn/metacritic-video-games-reviews-up-to-sep-2025 | 6.277      | 3.056                    | 3,1 %        | normalisierter Name + Jahr (nur PC) |
-| Preishistorie        | andrii222/steam-price-history-nov-2023-oct-2025          | 651        | 645                      | 0,6 %        | Steam-AppID                         |
+| Quelle               | Datensatz                                                           | N_Quelle   | N in Analysestichprobe   | Match-Rate   | Matching-Schlüssel                  |
+|:---------------------|:--------------------------------------------------------------------|:-----------|:-------------------------|:-------------|:------------------------------------|
+| FronkonGames (Steam) | steam-games-dataset, Version 57                                     | 125.855    | 99.397                   | 100,0 %      | AppID                               |
+| IGDB                 | emirshn/igdb-dataset-for-data-mining-projects, Version 1            | 230.201    | 66.354                   | 66,8 %       | normalisierter Name + Jahr          |
+| Metacritic extern    | stadynromn/metacritic-video-games-reviews-up-to-sep-2025, Version 1 | 6.277      | 3.056                    | 3,1 %        | normalisierter Name + Jahr (nur PC) |
+| Preishistorie        | andrii222/steam-price-history-nov-2023-oct-2025, Version 1          | 651        | 645                      | 0,6 %        | Steam-AppID                         |
 
 Die **IGDB-Abdeckung** ist mit 66,8 % der Analysestichprobe gut. **Externes Metacritic** ist mit 3,1 % und die **Preishistorie** mit 0,6 % deutlich selektiver. Die Preishistorie enthält nur 651 Apps; die Analysen zu Preisentwicklung sind daher als **Fallstudie für populäre Titel** zu lesen, nicht als repräsentative Stichprobe aller Steam-Spiele.
 
@@ -139,7 +141,7 @@ Die starke Konzentration in der untersten Klasse (0–20.000) ist eine zentrale 
 | 50 - 100 Mio.     | 9     | 0,0 %    |
 | 100 - 200 Mio.    | 4     | 0,0 %    |
 
-Die Verteilung ist stark rechtsschief: 74,5 % der Spiele liegen in der untersten Klasse, während nur 0,04 % (4 Spiele) die Klasse 100–200 Mio. erreichen. Für Korrelationen und Gruppenvergleiche wird daher `log10(owners_mid)` verwendet.
+Die Verteilung ist stark rechtsschief: 74,5 % der Spiele liegen in der untersten Klasse, während nur 0,004 % (4 Spiele) die Klasse 100–200 Mio. erreichen. Für Korrelationen und Gruppenvergleiche wird daher `log10(owners_mid)` verwendet.
 
 ![Verteilung der geschätzten Besitzer](../figures/fig_01_owners_distribution.png)
 
@@ -207,20 +209,20 @@ Mit steigender aktuellem Rabattstufe steigt die Erfolgsquote deutlich. Dieser Zu
 
 ### 2.5 Steam-Bewertungen und externes Metacritic
 
-| Bewertungsmaß       | Quartil      | N     | Erfolgsquote   | 95-%-KI          |
-|:--------------------|:-------------|:------|:---------------|:-----------------|
-| Wilson-Score        | Q1 (niedrig) | 13954 | 26,3 %         | [25,6 %; 27,1 %] |
-| Wilson-Score        | Q2           | 13953 | 34,8 %         | [34,0 %; 35,6 %] |
-| Wilson-Score        | Q3           | 13947 | 41,6 %         | [40,8 %; 42,4 %] |
-| Wilson-Score        | Q4 (hoch)    | 13952 | 56,8 %         | [56,0 %; 57,6 %] |
-| Positive Ratio      | Q1 (niedrig) | 13952 | 36,8 %         | [36,0 %; 37,6 %] |
-| Positive Ratio      | Q2           | 13951 | 43,9 %         | [43,1 %; 44,8 %] |
-| Positive Ratio      | Q3           | 13951 | 44,2 %         | [43,4 %; 45,0 %] |
-| Positive Ratio      | Q4 (hoch)    | 13952 | 34,5 %         | [33,8 %; 35,3 %] |
-| Metacritic (extern) | Q1 (niedrig) | 810   | 85,8 %         | [83,2 %; 88,0 %] |
-| Metacritic (extern) | Q2           | 827   | 89,8 %         | [87,6 %; 91,7 %] |
-| Metacritic (extern) | Q3           | 704   | 88,9 %         | [86,4 %; 91,0 %] |
-| Metacritic (extern) | Q4 (hoch)    | 715   | 91,0 %         | [88,7 %; 92,9 %] |
+| Bewertungsmaß       | Quartil      | N      | Erfolgsquote   | 95-%-KI          |
+|:--------------------|:-------------|:-------|:---------------|:-----------------|
+| Wilson-Score        | Q1 (niedrig) | 13.952 | 26,3 %         | [25,6 %; 27,1 %] |
+| Wilson-Score        | Q2           | 13.951 | 34,8 %         | [34,0 %; 35,6 %] |
+| Wilson-Score        | Q3           | 13.951 | 41,6 %         | [40,8 %; 42,4 %] |
+| Wilson-Score        | Q4 (hoch)    | 13.952 | 56,8 %         | [56,0 %; 57,6 %] |
+| Positive Ratio      | Q1 (niedrig) | 13.952 | 36,8 %         | [36,0 %; 37,6 %] |
+| Positive Ratio      | Q2           | 13.951 | 43,9 %         | [43,1 %; 44,8 %] |
+| Positive Ratio      | Q3           | 13.951 | 44,2 %         | [43,4 %; 45,0 %] |
+| Positive Ratio      | Q4 (hoch)    | 13.952 | 34,5 %         | [33,8 %; 35,3 %] |
+| Metacritic (extern) | Q1 (niedrig) | 764    | 85,5 %         | [82,8 %; 87,8 %] |
+| Metacritic (extern) | Q2           | 764    | 90,1 %         | [87,7 %; 92,0 %] |
+| Metacritic (extern) | Q3           | 764    | 89,3 %         | [86,9 %; 91,3 %] |
+| Metacritic (extern) | Q4 (hoch)    | 764    | 90,6 %         | [88,3 %; 92,4 %] |
 
 Der Wilson-Score zeigt einen monotonen Anstieg der Erfolgsquote über die Quartile. Die Positive Ratio zeigt dagegen ein nicht-monotones Muster. Der scheinbare Wilson-Effekt ist teilweise auf das Bewertungsvolumen zurückzuführen (siehe Abschnitt 3.6).
 
@@ -228,14 +230,16 @@ Die externe Metacritic-Teilstichprobe ist stark selektiert; die Erfolgsquoten un
 
 | Bewertungsmaß            | Quartil      | N   | Erfolgsquote   | 95-%-KI          | Median Besitzer   |
 |:-------------------------|:-------------|:----|:---------------|:-----------------|:------------------|
-| Metacritic-Kritikerscore | Q1 (niedrig) | 810 | 85,8 %         | [83,2 %; 88,0 %] | 150.000           |
-| Metacritic-Kritikerscore | Q2           | 827 | 89,8 %         | [87,6 %; 91,7 %] | 150.000           |
-| Metacritic-Kritikerscore | Q3           | 704 | 88,9 %         | [86,4 %; 91,0 %] | 350.000           |
-| Metacritic-Kritikerscore | Q4 (hoch)    | 715 | 91,0 %         | [88,7 %; 92,9 %] | 750.000           |
-| Metacritic-Nutzerscore   | Q1 (niedrig) | 785 | 85,1 %         | [82,4 %; 87,4 %] | 150.000           |
-| Metacritic-Nutzerscore   | Q2           | 848 | 88,9 %         | [86,6 %; 90,9 %] | 150.000           |
-| Metacritic-Nutzerscore   | Q3           | 703 | 91,7 %         | [89,5 %; 93,6 %] | 350.000           |
-| Metacritic-Nutzerscore   | Q4 (hoch)    | 720 | 90,0 %         | [87,6 %; 92,0 %] | 350.000           |
+| Metacritic-Kritikerscore | Q1 (niedrig) | 764 | 85,5 %         | [82,8 %; 87,8 %] | 150.000           |
+| Metacritic-Kritikerscore | Q2           | 764 | 90,1 %         | [87,7 %; 92,0 %] | 150.000           |
+| Metacritic-Kritikerscore | Q3           | 764 | 89,3 %         | [86,9 %; 91,3 %] | 350.000           |
+| Metacritic-Kritikerscore | Q4 (hoch)    | 764 | 90,6 %         | [88,3 %; 92,4 %] | 750.000           |
+| Metacritic-Nutzerscore   | Q1 (niedrig) | 764 | 85,2 %         | [82,5 %; 87,6 %] | 150.000           |
+| Metacritic-Nutzerscore   | Q2           | 764 | 88,5 %         | [86,0 %; 90,6 %] | 150.000           |
+| Metacritic-Nutzerscore   | Q3           | 764 | 91,6 %         | [89,4 %; 93,4 %] | 350.000           |
+| Metacritic-Nutzerscore   | Q4 (hoch)    | 764 | 90,1 %         | [87,7 %; 92,0 %] | 350.000           |
+
+**Wichtig:** Der externe Metacritic-Datensatz ist keine unabhängige zweite Quelle. Von den 2.051 Spielen mit beiden Scores stimmen 2.007 exakt mit der FronkonGames-Spalte überein (Spearman ρ = 0,9948). Der Abgleich prüft daher das Matching, nicht die externe Validität.
 
 | Kennzahl                                                      | Wert   |
 |:--------------------------------------------------------------|:-------|
@@ -304,16 +308,18 @@ Erfolgsquote nach IGDB-Spielmodus:
 
 Erfolgsquote nach IGDB-Bewertungsquartilen:
 
-| Bewertungsmaß          | Quartil      | N    | Erfolgsquote   | 95-%-KI          | Median Besitzer   |
-|:-----------------------|:-------------|:-----|:---------------|:-----------------|:------------------|
-| IGDB-Nutzerbewertung   | Q1 (niedrig) | 3125 | 60,3 %         | [58,5 %; 62,0 %] | 35.000            |
-| IGDB-Nutzerbewertung   | Q2           | 6157 | 54,1 %         | [52,8 %; 55,3 %] | 35.000            |
-| IGDB-Nutzerbewertung   | Q3           | 93   | 92,5 %         | [85,3 %; 96,3 %] | 150.000           |
-| IGDB-Nutzerbewertung   | Q4 (hoch)    | 3125 | 90,5 %         | [89,5 %; 91,5 %] | 350.000           |
-| IGDB-Kritikerbewertung | Q1 (niedrig) | 1269 | 65,2 %         | [62,6 %; 67,8 %] | 35.000            |
-| IGDB-Kritikerbewertung | Q2           | 1262 | 73,2 %         | [70,7 %; 75,6 %] | 75.000            |
-| IGDB-Kritikerbewertung | Q3           | 1293 | 75,1 %         | [72,7 %; 77,4 %] | 75.000            |
-| IGDB-Kritikerbewertung | Q4 (hoch)    | 1237 | 85,3 %         | [83,2 %; 87,2 %] | 350.000           |
+Die IGDB-Nutzerbewertung ist stark gebunden: 27,4 % der Spiele mit IGDB-Bewertung haben exakt 70/100. Die Quartile werden daher rangbasiert gebildet; bei Gleichständen entscheidet eine feste Zufallsreihenfolge (Seed 42), welchem Quartil ein Spiel zugeordnet wird. Dadurch sind die vier Gruppen gleich groß und die Erfolgsquoten vergleichbar, die Quartilsgrenzen selbst sind wegen der Bindungen aber nicht inhaltlich interpretierbar. Zusätzlich hängt die Nachkommastelle der IGDB-Bewertung vom Bewertungsvolumen ab: Spiele mit ganzzahliger Bewertung (8.540; Erfolgsquote 51,6 %) unterscheiden sich deutlich von Spielen mit nicht-ganzzahliger Bewertung (3.960; 94,0 %). Die IGDB-Nutzerbewertung ist daher als ordinale Erfolgskennzahl nur eingeschränkt interpretierbar; die Quartilstabelle zeigt entsprechend kein monotones Muster.
+
+| Bewertungsmaß          | Quartil      | N     | Erfolgsquote   | 95-%-KI          | Median Besitzer   |
+|:-----------------------|:-------------|:------|:---------------|:-----------------|:------------------|
+| IGDB-Nutzerbewertung   | Q1 (niedrig) | 3.125 | 60,3 %         | [58,5 %; 62,0 %] | 35.000            |
+| IGDB-Nutzerbewertung   | Q2           | 3.125 | 70,3 %         | [68,7 %; 71,9 %] | 75.000            |
+| IGDB-Nutzerbewertung   | Q3           | 3.125 | 39,0 %         | [37,3 %; 40,7 %] | 10.000            |
+| IGDB-Nutzerbewertung   | Q4 (hoch)    | 3.125 | 90,5 %         | [89,5 %; 91,5 %] | 350.000           |
+| IGDB-Kritikerbewertung | Q1 (niedrig) | 1.266 | 65,2 %         | [62,5 %; 67,7 %] | 35.000            |
+| IGDB-Kritikerbewertung | Q2           | 1.265 | 73,3 %         | [70,8 %; 75,6 %] | 75.000            |
+| IGDB-Kritikerbewertung | Q3           | 1.265 | 75,2 %         | [72,7 %; 77,5 %] | 75.000            |
+| IGDB-Kritikerbewertung | Q4 (hoch)    | 1.265 | 85,0 %         | [82,9 %; 86,8 %] | 350.000           |
 
 ![IGDB-Bewertungen und Besitzer](../figures/fig_11_igdb_ratings.png)
 
@@ -323,17 +329,17 @@ Für die 645 gematchten Spiele stehen monatliche Preisinformationen von November
 
 | Preismerkmal             | Quartil      | N   | Erfolgsquote   | 95-%-KI          | Median Besitzer   |
 |:-------------------------|:-------------|:----|:---------------|:-----------------|:------------------|
-| Maximaler Rabatt         | Q1 (niedrig) | 163 | 68,1 %         | [60,6 %; 74,8 %] | 150.000           |
-| Maximaler Rabatt         | Q2           | 165 | 92,7 %         | [87,7 %; 95,8 %] | 350.000           |
-| Maximaler Rabatt         | Q3           | 158 | 98,1 %         | [94,6 %; 99,4 %] | 1.500.000         |
-| Maximaler Rabatt         | Q4 (hoch)    | 159 | 99,4 %         | [96,5 %; 99,9 %] | 1.500.000         |
-| Anteil Monate mit Rabatt | Q1 (niedrig) | 165 | 86,7 %         | [80,6 %; 91,0 %] | 350.000           |
-| Anteil Monate mit Rabatt | Q2           | 217 | 94,5 %         | [90,6 %; 96,8 %] | 750.000           |
-| Anteil Monate mit Rabatt | Q3           | 116 | 97,4 %         | [92,7 %; 99,1 %] | 1.500.000         |
-| Anteil Monate mit Rabatt | Q4 (hoch)    | 147 | 78,9 %         | [71,6 %; 84,7 %] | 750.000           |
-| Preisänderungen          | Q1 (niedrig) | 165 | 61,8 %         | [54,2 %; 68,9 %] | 35.000            |
-| Preisänderungen          | Q2           | 181 | 98,3 %         | [95,2 %; 99,4 %] | 750.000           |
-| Preisänderungen          | Q3           | 138 | 99,3 %         | [96,0 %; 99,9 %] | 1.500.000         |
+| Maximaler Rabatt         | Q1 (niedrig) | 162 | 67,9 %         | [60,4 %; 74,6 %] | 150.000           |
+| Maximaler Rabatt         | Q2           | 161 | 92,5 %         | [87,4 %; 95,7 %] | 350.000           |
+| Maximaler Rabatt         | Q3           | 161 | 98,1 %         | [94,7 %; 99,4 %] | 1.500.000         |
+| Maximaler Rabatt         | Q4 (hoch)    | 161 | 99,4 %         | [96,6 %; 99,9 %] | 1.500.000         |
+| Anteil Monate mit Rabatt | Q1 (niedrig) | 162 | 86,4 %         | [80,3 %; 90,9 %] | 350.000           |
+| Anteil Monate mit Rabatt | Q2           | 161 | 93,2 %         | [88,2 %; 96,1 %] | 750.000           |
+| Anteil Monate mit Rabatt | Q3           | 161 | 97,5 %         | [93,8 %; 99,0 %] | 750.000           |
+| Anteil Monate mit Rabatt | Q4 (hoch)    | 161 | 80,7 %         | [74,0 %; 86,1 %] | 750.000           |
+| Preisänderungen          | Q1 (niedrig) | 162 | 61,1 %         | [53,4 %; 68,3 %] | 35.000            |
+| Preisänderungen          | Q2           | 161 | 98,1 %         | [94,7 %; 99,4 %] | 750.000           |
+| Preisänderungen          | Q3           | 161 | 99,4 %         | [96,6 %; 99,9 %] | 1.500.000         |
 | Preisänderungen          | Q4 (hoch)    | 161 | 99,4 %         | [96,6 %; 99,9 %] | 1.500.000         |
 
 Roh betrachtet weisen Spiele mit höheren maximalen Rabatten und mehr Preisänderungen höhere Besitzerzahlen auf; die Rabatthäufigkeit allein zeigt dagegen kaum einen Zusammenhang. Nach Kontrolle des Veröffentlichungsjahres bleibt nur der Zusammenhang der Preisänderungen bestehen, während der maximale Rabatt und die Rabatthäufigkeit statistisch nicht mehr signifikant sind. Wegen der kleinen, selektiven Stichprobe und der gemeinsamen Zeitperiode sind dies **Assoziationen, keine Kausaleffekte**.
@@ -355,7 +361,7 @@ Die meisten Spiele stammen aus dem Basisdatensatz; 66.354 Spiele haben zusätzli
 
 ## 3. Statistische Tests
 
-Alle Tests berichten Effektstärken und 95-%-Konfidenzintervalle. p-Werte werden innerhalb jeder Hypothese per **Benjamini-Hochberg**-Verfahren korrigiert. Wegen der großen Stichprobe sind viele p-Werte extrem klein; die inhaltliche Bewertung stützt sich daher auf Effektgrößen und Konfidenzintervalle.
+Die Tests berichten Effektstärken. 95-%-Konfidenzintervalle werden für Odds Ratios und Spearman-Korrelationen ausgewiesen; für Chi²-, Kruskal-Wallis- und Cliff's-Delta-Maße werden die Effektstärken (Cramér's V, ε², Cliff's Delta) ohne Konfidenzintervall angegeben. p-Werte werden innerhalb jeder Hypothese per **Benjamini-Hochberg**-Verfahren korrigiert. Wegen der großen Stichprobe sind viele p-Werte extrem klein; die inhaltliche Bewertung stützt sich daher auf Effektgrößen.
 
 ### 3.1 H1 – Spieleigenschaften
 
@@ -363,7 +369,7 @@ Alle Tests berichten Effektstärken und 95-%-Konfidenzintervalle. p-Werte werden
 
 | Merkmal                      | Test                                | Effektmaß              | N      | Effekt [95-%-KI]   | p (BH-korrigiert)   |
 |:-----------------------------|:------------------------------------|:-----------------------|:-------|:-------------------|:--------------------|
-| Anzahl Plattformen (1/2/3)   | Chi2 (kategorial)                   | Chi2                   | 99.397 | 952,44             | < 0,001             |
+| Anzahl Plattformen (1/2/3)   | Chi2 (kategorial)                   | Cramér's V             | 99.397 | 0,10               | < 0,001             |
 | Genre: Action                | Chi2 / Odds Ratio                   | Odds Ratio             | 99.397 | 1,17 [1,14; 1,21]  | < 0,001             |
 | Genre: Action                | Logistische Regression (adjustiert) | adjustierte Odds Ratio | 99.397 | 1,13 [1,09; 1,16]  | < 0,001             |
 | Genre: Adventure             | Chi2 / Odds Ratio                   | Odds Ratio             | 99.397 | 1,18 [1,14; 1,21]  | < 0,001             |
@@ -388,7 +394,7 @@ Alle Tests berichten Effektstärken und 95-%-Konfidenzintervalle. p-Werte werden
 | Mehr als eine Plattform      | Logistische Regression (adjustiert) | adjustierte Odds Ratio | 99.397 | 1,29 [1,24; 1,33]  | < 0,001             |
 | Plattform: Linux             | Chi2 / Odds Ratio                   | Odds Ratio             | 99.397 | 1,49 [1,44; 1,55]  | < 0,001             |
 | Plattform: macOS             | Chi2 / Odds Ratio                   | Odds Ratio             | 99.397 | 1,77 [1,71; 1,83]  | < 0,001             |
-| Spielmodus (4 Kategorien)    | Chi2 (kategorial)                   | Chi2                   | 99.397 | 1.441,18           | < 0,001             |
+| Spielmodus (4 Kategorien)    | Chi2 (kategorial)                   | Cramér's V             | 99.397 | 0,12               | < 0,001             |
 | Spielmodus: Koop             | Chi2 / Odds Ratio                   | Odds Ratio             | 99.397 | 1,91 [1,83; 1,99]  | < 0,001             |
 | Spielmodus: Koop             | Logistische Regression (adjustiert) | adjustierte Odds Ratio | 99.397 | 2,04 [1,94; 2,13]  | < 0,001             |
 | Spielmodus: MMO              | Chi2 / Odds Ratio                   | Odds Ratio             | 99.397 | 3,92 [3,43; 4,47]  | < 0,001             |
@@ -410,21 +416,21 @@ Kernergebnisse:
 
 ### 3.2 H2 – Preis
 
-| Merkmal                                        | Test                      | Effektmaß        | N      | Effekt [95-%-KI]   | p (BH-korrigiert)   |
-|:-----------------------------------------------|:--------------------------|:-----------------|:-------|:-------------------|:--------------------|
-| Besitzer: Free-to-Play vs. kostenpflichtig     | Mann-Whitney-U            | Cliff's Delta    | 99.397 | 0,16               | < 0,001             |
-| Peak CCU: Free-to-Play vs. kostenpflichtig     | Mann-Whitney-U            | Cliff's Delta    | 99.397 | 0,03               | < 0,001             |
-| Erfolgsquote: Free-to-Play vs. kostenpflichtig | Chi2 / Odds Ratio         | Odds Ratio       | 99.397 | 2,07 [1,98; 2,16]  | < 0,001             |
-| Preis vs. Besitzer (nur kostenpflichtig)       | Spearman                  | Spearman rho     | 89.837 | 0,02 [0,01; 0,03]  | < 0,001             |
-| Preis vs. Besitzer (nur kostenpflichtig)       | Spearman (partiell, Jahr) | Spearman rho     | 89.837 | 0,06 [0,06; 0,07]  | < 0,001             |
-| Preis vs. Peak CCU (nur kostenpflichtig)       | Spearman                  | Spearman rho     | 89.837 | 0,20 [0,19; 0,21]  | < 0,001             |
-| Rabatt vs. Besitzer (nur kostenpflichtig)      | Spearman                  | Spearman rho     | 89.837 | 0,22 [0,22; 0,23]  | < 0,001             |
-| Rabatt vs. Besitzer (nur kostenpflichtig)      | Spearman (partiell, Jahr) | Spearman rho     | 89.837 | 0,22 [0,21; 0,22]  | < 0,001             |
-| Rabatt vs. Peak CCU (nur kostenpflichtig)      | Spearman                  | Spearman rho     | 89.837 | 0,25 [0,24; 0,25]  | < 0,001             |
-| Erfolgsquote: Rabatt aktiv vs. kein Rabatt     | Chi2 / Odds Ratio         | Odds Ratio       | 89.837 | 2,21 [2,14; 2,28]  | < 0,001             |
-| Besitzer nach Rabattgruppe                     | Kruskal-Wallis            | Kruskal-Wallis H | 89.837 | 4.863,28           | < 0,001             |
-| Besitzer nach Preisklasse                      | Kruskal-Wallis            | Kruskal-Wallis H | 89.837 | 198,94             | < 0,001             |
-| DLC-Anzahl vs. Besitzer (alle Spiele)          | Spearman                  | Spearman rho     | 99.397 | 0,25 [0,25; 0,26]  | < 0,001             |
+| Merkmal                                        | Test                      | Effektmaß     | N      | Effekt [95-%-KI]   | p (BH-korrigiert)   |
+|:-----------------------------------------------|:--------------------------|:--------------|:-------|:-------------------|:--------------------|
+| Besitzer: Free-to-Play vs. kostenpflichtig     | Mann-Whitney-U            | Cliff's Delta | 99.397 | 0,16               | < 0,001             |
+| Peak CCU: Free-to-Play vs. kostenpflichtig     | Mann-Whitney-U            | Cliff's Delta | 99.397 | 0,03               | < 0,001             |
+| Erfolgsquote: Free-to-Play vs. kostenpflichtig | Chi2 / Odds Ratio         | Odds Ratio    | 99.397 | 2,07 [1,98; 2,16]  | < 0,001             |
+| Preis vs. Besitzer (nur kostenpflichtig)       | Spearman                  | Spearman rho  | 89.837 | 0,02 [0,01; 0,03]  | < 0,001             |
+| Preis vs. Besitzer (nur kostenpflichtig)       | Spearman (partiell, Jahr) | Spearman rho  | 89.837 | 0,06 [0,06; 0,07]  | < 0,001             |
+| Preis vs. Peak CCU (nur kostenpflichtig)       | Spearman                  | Spearman rho  | 89.837 | 0,20 [0,19; 0,21]  | < 0,001             |
+| Rabatt vs. Besitzer (nur kostenpflichtig)      | Spearman                  | Spearman rho  | 89.837 | 0,22 [0,22; 0,23]  | < 0,001             |
+| Rabatt vs. Besitzer (nur kostenpflichtig)      | Spearman (partiell, Jahr) | Spearman rho  | 89.837 | 0,22 [0,21; 0,22]  | < 0,001             |
+| Rabatt vs. Peak CCU (nur kostenpflichtig)      | Spearman                  | Spearman rho  | 89.837 | 0,25 [0,24; 0,25]  | < 0,001             |
+| Erfolgsquote: Rabatt aktiv vs. kein Rabatt     | Chi2 / Odds Ratio         | Odds Ratio    | 89.837 | 2,21 [2,14; 2,28]  | < 0,001             |
+| Besitzer nach Rabattgruppe                     | Kruskal-Wallis            | ε²            | 89.837 | 0,054              | < 0,001             |
+| Besitzer nach Preisklasse                      | Kruskal-Wallis            | ε²            | 89.837 | 0,002              | < 0,001             |
+| DLC-Anzahl vs. Besitzer (alle Spiele)          | Spearman                  | Spearman rho  | 99.397 | 0,25 [0,25; 0,26]  | < 0,001             |
 
 Kernergebnisse:
 
@@ -445,7 +451,7 @@ Kernergebnisse:
 | Positive Ratio vs. Besitzer (mind. 10 Reviews)                  | Spearman                      | Spearman rho     | 55.806 | 0,00 [-0,01; 0,01] | 0,846               |
 | Positive Ratio vs. Besitzer (mind. 10 Reviews)                  | Spearman (partiell, Jahr)     | Spearman rho     | 55.806 | 0,08 [0,07; 0,09]  | < 0,001             |
 | Positive Ratio vs. Peak CCU (mind. 10 Reviews)                  | Spearman                      | Spearman rho     | 55.806 | 0,16 [0,15; 0,16]  | < 0,001             |
-| Erfolgsquote Wilson Q4 vs. Q1 (mind. 10 Reviews)                | Chi2 / Odds Ratio (Q4 vs. Q1) | Odds Ratio Q4/Q1 | 27.906 | 3,68 [3,50; 3,87]  | < 0,001             |
+| Erfolgsquote Wilson Q4 vs. Q1 (mind. 10 Reviews)                | Chi2 / Odds Ratio (Q4 vs. Q1) | Odds Ratio Q4/Q1 | 27.904 | 3,68 [3,49; 3,87]  | < 0,001             |
 | Erfolgsquote Positive Ratio Q4 vs. Q1 (mind. 10 Reviews)        | Chi2 / Odds Ratio (Q4 vs. Q1) | Odds Ratio Q4/Q1 | 27.904 | 0,91 [0,86; 0,95]  | < 0,001             |
 | Wilson-Score vs. Besitzer (mind. 50 Reviews)                    | Spearman                      | Spearman rho     | 30.214 | 0,17 [0,16; 0,18]  | < 0,001             |
 | Wilson-Score vs. Besitzer (mind. 50 Reviews)                    | Spearman (partiell, Jahr)     | Spearman rho     | 30.214 | 0,24 [0,23; 0,25]  | < 0,001             |
@@ -453,8 +459,8 @@ Kernergebnisse:
 | Positive Ratio vs. Besitzer (mind. 50 Reviews)                  | Spearman                      | Spearman rho     | 30.214 | 0,01 [-0,01; 0,02] | 0,324               |
 | Positive Ratio vs. Besitzer (mind. 50 Reviews)                  | Spearman (partiell, Jahr)     | Spearman rho     | 30.214 | 0,08 [0,07; 0,09]  | < 0,001             |
 | Positive Ratio vs. Peak CCU (mind. 50 Reviews)                  | Spearman                      | Spearman rho     | 30.214 | 0,22 [0,21; 0,23]  | < 0,001             |
-| Erfolgsquote Wilson Q4 vs. Q1 (mind. 50 Reviews)                | Chi2 / Odds Ratio (Q4 vs. Q1) | Odds Ratio Q4/Q1 | 15.109 | 1,54 [1,44; 1,64]  | < 0,001             |
-| Erfolgsquote Positive Ratio Q4 vs. Q1 (mind. 50 Reviews)        | Chi2 / Odds Ratio (Q4 vs. Q1) | Odds Ratio Q4/Q1 | 15.113 | 0,76 [0,71; 0,81]  | < 0,001             |
+| Erfolgsquote Wilson Q4 vs. Q1 (mind. 50 Reviews)                | Chi2 / Odds Ratio (Q4 vs. Q1) | Odds Ratio Q4/Q1 | 15.108 | 1,54 [1,44; 1,64]  | < 0,001             |
+| Erfolgsquote Positive Ratio Q4 vs. Q1 (mind. 50 Reviews)        | Chi2 / Odds Ratio (Q4 vs. Q1) | Odds Ratio Q4/Q1 | 15.108 | 0,75 [0,71; 0,81]  | < 0,001             |
 | Metacritic (extern) vs. Besitzer                                | Spearman                      | Spearman rho     | 3.056  | 0,31 [0,27; 0,34]  | < 0,001             |
 | Metacritic (extern) vs. Besitzer                                | Spearman (partiell, Jahr)     | Spearman rho     | 3.056  | 0,37 [0,34; 0,40]  | < 0,001             |
 | Metacritic (extern) vs. Peak CCU                                | Spearman                      | Spearman rho     | 3.056  | 0,43 [0,40; 0,46]  | < 0,001             |
@@ -464,13 +470,13 @@ Kernergebnisse:
 | Wilson vs. Besitzer (externe Metacritic-Teilstichprobe)         | Spearman                      | Spearman rho     | 2.983  | 0,35 [0,32; 0,38]  | < 0,001             |
 | Wilson vs. Metacritic (externe Quelle, Übereinstimmung)         | Spearman                      | Spearman rho     | 2.983  | 0,64 [0,62; 0,66]  | < 0,001             |
 | Externes vs. FronkonGames-Metacritic (Übereinstimmung)          | Spearman                      | Spearman rho     | 2.051  | 0,99 [0,99; 1,00]  | < 0,001             |
-| Erfolgsquote Metacritic (extern) Q4 vs. Q1                      | Chi2 / Odds Ratio (Q4 vs. Q1) | Odds Ratio Q4/Q1 | 1.525  | 1,68 [1,22; 2,33]  | 0,002               |
+| Erfolgsquote Metacritic (extern) Q4 vs. Q1                      | Chi2 / Odds Ratio (Q4 vs. Q1) | Odds Ratio Q4/Q1 | 1.528  | 1,63 [1,19; 2,24]  | 0,002               |
 
 Kernergebnisse:
 
 - **Steam-Nutzerbewertungen:** Der Wilson-Score korreliert positiv mit Besitzern (0,281 [0,273; 0,289]) und Peak CCU. Die **Positive Ratio** – der reine Anteil positiver Bewertungen – korreliert dagegen praktisch nicht mit Besitzern (-0,001 [-0,009; 0,007]). Mit Peak CCU besteht ein schwacher positiver Zusammenhang. Nach Kontrolle des Veröffentlichungsjahres wird die Positive-Ratio-Korrelation mit Besitzern leicht positiv, bleibt aber klein.
 - **Externes Metacritic:** In der Teilstichprobe korreliert der externe Metacritic-Score positiv mit Besitzern (0,307 [0,275; 0,339]) und Peak CCU. Die Übereinstimmung zwischen Steam-Wilson und externem Metacritic ist moderat. Wegen der starken Selektion (nur 3,1 % der Analysestichprobe haben externe Metacritic-Daten) sind diese Werte nicht auf alle Spiele verallgemeinerbar.
-- **Vergleich der Metacritic-Quellen:** Der externe Metacritic-Score und die FronkonGames-eigene Metacritic-Spalte werden direkt gegeneinander geprüft; die Übereinstimmung ist ein Validitätsindikator für das Matching.
+- **Vergleich der Metacritic-Quellen:** Der externe Metacritic-Score und die FronkonGames-eigene Metacritic-Spalte werden direkt gegeneinander geprüft. Da 2.007 von 2.051 Werten exakt übereinstimmen (ρ = 0,9948), ist das faktisch dieselbe Quelle; der Abgleich ist ein Matching-Check, kein unabhängiger Validitätsnachweis.
 
 **H3 wird für Kritikerbewertungen gestützt, für Steam-Nutzerbewertungen nur eingeschränkt:** Die Bewertungshöhe der Steam-Nutzer hängt nicht mit der Reichweite zusammen; der positive Wilson-Besitzer-Zusammenhang ist größtenteils ein Volumenartefakt.
 
@@ -488,29 +494,29 @@ Die folgende Tabelle prüft, ob die externen Quellen die Befunde stützen. IGDB-
 | IGDB-Kritikerbewertung vs. Peak CCU            | Spearman                            | Spearman rho           | 5.061  | 0,37 [0,35; 0,39]     | < 0,001             |
 | Anzahl IGDB-Genres vs. Besitzer                | Spearman                            | Spearman rho           | 66.354 | 0,19 [0,18; 0,19]     | < 0,001             |
 | Erfolgsquote IGDB-Nutzerbewertung Q4 vs. Q1    | Chi2 / Odds Ratio (Q4 vs. Q1)       | Odds Ratio Q4/Q1       | 6.250  | 6,30 [5,48; 7,25]     | < 0,001             |
-| Erfolgsquote IGDB-Kritikerbewertung Q4 vs. Q1  | Chi2 / Odds Ratio (Q4 vs. Q1)       | Odds Ratio Q4/Q1       | 2.506  | 3,09 [2,54; 3,75]     | < 0,001             |
+| Erfolgsquote IGDB-Kritikerbewertung Q4 vs. Q1  | Chi2 / Odds Ratio (Q4 vs. Q1)       | Odds Ratio Q4/Q1       | 2.531  | 3,02 [2,49; 3,67]     | < 0,001             |
 | IGDB: Multiplayer vs. kein Multiplayer         | Chi2 / Odds Ratio                   | Odds Ratio             | 66.354 | 1,89 [1,81; 1,98]     | < 0,001             |
 | IGDB: Multiplayer vs. kein Multiplayer         | Logistische Regression (adjustiert) | adjustierte Odds Ratio | 66.354 | 1,62 [1,54; 1,70]     | < 0,001             |
 | IGDB: Singleplayer vs. kein Singleplayer       | Chi2 / Odds Ratio                   | Odds Ratio             | 66.354 | 1,40 [1,33; 1,47]     | < 0,001             |
 | IGDB: Singleplayer vs. kein Singleplayer       | Logistische Regression (adjustiert) | adjustierte Odds Ratio | 66.354 | 1,10 [1,05; 1,16]     | < 0,001             |
 | IGDB: Kooperation vs. keine Kooperation        | Chi2 / Odds Ratio                   | Odds Ratio             | 66.354 | 2,08 [1,97; 2,19]     | < 0,001             |
 | Maximaler Rabatt (Preishistorie) vs. Besitzer  | Spearman                            | Spearman rho           | 645    | 0,50 [0,44; 0,56]     | < 0,001             |
-| Maximaler Rabatt (Preishistorie) vs. Besitzer  | Spearman (partiell, Jahr)           | Spearman rho           | 645    | 0,06 [-0,02; 0,13]    | 0,159               |
+| Maximaler Rabatt (Preishistorie) vs. Besitzer  | Spearman (partiell, Jahr)           | Spearman rho           | 645    | 0,06 [-0,02; 0,13]    | 0,166               |
 | Maximaler Rabatt (Preishistorie) vs. Peak CCU  | Spearman                            | Spearman rho           | 645    | 0,20 [0,12; 0,27]     | < 0,001             |
 | Anteil Monate mit Rabatt vs. Besitzer          | Spearman                            | Spearman rho           | 645    | 0,05 [-0,03; 0,13]    | 0,220               |
 | Anteil Monate mit Rabatt vs. Besitzer          | Spearman (partiell, Jahr)           | Spearman rho           | 645    | 0,04 [-0,04; 0,12]    | 0,326               |
 | Anteil Monate mit Rabatt vs. Peak CCU          | Spearman                            | Spearman rho           | 645    | 0,01 [-0,06; 0,09]    | 0,752               |
 | Preisänderungen (Preishistorie) vs. Besitzer   | Spearman                            | Spearman rho           | 645    | 0,51 [0,45; 0,57]     | < 0,001             |
 | Preisänderungen (Preishistorie) vs. Besitzer   | Spearman (partiell, Jahr)           | Spearman rho           | 645    | 0,22 [0,15; 0,29]     | < 0,001             |
-| Erfolgsquote maximaler Rabatt Q4 vs. Q1        | Chi2 / Odds Ratio (Q4 vs. Q1)       | Odds Ratio Q4/Q1       | 322    | 74,02 [10,08; 543,41] | < 0,001             |
-| Erfolgsquote Rabatthäufigkeit Q4 vs. Q1        | Chi2 / Odds Ratio (Q4 vs. Q1)       | Odds Ratio Q4/Q1       | 312    | 0,58 [0,32; 1,05]     | 0,081               |
+| Erfolgsquote maximaler Rabatt Q4 vs. Q1        | Chi2 / Odds Ratio (Q4 vs. Q1)       | Odds Ratio Q4/Q1       | 323    | 75,64 [10,30; 555,29] | < 0,001             |
+| Erfolgsquote Rabatthäufigkeit Q4 vs. Q1        | Chi2 / Odds Ratio (Q4 vs. Q1)       | Odds Ratio Q4/Q1       | 323    | 0,66 [0,36; 1,20]     | 0,190               |
 | IGDB-Nutzerbewertung vs. Steam-Wilson          | Spearman                            | Spearman rho           | 12.405 | 0,66 [0,65; 0,67]     | < 0,001             |
 | IGDB-Kritikerbewertung vs. Steam-Wilson        | Spearman                            | Spearman rho           | 5.016  | 0,46 [0,44; 0,48]     | < 0,001             |
 | IGDB-Kritikerbewertung vs. Metacritic (extern) | Spearman                            | Spearman rho           | 2.399  | 0,74 [0,72; 0,76]     | < 0,001             |
 
 Kernergebnisse:
 
-- **IGDB-Bewertungen:** IGDB-Nutzerbewertungen korrelieren mit Besitzern (0,241 [0,225; 0,258]), IGDB-Kritikerbewertungen ebenfalls (0,270 [0,245; 0,296]). Die Effekte sind kleiner als beim externen Metacritic, aber konsistent in der Richtung.
+- **IGDB-Bewertungen:** IGDB-Nutzerbewertungen korrelieren mit Besitzern (0,241 [0,225; 0,258]), IGDB-Kritikerbewertungen ebenfalls (0,270 [0,245; 0,296]). Die Rangkorrelationen sind kleiner als beim externen Metacritic, aber konsistent in der Richtung. Bei der Nutzerbewertung ist zu beachten, dass die Bewertungspräzision mit dem Bewertungsvolumen zusammenhängt (Abschnitt 2.6); der Zusammenhang ist daher teilweise ein Popularitätsartefakt.
 - **IGDB-Spielmodi:** IGDB-Multiplayer ist positiv mit Erfolg assoziiert (adjustierte OR 1,62 [1,54; 1,70]); die übrigen Modi zeigen ebenfalls positive, aber unterschiedlich starke Assoziationen.
 - **Preishistorie:** Der maximale Rabatt korreliert roh mit Besitzern (0,500 [0,440; 0,556]), nach Alterskontrolle jedoch nicht mehr (0,058 [-0,019; 0,135]). Die Rabatthäufigkeit ist roh (0,050 [-0,027; 0,127]) und partiell (0,040 [-0,038; 0,117]) schwach. Die Anzahl der Preisänderungen korreliert roh (0,511 [0,452; 0,566]) und auch nach Alterskontrolle (0,220 [0,145; 0,292]) positiv. Die bivariaten Rabattmuster sind damit stark durch die selektive Stichprobe und das Alter der Spiele geprägt.
 - **Quellenübereinstimmung:** IGDB-Kritikerbewertungen, externes Metacritic und Steam-Wilson zeigen positive Übereinstimmungen. Die externen Quellen widersprechen den Steam-Befunden nicht, messen aber unterschiedliche Konstrukte (Kritikerurteil, Nutzerurteil, Reichweite).
@@ -519,14 +525,14 @@ Kernergebnisse:
 
 ### 3.5 Selektionsverzerrung der externen Teilstichproben
 
-Spiele mit externen Daten sind größer und populärer als Spiele ohne externe Daten. Die folgende Tabelle vergleicht die Besitzerverteilung zwischen gematchten und nicht gematchten Spielen:
+Spiele mit externen Daten sind im Mittel größer und populärer als Spiele ohne externe Daten; der Unterschied ist für Metacritic (Cliff's Delta 0,77) und Preishistorie (0,81) stark, für IGDB nur schwach (0,05). Die folgende Tabelle vergleicht die Besitzerverteilung zwischen gematchten und nicht gematchten Spielen:
 
-| Merkmal                                                 | N     | Cliff's Delta [95-%-KI]   | p (BH-korrigiert)   |
-|:--------------------------------------------------------|:------|:--------------------------|:--------------------|
-| Besitzer: IGDB-Match vorhanden vs. nicht                | 99397 | 0,05                      | < 0,001             |
-| Besitzer: externer Metacritic-Match vorhanden vs. nicht | 99397 | 0,77                      | < 0,001             |
-| Besitzer: Preishistorie-Match vorhanden vs. nicht       | 99397 | 0,81                      | < 0,001             |
-| Besitzer: FronkonGames-Metacritic vorhanden vs. nicht   | 99397 | 0,74                      | < 0,001             |
+| Merkmal                                                 | N     | Cliff's Delta   | p (BH-korrigiert)   |
+|:--------------------------------------------------------|:------|:----------------|:--------------------|
+| Besitzer: IGDB-Match vorhanden vs. nicht                | 99397 | 0,05            | < 0,001             |
+| Besitzer: externer Metacritic-Match vorhanden vs. nicht | 99397 | 0,77            | < 0,001             |
+| Besitzer: Preishistorie-Match vorhanden vs. nicht       | 99397 | 0,81            | < 0,001             |
+| Besitzer: FronkonGames-Metacritic vorhanden vs. nicht   | 99397 | 0,74            | < 0,001             |
 
 Die Matching-Quote ist daher kein neutraler Datenzusatz: IGDB-, Metacritic- und Preishistorien-Analysen sind **Selektionsanalysen** für Spiele, die in den jeweiligen Quellen dokumentiert sind. Das ist besonders für die Preishistorie (651 Apps) und das externe Metacritic (PC-only) relevant.
 
@@ -549,7 +555,7 @@ Die folgende Diagnose trennt Bewertungshöhe und Bewertungsvolumen:
 | Wilson vs. Besitzer, kontrolliert Review-Anzahl (mind. 50 Reviews)         | 30214 | -0,197 [-0,208; -0,186]  | < 0,001             |
 | Positive Ratio vs. Besitzer, kontrolliert Review-Anzahl (mind. 50 Reviews) | 30214 | -0,193 [-0,203; -0,182]  | < 0,001             |
 
-Die Review-Anzahl korreliert sehr stark mit Besitzern und mit dem Wilson-Score. Wird das Review-Volumen herauspartialisiert, wird die Wilson-Besitzer-Korrelation **negativ**. Der Wilson-Score misst daher nicht nur Zufriedenheit, sondern auch, wie viele Reviews ein Spiel hat – und die Review-Anzahl ist selbst ein Popularitätsmaß. Aus diesem Grund wird die **Positive Ratio** als inhaltlich saubere Bewertungsvariable verwendet; der Wilson-Score dient nur als Sensitivitätsanalyse.
+Die Review-Anzahl korreliert sehr stark mit Besitzern und mit dem Wilson-Score. Wird das Review-Volumen herauspartialisiert, wird die Wilson-Besitzer-Korrelation **negativ** (−0,087 bei mind. 10, −0,197 bei mind. 50 Reviews). Der Wilson-Score misst daher nicht nur Zufriedenheit, sondern auch, wie viele Reviews ein Spiel hat – und die Review-Anzahl ist selbst ein Popularitätsmaß. Die **Positive Ratio** ist davon weniger betroffen, aber nicht frei davon: Nach Kontrolle des Review-Volumens ist auch ihr Zusammenhang mit Besitzern negativ (−0,057 bzw. −0,193). Sie wird daher als näher an der reinen Bewertungshöhe verwendet; der Wilson-Score dient nur als Sensitivitätsanalyse.
 
 ## 4. Beantwortung der Forschungsfragen
 
@@ -569,7 +575,7 @@ Free-to-Play-Spiele erreichen häufiger hohe Besitzerzahlen. Unter kostenpflicht
 
 **Wie stark hängen Nutzer- und Kritikerbewertungen mit Popularität zusammen?**
 
-Die Steam-Bewertungshöhe (Positive Ratio) hängt praktisch nicht mit der Reichweite zusammen; mit der Spieleraktivität besteht ein schwacher positiver Zusammenhang. Der Wilson-Score zeigt nur deshalb einen positiven Besitzer-Zusammenhang, weil er das Review-Volumen enthält. Externe Metacritic-Scores und IGDB-Bewertungen korrelieren in den jeweiligen Teilstichproben moderat positiv mit Besitzern und Peak CCU; die Übereinstimmung zwischen den Bewertungsquellen ist moderat. H3 wird für Kritikerbewertungen gestützt, für Steam-Nutzerbewertungen nur eingeschränkt.
+Die Steam-Bewertungshöhe (Positive Ratio) hängt roh praktisch nicht mit der Reichweite zusammen; nach Kontrolle des Review-Volumens ist der Zusammenhang sogar leicht negativ. Mit der Spieleraktivität besteht ein schwacher positiver Zusammenhang. Der Wilson-Score zeigt nur deshalb einen positiven Besitzer-Zusammenhang, weil er das Review-Volumen enthält. Externe Metacritic-Scores und IGDB-Bewertungen korrelieren in den jeweiligen Teilstichproben moderat positiv mit Besitzern und Peak CCU; die Übereinstimmung zwischen den Bewertungsquellen ist moderat. H3 wird für Kritikerbewertungen gestützt, für Steam-Nutzerbewertungen nur eingeschränkt.
 
 ### Quellenübergreifende Einordnung
 
@@ -582,10 +588,10 @@ Die vier Quellen messen unterschiedliche Dinge: Steam liefert Reichweite und Nut
 - **Matching-Fehler:** IGDB und Metacritic werden über normalisierten Namen und Jahr verknüpft. Editionsvarianten, Remakes, abweichende Schreibweisen und fehlende Jahresangaben können zu Fehltreffern oder Nicht-Treffern führen. Die IGDB-Abdeckung ist gut, die Metacritic- und Preishistorien-Abdeckung klein.
 - **Selektionsverzerrung:** Die Review-Schwelle verschiebt die Stichprobe zu populäreren Spielen. Externe Metacritic-Daten liegen nur für 3,1 % der Analysestichprobe vor, Preishistorien nur für 0,6 %. Die Selektions-Tests zeigen systematische Unterschiede bei den Besitzern.
 - **Preishistorie:** Nur 651 Apps, monatliche Aggregation, keine täglichen Preisänderungen und keine Repräsentation des gesamten Steam-Katalogs. Die Ergebnisse sind eine Fallstudie für populäre Titel.
-- **IGDB-Datenqualität:** Der Kaggle-Dump enthält viele Editionen und Mehrfacheinträge; die Deduplizierung ist konservativ, kann aber falsche Einträge auswählen. Die IGDB-Bewertungen haben eine andere Skala und Nutzerbasis als Steam.
-- **Externes Metacritic:** Nur PC-Einträge, stark selektiv, andere Plattform- und Zeitabdeckung. Die Übereinstimmung mit der FronkonGames-Spalte ist ein Validitätsindikator, aber kein Beweis für Messäquivalenz.
+- **IGDB-Datenqualität:** Der Kaggle-Dump enthält viele Editionen und Mehrfacheinträge; die Deduplizierung ist konservativ, kann aber falsche Einträge auswählen. Die IGDB-Bewertungen haben eine andere Skala und Nutzerbasis als Steam; zudem korreliert die Bewertungspräzision mit dem Bewertungsvolumen.
+- **Externes Metacritic:** Nur PC-Einträge, stark selektiv, andere Plattform- und Zeitabdeckung. Die hohe Übereinstimmung mit der FronkonGames-Spalte (2.007 von 2.051 exakt) zeigt vor allem, dass beide Felder aus derselben Quelle stammen; sie ist kein unabhängiger Beleg für Messäquivalenz.
 - **Keine Prognose:** Es werden bewusst **keine Klassifikations- oder Vorhersagemodelle** geschätzt. Die Aussagen sind deskriptiv und assoziativ; sie sind keine Erfolgsprognose für neue Spiele.
-- **Wilson-Score:** Der Wilson-Score enthält das Review-Volumen und damit ein Popularitätsmaß. Er wird nur als Sensitivitätsanalyse berichtet; die Positive Ratio ist die inhaltlich saubere Bewertungsvariable.
+- **Wilson-Score:** Der Wilson-Score enthält das Review-Volumen und damit ein Popularitätsmaß. Er wird nur als Sensitivitätsanalyse berichtet; die Positive Ratio liegt näher an der reinen Bewertungshöhe, ist aber ebenfalls nicht vollständig vom Review-Volumen unabhängig.
 
 ## 6. Reproduzierbarkeit
 
@@ -607,7 +613,7 @@ python scripts/03_tests.py
 python scripts/05_report.py
 ```
 
-Falls die Rohdaten nicht vorhanden sind, laden `01_prepare_data.py` und `external_data.py` die Datensätze automatisch über `kagglehub`. Die bereinigten Daten werden als Parquet in `data/` gespeichert; Tabellen liegen in `outputs/tables/`, Abbildungen in `figures/`.
+Falls die Rohdaten nicht vorhanden sind, laden `01_prepare_data.py` und `external_data.py` die Datensätze automatisch über `kagglehub`. Die Downloads sind auf feste Versionen gepinnt (FronkonGames Version 57; IGDB, Metacritic und Preishistorie jeweils Version 1), damit ein erneuter Lauf dieselben Rohdaten verwendet. Die bereinigten Daten werden als Parquet in `data/` gespeichert; Tabellen liegen in `outputs/tables/`, Abbildungen in `figures/`.
 
 ## Anhang: Zentrale Output-Dateien
 
@@ -638,4 +644,4 @@ Falls die Rohdaten nicht vorhanden sind, laden `01_prepare_data.py` und `externa
 | `outputs/tables/review_volume_diagnostic.csv` | Diagnose Bewertungsvolumen |
 | `data/external_features.parquet` | Externe Merkmale je AppID |
 
-*Hinweis: Die im Text genannten Zahlen stammen aus den zum Auswertungszeitpunkt erzeugten Tabellen. Bei erneuter Ausführung können sie sich durch Aktualisierungen der Kaggle-Datensätze oder Bibliotheksversionen geringfügig ändern.*
+*Hinweis: Die im Text genannten Zahlen stammen aus den zum Auswertungszeitpunkt erzeugten Tabellen. Die Kaggle-Rohdaten sind auf feste Versionen gepinnt; bei erneuter Ausführung können sich Werte durch abweichende Bibliotheksversionen geringfügig ändern.*

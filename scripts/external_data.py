@@ -22,8 +22,11 @@ import pandas as pd
 from common import DATA, normalize_name, save_table
 
 IGDB_SLUG = "emirshn/igdb-dataset-for-data-mining-projects"
+IGDB_VERSION = 1
 MC_SLUG = "stadynromn/metacritic-video-games-reviews-up-to-sep-2025"
+MC_VERSION = 1
 PRICE_SLUG = "andrii222/steam-price-history-nov-2023-oct-2025"
+PRICE_VERSION = 1
 
 IGDB_GENRES = [
     "Adventure", "Arcade", "Card & Board Game", "Fighting",
@@ -38,10 +41,10 @@ def _slug(value: str) -> str:
     return re.sub(r"[^a-z0-9]+", "_", value.lower()).strip("_")
 
 
-def _dataset_file(slug: str, filename: str) -> Path:
+def _dataset_file(slug: str, filename: str, version: int) -> Path:
     import kagglehub
 
-    root = Path(kagglehub.dataset_download(slug))
+    root = Path(kagglehub.dataset_download(f"{slug}/versions/{version}"))
     candidates = list(root.rglob(filename))
     if not candidates:
         raise FileNotFoundError(f"{filename} im Kaggle-Download {slug} nicht gefunden")
@@ -69,7 +72,7 @@ def _normalise_name(series: pd.Series) -> pd.Series:
 
 
 def load_igdb() -> pd.DataFrame:
-    path = _dataset_file(IGDB_SLUG, "game_dataset_cleaned.csv")
+    path = _dataset_file(IGDB_SLUG, "game_dataset_cleaned.csv", IGDB_VERSION)
     cols = [
         "id", "name", "category", "release_date", "rating", "aggregated_rating",
         "genres", "themes", "franchise", "main_developers", "publishers",
@@ -141,7 +144,7 @@ def load_igdb() -> pd.DataFrame:
 
 
 def load_metacritic() -> pd.DataFrame:
-    path = _dataset_file(MC_SLUG, "metacritic_dataset_clean.csv")
+    path = _dataset_file(MC_SLUG, "metacritic_dataset_clean.csv", MC_VERSION)
     df = pd.read_csv(path)
 
     df = df[df["platform"].astype(str).str.fullmatch("PC", case=False, na=False)].copy()
@@ -172,7 +175,7 @@ def load_metacritic() -> pd.DataFrame:
 
 
 def load_price_history() -> pd.DataFrame:
-    path = _dataset_file(PRICE_SLUG, "steam_price_history.csv")
+    path = _dataset_file(PRICE_SLUG, "steam_price_history.csv", PRICE_VERSION)
     df = pd.read_csv(path)
 
     for col in ["app_id", "base_price", "lowest_price", "price_changes", "days_on_sale"]:
@@ -299,7 +302,7 @@ def attach_external_sources(
             },
             {
                 "Quelle": "IGDB",
-                "Datensatz": "emirshn/igdb-dataset-for-data-mining-projects",
+                "Datensatz": "emirshn/igdb-dataset-for-data-mining-projects, Version 1",
                 "N_Quelle": len(igdb),
                 "N_gematcht_gesamt": int(base["has_igdb"].sum()),
                 "Match_Rate_gesamt": base["has_igdb"].mean(),
@@ -310,7 +313,7 @@ def attach_external_sources(
             },
             {
                 "Quelle": "Metacritic extern",
-                "Datensatz": "stadynromn/metacritic-video-games-reviews-up-to-sep-2025",
+                "Datensatz": "stadynromn/metacritic-video-games-reviews-up-to-sep-2025, Version 1",
                 "N_Quelle": len(mc),
                 "N_gematcht_gesamt": int(base["has_mc_external"].sum()),
                 "Match_Rate_gesamt": base["has_mc_external"].mean(),
@@ -321,7 +324,7 @@ def attach_external_sources(
             },
             {
                 "Quelle": "Preishistorie",
-                "Datensatz": "andrii222/steam-price-history-nov-2023-oct-2025",
+                "Datensatz": "andrii222/steam-price-history-nov-2023-oct-2025, Version 1",
                 "N_Quelle": len(price),
                 "N_gematcht_gesamt": int(base["has_price_history"].sum()),
                 "Match_Rate_gesamt": base["has_price_history"].mean(),

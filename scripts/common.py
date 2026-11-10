@@ -28,6 +28,11 @@ REFERENCE_YEAR = 2025  # letztes vollstaendiges Veroeffentlichungsjahr im Datens
 MIN_REVIEWS = 10
 MIN_REVIEWS_ROBUST = 50
 
+# Kaggle-Downloads werden auf feste Dataset-Versionen gepinnt, damit ein
+# erneuter Lauf dieselben Rohdaten verwendet.
+FRONKON_SLUG = "fronkongames/steam-games-dataset"
+FRONKON_VERSION = 57
+
 # Spaltenreihenfolge der Rohdatei. Die Kopfzeile enthaelt nur 39 Namen,
 # die Datenzeilen enthalten 40 Felder: "DiscountDLC count" ist in den Daten
 # in die beiden Spalten "Discount" und "DLC count" aufgeteilt.
@@ -86,7 +91,8 @@ def load_raw(usecols: list[str] | None = None) -> pd.DataFrame:
     if not path.exists():
         import kagglehub
 
-        downloaded = Path(kagglehub.dataset_download("fronkongames/steam-games-dataset"))
+        handle = f"{FRONKON_SLUG}/versions/{FRONKON_VERSION}"
+        downloaded = Path(kagglehub.dataset_download(handle))
         candidates = list(downloaded.glob("games.csv"))
         if not candidates:
             raise FileNotFoundError("games.csv im Kaggle-Download nicht gefunden")
@@ -174,6 +180,34 @@ def partial_spearman(x: pd.Series, y: pd.Series, z: pd.Series) -> tuple[float, f
     res_y = ry - rz_design @ beta_y
     r, p = pearsonr(res_x, res_y)
     return float(r), float(p), len(frame)
+
+
+def ranked_quartiles(
+    series: pd.Series,
+    labels: tuple[str, str, str, str] = ("Q1 (niedrig)", "Q2", "Q3", "Q4 (hoch)"),
+    seed: int = RANDOM_STATE,
+) -> pd.Series:
+    """Rangbasierte Quartile, die Bindungen reproduzierbar zufaellig aufteilen.
+
+    ``pd.qcut`` auf den Rohwerten bricht bei stark gebundenen Merkmalen zusammen
+    (z. B. IGDB-Nutzerbewertung, bei der ein grosser Teil der Werte exakt
+    70/100 ist); es entstehen Gruppen mit wenigen Beobachtungen. Hier werden die
+    Werte zunaechst sortiert und Gleichstaende ueber eine feste Zufallsreihenfolge
+    (``seed``) aufgeloest. Dadurch bleibt die inhaltliche Ordnung erhalten und die
+    vier Gruppen sind gleich gross. Fehlende Werte bleiben NaN.
+    """
+    values = pd.Series(series)
+    valid = values.notna()
+    if not valid.any():
+        return pd.Series(np.nan, index=values.index, dtype=object)
+    positions = np.flatnonzero(valid.to_numpy())
+    numbers = values.to_numpy(dtype=float)[positions]
+    rng = np.random.default_rng(seed)
+    tiebreak = rng.random(len(positions))
+    order = np.lexsort((tiebreak, numbers))
+    ranks = np.full(len(values), np.nan)
+    ranks[positions[order]] = np.arange(1, len(positions) + 1, dtype=float)
+    return pd.qcut(pd.Series(ranks, index=values.index), 4, labels=list(labels))
 
 
 def save_table(df: pd.DataFrame, name: str, index: bool = False) -> Path:
