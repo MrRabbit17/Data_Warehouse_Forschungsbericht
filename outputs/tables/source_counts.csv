@@ -1,0 +1,68 @@
+﻿Quelle,Schritt,N,N_analytisch,Hinweis
+FronkonGames,Spiele im Basisdatensatz,125855,91052,
+FronkonGames,Name nach Normalisierung kürzer als 2 Zeichen (nicht matchbar),21,12,
+FronkonGames,Name nach Normalisierung 2 bis 3 Zeichen (nur Stufe 1 möglich),683,518,
+FronkonGames,Name über alle Spiele eindeutig (Voraussetzung für Stufe 2/3),121155,87963,
+IGDB,Rohzeilen,232595,,
+IGDB,Kritikerbewertung = 0 (Platzhalter) -> NaN,83,,
+IGDB,Nutzerbewertung = 0 (Platzhalter) -> NaN,0,,
+IGDB,ohne verwertbaren Namen (< 2 Zeichen nach Normalisierung) entfernt,46,,
+IGDB,Plattformangabe ohne PC-nahe Plattform (Windows/Mac/Linux/SteamVR) entfernt,63221,,
+IGDB,Name/Jahr-Dubletten entfernt (Hauptspiel und PC-Plattform bevorzugt),468,,
+IGDB,Einträge für das Matching,168860,,
+IGDB,davon ohne Veröffentlichungsdatum (nur Stufe 3 möglich),49378,,
+IGDB,davon Kritikerbewertung vorhanden,8963,,
+IGDB,davon Nutzerbewertung vorhanden,21496,,
+Metacritic,Rohzeilen (Plattform-Einträge),36831,,
+Metacritic,PC-Einträge,8780,,
+Metacritic,exakte Dublettenzeilen der Quelle entfernt,167,,
+Metacritic,Metascore 'tbd' -> NaN,995,,
+Metacritic,Metascore leer,746,,
+Metacritic,Nutzerscore 'tbd' -> NaN,1,,
+Metacritic,Nutzerscore leer,1750,,
+Metacritic,ohne verwertbaren Namen (< 2 Zeichen) entfernt,2,,
+Metacritic,Name/Jahr-Dubletten entfernt (Eintrag mit Metascore bevorzugt),11,,
+Metacritic,Einträge für das Matching,8600,,
+Metacritic,"davon ohne lesbares Veröffentlichungsdatum (bleiben enthalten, nicht matchbar)",23,,
+Metacritic,davon mit Metascore,6869,,
+Metacritic,davon mit Nutzerscore,6859,,
+Preishistorie,Rohzeilen (App-Monate),13119,,
+Preishistorie,Apps in der Rohdatei,651,,
+Preishistorie,Zeilen mit fehlenden/ungültigen Werten entfernt,0,,
+Preishistorie,"doppelte (app_id, month)-Gruppen",192,,8 Apps; Gruppen mit abweichenden Preisfeldern: 0
+Preishistorie,doppelte App-Monatszeilen entfernt (nicht summiert),216,,
+Preishistorie,unvollständiger Monat 2025-11 entfernt (Zeilen),318,,318 Apps betroffen
+Preishistorie,Zeilen nach Bereinigung,12585,,
+Preishistorie,Monate mit lowest_price > base_price (Rabatt -> NaN),123,,26 Apps
+Preishistorie,Apps für das Matching,651,,
+Preishistorie,"davon volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025, 24 bzw. 23 Monate)",444,,
+Preishistorie,davon kürzeres Fenster (Release im Zeitraum),207,,
+Preishistorie,davon mit lowest_price > base_price in mind. einem Monat,26,,
+IGDB,Stufe 1: Quelleinträge mit mehreren AppIDs (gleicher Name und Jahr),300,,"entschieden über Entwickler/Publisher: 69, über Analysestichprobe: 105, mehrdeutig und nicht gematcht: 126"
+IGDB,Stufe 3: Kandidaten mit Firmenangabe auf beiden Seiten geprüft,666,141,verworfen (Entwickler/Publisher verschieden): 66 (Analysestichprobe 25)
+IGDB,gematcht in Stufe 1,72011,63421,
+IGDB,gematcht in Stufe 2,3077,2564,
+IGDB,gematcht in Stufe 3,6525,4762,
+IGDB,gematcht gesamt,81613,70747,
+IGDB,"Prüfung Stufe 1: Treffer mit Firmenangabe auf beiden Seiten, davon Firmen verschieden",1457,1345,von 29839 (4.9%); Analysestichprobe von 27264 (4.9%)
+IGDB,"Prüfung Stufe 2: Treffer mit Firmenangabe auf beiden Seiten, davon Firmen verschieden",128,113,von 2172 (5.9%); Analysestichprobe von 1887 (6.0%)
+IGDB,"Prüfung Stufe 3: Treffer mit Firmenangabe auf beiden Seiten, davon Firmen verschieden",0,0,von 600 (0.0%); Analysestichprobe von 116 (0.0%)
+IGDB,"ungematcht, Name und Jahr nur bei ausgeschlossenen Nicht-PC-Einträgen",254,215,
+IGDB,"Steam-Namen mit nicht-lateinischen Buchstaben (Rohname), davon gematcht",1315,1172,von 5414 (Analysestichprobe 3522)
+IGDB,"darunter Schlüssel auf den lateinischen Namensteil reduziert, davon gematcht",1244,1104,von 3124 (Analysestichprobe 1992)
+IGDB,"darunter Schlüssel mit nicht-lateinischen Buchstaben, davon gematcht",71,68,von 2290 (Analysestichprobe 1530)
+IGDB,"Release nach dem IGDB-Stand 26.07.2025, davon gematcht",3107,0,von 14915 (Analysestichprobe 0)
+IGDB,"Recall-Referenz: Spiele mit Steam-Metacritic-Score, davon gematcht",3265,3190,von 4258 (76.7%); Analysestichprobe von 4095 (77.9%)
+IGDB,"Erstveröffentlichungsjahr per Namens-Lookup (ohne Match, Name beidseitig eindeutig)",3988,3559,verworfen wegen abweichender Entwickler/Publisher: 312; IGDB-Jahr mehr als 1 Jahr vor dem Steam-Jahr: 3907 (Analysestichprobe 3479)
+Metacritic,Stufe 1: Quelleinträge mit mehreren AppIDs (gleicher Name und Jahr),35,,"entschieden über Entwickler/Publisher: 3, über Analysestichprobe: 31, mehrdeutig und nicht gematcht: 1"
+Metacritic,Stufe 2: Kandidaten mit Jahresabstand >= 2 geprüft,684,,"verworfen (Entwickler/Publisher verschieden, Score nicht bestätigt): 30"
+Metacritic,gematcht in Stufe 1,3964,3812,
+Metacritic,gematcht in Stufe 2,1239,1204,
+Metacritic,gematcht gesamt,5203,5016,
+Metacritic,"Prüfung Stufe 1: Treffer mit Firmenangabe auf beiden Seiten, davon Firmen verschieden",98,97,von 3946 (2.5%); Analysestichprobe von 3796 (2.6%)
+Metacritic,"Prüfung Stufe 2: Treffer mit Firmenangabe auf beiden Seiten, davon Firmen verschieden",45,44,von 1228 (3.7%); Analysestichprobe von 1194 (3.7%)
+Metacritic,gematcht mit Metascore (has_mc_external),4224,4070,
+Metacritic,"Prüfung Stufe 1: Treffer mit Steam-Metacritic-Score, davon gleicher Metascore",2103,2077,von 2153 (97.7%); Analysestichprobe von 2120 (98.0%)
+Metacritic,"Prüfung Stufe 2: Treffer mit Steam-Metacritic-Score, davon gleicher Metascore",588,580,von 616 (95.5%); Analysestichprobe von 608 (95.4%)
+Preishistorie,gematcht über AppID,650,573,
+Preishistorie,gematcht mit vollem Fenster,443,434,

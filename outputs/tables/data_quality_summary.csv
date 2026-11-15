@@ -1,24 +1,76 @@
-﻿Pruefung,Wert,Anteil
-Zeilen im Rohdatensatz,125855,1.0
-Eindeutige AppIDs,125855,1.0
-Doppelte AppIDs,0,0.0
-Fehlender Name,1,7.945651742084144e-06
-Fehlendes Release-Datum,0,0.0
-Release-Jahr nach 2025,3316,0.026347781176751024
-Besitzer '0 - 0' (fehlend),24579,0.1952961741686862
-Preis = 0,26661,0.21183902109570538
-Preis fehlend/negativ,0,0.0
-Keine Reviews,42899,0.3408605140836677
-Kein Metacritic-Score,121597,0.9661674148822057
-Peak CCU = 0,106175,0.8436295737157841
-Keine Genre-Angabe,10134,0.08052123475428072
-Keine Kategorie-Angabe,8966,0.07124071351952643
-Software/Utilities,1208,0.009598347304437647
-Nicht-Spiel-Name (Demo/Playtest usw.),8310,0.06602836597671924
-Namens-/Editionsduplikate (entfernt),402,0.003194152000317826
-Analysestichprobe,99397,0.7897739462079377
-IGDB-Match in Analysestichprobe,66354,0.5272257756942513
-Externer Metacritic-Match in Analysestichprobe,3056,0.024281911723809144
-Preishistorie-Match in Analysestichprobe,645,0.005124945373644273
-Mindestens zwei Datenquellen,66783,0.5306344602916054
-Alle vier Datenquellen,290,0.002304239005204402
+﻿Kennung,Pruefung,Basis,N_Basis,Wert,Anteil,Hinweis
+raw_rows,Zeilen im Rohdatensatz,Rohdatensatz,125855,125855,1,
+unique_appids,Eindeutige AppIDs,Rohdatensatz,125855,125855,1,
+duplicate_appids,Doppelte AppIDs,Rohdatensatz,125855,0,0,
+missing_name,Fehlender Name,Rohdatensatz,125855,1,7.945651742e-06,
+missing_release,Fehlendes Release-Datum,Rohdatensatz,125855,0,0,
+release_after_cutoff,Release ab dem SteamSpy-Stichtag (01.06.2025),Rohdatensatz,125855,18761,0.1490683723,keine SteamSpy-Ergebnisdaten; aus der Analysestichprobe ausgeschlossen
+release_after_2025,Release-Jahr nach 2025,Rohdatensatz,125855,3316,0.02634778118,
+owners_zero,Besitzer '0 - 0' (fehlend),Rohdatensatz,125855,24579,0.1952961742,immer 0 Reviews und Peak CCU 0; Anteil steigt stark mit dem Release-Jahr
+steamspy_missing,"SteamSpy-Lücke (0 Reviews, aber Steam-Recommendations > 0)",Rohdatensatz,125855,2494,0.01981645544,"Besitzer, Reviews und Peak CCU auf NaN gesetzt und ausgeschlossen"
+price_current_zero,Tagespreis = 0,Rohdatensatz,125855,26661,0.2118390211,
+list_price_zero,Listenpreis = 0 (kostenlos),Rohdatensatz,125855,26622,0.2115291407,
+list_price_undefined,Listenpreis nicht bestimmbar,Rohdatensatz,125855,41,0.0003257717214,Rabatt 100 % oder Tagespreis 0 trotz Rabatt 1–99 %; weder kostenlos noch kostenpflichtig gezählt
+price_zero_with_discount,Tagespreis 0 trotz Rabatt 1–99 % (Datenfehler),Rohdatensatz,125855,35,0.000278097811,Listenpreis fehlend statt 0; nicht als kostenlos gewertet
+price_outlier,Listenpreis > 100 USD (Preisausreißer),Rohdatensatz,125855,346,0.002749195503,
+list_price_conflict,Rabattangabe widerspricht dem Tagespreis: Tagespreis als Listenpreis übernommen,"Rohdatensatz, rabattiert mit Listenpreis > 0",40769,104,0.002550957836,"Tagespreis exakt x,99/ganzer Dollar, Tagespreis/(1 − Rabatt) neben keinem Preispunkt (z. B. 39,99 bei 85 % → 266,60); Rabattgruppe folgt weiter der Quelle"
+list_price_off_point,"Rabattiert: Listenpreis nicht auf x,99/ganzem Dollar (beibehalten)","Rohdatensatz, rabattiert mit Listenpreis > 0",40769,508,0.01246044789,"ungewöhnliche, aber mit Tagespreis und Rabatt vereinbare Preise (z. B. 0,93 bei 50 % → 1,86)"
+no_metacritic,Kein Metacritic-Score (FronkonGames),Rohdatensatz,125855,121597,0.9661674149,
+no_standard_genre,Kein Steam-Standardgenre,Rohdatensatz,125855,10134,0.08052123475,"umfasst auch Einträge nur mit Free To Play, Early Access oder Software-Genres"
+genres_empty,Genre-Feld leer,Rohdatensatz,125855,8423,0.06692622462,
+no_categories,Keine Kategorie-Angabe,Rohdatensatz,125855,8966,0.07124071352,
+no_languages,Keine Sprachangabe,Rohdatensatz,125855,8391,0.06667196377,
+software_flag,"Software (Software-Genre ohne Standardgenre), Merkmal",Rohdatensatz,125855,1491,0.01184696675,Merkmal über alle Zeilen; tatsächlich entfernt (nach den vorherigen Schritten) siehe sample_flow
+non_game_flag,"Nicht-Spiel-Name (Demo/Playtest/Soundtrack usw.), Merkmal",Rohdatensatz,125855,8314,0.06606014858,Merkmal über alle Zeilen; die meisten Treffer haben bereits '0 - 0' (siehe sample_flow)
+duplicates_removed,"Duplikate (Name + Jahr + Entwickler), entfernt",Rohdatensatz,125855,102,0.0008104564777,nur Einträge mit gültiger Besitzerangabe; zusammen mit '0 - 0'-Einträgen (Sensitivitätsstichprobe) 109
+analytic_sample,Analysestichprobe,Rohdatensatz,125855,91052,0.7234674824,
+an_no_reviews,Keine Reviews,Analysestichprobe,91052,9928,0.1090365945,
+an_lt10_reviews,Weniger als 10 Reviews,Analysestichprobe,91052,35644,0.3914686113,
+an_peak_zero,Peak CCU = 0,Analysestichprobe,91052,72665,0.798060449,Peak CCU = gleichzeitige Spieler am Vortag des SteamSpy-Abrufs
+an_list_price_zero,Listenpreis = 0 (kostenlos),Analysestichprobe,91052,9306,0.1022053332,
+an_list_price_undefined,Listenpreis nicht bestimmbar,Analysestichprobe,91052,34,0.0003734129948,Rabatt 100 % oder Tagespreis 0 trotz Rabatt 1–99 %
+an_price_zero_with_discount,Tagespreis 0 trotz Rabatt 1–99 % (Datenfehler),Analysestichprobe,91052,28,0.0003075165839,nicht als kostenlos gewertet (Listenpreis fehlend)
+an_f2p_tag,Genre 'Free To Play',Analysestichprobe,91052,5599,0.06149233405,
+an_price_outlier,Listenpreis > 100 USD,Analysestichprobe,91052,187,0.002053771471,
+an_price_cluster,"Listenpreis exakt 54,99 USD, Release ab 2024 (Preis-Cluster)",Analysestichprobe,91052,110,0.001208100865,Serien von Kleinstspielen; in der Preisübersicht getrennt ausgewiesen
+an_list_price_conflict,Rabattangabe widerspricht dem Tagespreis: Tagespreis als Listenpreis übernommen,"Analysestichprobe, rabattiert mit Listenpreis > 0",35993,75,0.002083738505,
+an_list_price_off_point,"Rabattiert: Listenpreis nicht auf x,99/ganzem Dollar (beibehalten)","Analysestichprobe, rabattiert mit Listenpreis > 0",35993,409,0.01136332065,
+an_discount,Rabatt > 0 zum Store-Snapshot,Analysestichprobe,91052,36027,0.3956749989,
+an_no_english,Englisch nicht unterstützt (bei vorhandener Sprachangabe),Analysestichprobe,91052,3670,0.04030663797,
+an_early_access,Early Access (Genre-Markierung),Analysestichprobe,91052,8515,0.09351798972,
+an_igdb,IGDB-Match,Analysestichprobe,91052,70747,0.776995563,
+an_mc_external,Externer Metacritic-Match,Analysestichprobe,91052,4070,0.04469973202,
+an_price_history,Preishistorie-Match,Analysestichprobe,91052,573,0.006293107235,
+an_two_sources,Mindestens zwei Datenquellen,Analysestichprobe,91052,71494,0.7851996661,
+an_all_sources,Alle vier Datenquellen,Analysestichprobe,91052,324,0.003558406185,
+an_release_shifted,IGDB-Erstveröffentlichung > 1 Jahr vor dem Steam-Jahr (release_shifted),Analysestichprobe,91052,3479,0.03820893555,"überwiegend Neuauflagen/Portierungen, teils Early-Access-Absolventen; Sensitivitätsanalyse"
+an_release_shifted_lookup,davon IGDB-Jahr aus dem Namens-Lookup (ohne IGDB-Treffer),"Analysestichprobe, release_shifted",3479,3479,1,"Treffer der Stufen 1/2 haben höchstens 1 Jahr Abstand, Stufe 3 kein Jahr"
+an_release_shifted_gap23,davon Abstand 2 bis 3 Jahre,"Analysestichprobe, release_shifted",3479,1563,0.4492670308,"Größenordnung typischer Early-Access-Phasen, aber auch Portierungen"
+an_ea_graduate_proxy,"Hinweis auf früheren Markteintritt (EA-Absolventen-Proxy, ohne aktuelle EA-Markierung)",Analysestichprobe,91052,2603,0.02858805957,AppID unter dem Median des Jahrgangs 3 Jahre vor dem Store-Jahr oder erster Preismonat > 1 Monat vor dem Store-Datum; mischt EA-Absolventen und lange angekündigte Titel
+an_entry_proxy_appid,davon über die AppID,Analysestichprobe,91052,2592,0.02846724948,
+an_entry_proxy_ph,davon über die Preishistorie,Analysestichprobe,91052,23,0.0002526029082,
+an_entry_proxy_shifted,EA-Absolventen-Proxy mit release_shifted,"Analysestichprobe, EA-Absolventen-Proxy",2603,361,0.1386861314,
+an_entry_proxy_igdb_year,EA-Absolventen-Proxy mit IGDB-Erstveröffentlichungsjahr,"Analysestichprobe, EA-Absolventen-Proxy",2603,2262,0.8689973108,
+an_entry_proxy_igdb_same,davon IGDB-Jahr = Store-Jahr,EA-Absolventen-Proxy mit IGDB-Jahr,2262,1811,0.8006189213,IGDB datiert wie Steam (Vollversion) oder der Proxy trifft keinen früheren Markteintritt
+an_kept_keyword,Gegenprobe Namensfilter: behalten trotz Schlüsselwort im Namen,Analysestichprobe,91052,1797,0.01973597505,"Schlüsselwörter wie Edition, Test, Pack, Beta, Demo; 25 Beispiele in exclusion_samples.csv"
+an_kept_keyword_genre,Gegenprobe: davon mit Steam-Standardgenre,Gegenprobe Namensfilter,1797,1787,0.9944351697,"ohne Standardgenre: u. a. Software ohne Genreangabe, die kein Filter erkennt"
+igdb_stage1,IGDB-Treffer in Stufe 1,IGDB-Teilstichprobe,70747,63421,0.8964479059,
+igdb_stage2,IGDB-Treffer in Stufe 2,IGDB-Teilstichprobe,70747,2564,0.03624181944,
+igdb_stage3,IGDB-Treffer in Stufe 3,IGDB-Teilstichprobe,70747,4762,0.06731027464,
+igdb_has_modes,IGDB-Spielmodus angegeben,IGDB-Teilstichprobe,70747,57663,0.8150592958,Basis der Modus-Anteile; ohne Angabe sind die Modus-Merkmale fehlend
+igdb_has_genres,IGDB-Genre angegeben,IGDB-Teilstichprobe,70747,67669,0.9564928548,Basis der Genre-Anteile
+igdb_rating,IGDB-Nutzerbewertung vorhanden,IGDB-Teilstichprobe,70747,13480,0.1905381147,
+igdb_rating_integer,IGDB-Nutzerbewertung ganzzahlig,IGDB-Treffer mit Nutzerbewertung,13480,9107,0.6755934718,ganzzahlige Werte deuten auf sehr wenige Stimmen (IGDB-Datei ohne Stimmenzahl)
+igdb_aggregated_rating,IGDB-Kritikerbewertung vorhanden,IGDB-Teilstichprobe,70747,5530,0.07816585862,
+igdb_stage3_has_modes,Stufe-3-Treffer mit Spielmodus-Angabe,IGDB-Treffer in Stufe 3,4762,938,0.1969760605,undatierte IGDB-Einträge sind meist spärlich dokumentiert
+mc_user_score,Externer Metacritic-Nutzerscore vorhanden,Externe Metacritic-Teilstichprobe,4070,3789,0.930958231,
+ph_full_window,Preishistorie mit vollem Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025),Preishistorie-Teilstichprobe,573,434,0.757417103,
+ph_lowest_above_base,Preishistorie: Tiefstpreis über statischem Basispreis in mind. einem Monat,Preishistorie-Teilstichprobe,573,25,0.04363001745,
+ph_before_release,Preishistorie beginnt > 1 Monat vor dem Store-Datum,Preishistorie-Teilstichprobe,573,23,0.04013961606,Hinweis auf früheren Markteintritt (v. a. Early-Access-Absolventen)
+ph_before_release_shifted,davon mit release_shifted,Preishistorie beginnt vor dem Store-Datum,23,1,0.04347826087,
+ph_before_release_igdb_same,davon IGDB-Erstveröffentlichungsjahr = Store-Jahr,"Preishistorie beginnt vor dem Store-Datum, IGDB-Jahr vorhanden",22,21,0.9545454545,IGDB datiert diese Spiele wie Steam auf die Vollversion (Preisfenster beginnt erst Nov. 2023)
+ph_before_release_appid,davon auch über die AppID erkannt,Preishistorie beginnt vor dem Store-Datum,23,12,0.5217391304,
+ph_disc0_le90,"Rabatt 0, aber Tagespreis ≤ 90 % des Basispreises der Preishistorie","Preishistorie-Teilstichprobe, kostenpflichtig, Rabatt 0 zum Snapshot",54,45,0.8333333333,Hinweis auf nicht erfassten Rabatt (oder dauerhafte Preissenkung nach Okt. 2025)
+ph_disc0_below,"Rabatt 0, aber Tagespreis unter dem Basispreis der Preishistorie","Preishistorie-Teilstichprobe, kostenpflichtig, Rabatt 0 zum Snapshot",54,45,0.8333333333,
+ph_disc0_above,"Rabatt 0, Tagespreis über dem Basispreis der Preishistorie","Preishistorie-Teilstichprobe, kostenpflichtig, Rabatt 0 zum Snapshot",54,0,0,
+ph_disc_list_eq_base,"Rabatt > 0: rekonstruierter Listenpreis = Basispreis der Preishistorie (± 0,02)","Preishistorie-Teilstichprobe, kostenpflichtig, Rabatt > 0 zum Snapshot",518,478,0.9227799228,Prüfung der Listenpreis-Rekonstruktion

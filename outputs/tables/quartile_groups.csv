@@ -1,0 +1,45 @@
+﻿Kennung,Variable,Merkmal,Stichprobe,Gruppe,n,min,max,Erfolgsquote_success_top25,Erfolgsquote_success_50k,Erfolgsquote_success_100k
+h3_pr_r10,positive_ratio,Positive Ratio (mind. 10 Reviews),mind. 10 Reviews,Q1 (niedrig),13852,0,0.672979798,0.3668784291,0.1889257869,0.1069159688
+h3_pr_r10,positive_ratio,Positive Ratio (mind. 10 Reviews),mind. 10 Reviews,Q2,13866,0.6730083234,0.8125,0.4381220251,0.2584739651,0.1603202077
+h3_pr_r10,positive_ratio,Positive Ratio (mind. 10 Reviews),mind. 10 Reviews,Q3,13838,0.8125765619,0.9106666667,0.44298309,0.2818326348,0.1901286313
+h3_pr_r10,positive_ratio,Positive Ratio (mind. 10 Reviews),mind. 10 Reviews,Q4 (hoch),13852,0.9106796117,1,0.3453652902,0.2110164597,0.1466936183
+h3_wilson_r10,wilson,Wilson-Score (mind. 10 Reviews),mind. 10 Reviews,Q1 (niedrig),13862,0,0.5212387899,0.2624440918,0.1106622421,0.05432116578
+h3_wilson_r10,wilson,Wilson-Score (mind. 10 Reviews),mind. 10 Reviews,Q2,13841,0.5212568919,0.6876639427,0.3473014956,0.1757098476,0.09659706669
+h3_wilson_r10,wilson,Wilson-Score (mind. 10 Reviews),mind. 10 Reviews,Q3,13853,0.6876689026,0.8130701181,0.4162997185,0.2504872591,0.1546235472
+h3_wilson_r10,wilson,Wilson-Score (mind. 10 Reviews),mind. 10 Reviews,Q4 (hoch),13852,0.8130739211,0.9945526277,0.5673548946,0.4034074502,0.2985128501
+h3_pr_r50,positive_ratio,Positive Ratio (mind. 50 Reviews),mind. 50 Reviews,Q1 (niedrig),7486,0.07142857143,0.7003367003,0.6382580818,0.3792412503,0.2269569864
+h3_pr_r50,positive_ratio,Positive Ratio (mind. 50 Reviews),mind. 50 Reviews,Q2,7484,0.7003676471,0.8204982553,0.6479155532,0.4143506146,0.2642971673
+h3_pr_r50,positive_ratio,Positive Ratio (mind. 50 Reviews),mind. 50 Reviews,Q3,7487,0.8205128205,0.9048913043,0.6349672766,0.4354213971,0.3033257647
+h3_pr_r50,positive_ratio,Positive Ratio (mind. 50 Reviews),mind. 50 Reviews,Q4 (hoch),7486,0.9049111808,1,0.5716003206,0.3887256212,0.281859471
+h3_wilson_r50,wilson,Wilson-Score (mind. 50 Reviews),mind. 50 Reviews,Q1 (niedrig),7486,0.0303188543,0.6280453141,0.5814854395,0.3124499065,0.1700507614
+h3_wilson_r50,wilson,Wilson-Score (mind. 50 Reviews),mind. 50 Reviews,Q2,7485,0.6280489953,0.7642867797,0.6105544422,0.3748830995,0.2319305277
+h3_wilson_r50,wilson,Wilson-Score (mind. 50 Reviews),mind. 50 Reviews,Q3,7486,0.7643091908,0.8643245526,0.618888592,0.423857868,0.2830617152
+h3_wilson_r50,wilson,Wilson-Score (mind. 50 Reviews),mind. 50 Reviews,Q4 (hoch),7486,0.86437765,0.9945526277,0.6818060379,0.5065455517,0.3913972749
+h3_mc,mc_metascore,Metascore (extern),Metacritic extern (Metascore vorhanden),Q1 (niedrig),1000,19,67,0.82,0.633,0.472
+h3_mc,mc_metascore,Metascore (extern),Metacritic extern (Metascore vorhanden),Q2,1066,68,74,0.8902439024,0.7570356473,0.595684803
+h3_mc,mc_metascore,Metascore (extern),Metacritic extern (Metascore vorhanden),Q3,1062,75,80,0.9058380414,0.8069679849,0.6854990584
+h3_mc,mc_metascore,Metascore (extern),Metacritic extern (Metascore vorhanden),Q4 (hoch),942,81,96,0.9299363057,0.8704883227,0.8025477707
+h4_igdbuser_all,igdb_rating,IGDB-Nutzerbewertung (alle),IGDB-Nutzerbewertung vorhanden,Q1 (niedrig),3370,10.79174646,57.69230769,0.6172106825,0.3934718101,0.250148368
+h4_igdbuser_all,igdb_rating,IGDB-Nutzerbewertung (alle),IGDB-Nutzerbewertung vorhanden,Q2,2925,57.7078682,69.99789602,0.7456410256,0.5675213675,0.4222222222
+h4_igdbuser_all,igdb_rating,IGDB-Nutzerbewertung (alle),IGDB-Nutzerbewertung vorhanden,Q3,3815,70,70.34294867,0.4081258191,0.1819134993,0.09252948886
+h4_igdbuser_all,igdb_rating,IGDB-Nutzerbewertung (alle),IGDB-Nutzerbewertung vorhanden,Q4 (hoch),3370,70.34684085,100,0.9071216617,0.7872403561,0.6545994065
+h4_igdbuser_nonint,igdb_rating,IGDB-Nutzerbewertung (nicht ganzzahlig (mehr Stimmen)),IGDB-Nutzerbewertung nicht ganzzahlig,Q1 (niedrig),1093,10.79174646,65.23572499,0.9222323879,0.8362305581,0.6980786825
+h4_igdbuser_nonint,igdb_rating,IGDB-Nutzerbewertung (nicht ganzzahlig (mehr Stimmen)),IGDB-Nutzerbewertung nicht ganzzahlig,Q2,1093,65.23809524,71.16156392,0.945105215,0.8581884721,0.7172918573
+h4_igdbuser_nonint,igdb_rating,IGDB-Nutzerbewertung (nicht ganzzahlig (mehr Stimmen)),IGDB-Nutzerbewertung nicht ganzzahlig,Q3,1094,71.16302054,78.74358015,0.9616087751,0.9095063985,0.8254113346
+h4_igdbuser_nonint,igdb_rating,IGDB-Nutzerbewertung (nicht ganzzahlig (mehr Stimmen)),IGDB-Nutzerbewertung nicht ganzzahlig,Q4 (hoch),1093,78.74524781,99.47618753,0.9533394328,0.8975297347,0.8078682525
+h4_igdbuser_int,igdb_rating,IGDB-Nutzerbewertung (ganzzahlig (wenige Stimmen)),IGDB-Nutzerbewertung ganzzahlig,Q1 (niedrig),2921,20,50,0.571037316,0.3279698733,0.1838411503
+h4_igdbuser_int,igdb_rating,IGDB-Nutzerbewertung (ganzzahlig (wenige Stimmen)),IGDB-Nutzerbewertung ganzzahlig,Q2,1533,53,68,0.5727332029,0.3144161774,0.1637312459
+h4_igdbuser_int,igdb_rating,IGDB-Nutzerbewertung (ganzzahlig (wenige Stimmen)),IGDB-Nutzerbewertung ganzzahlig,Q3,3637,70,70,0.382183118,0.1495738246,0.06378883695
+h4_igdbuser_int,igdb_rating,IGDB-Nutzerbewertung (ganzzahlig (wenige Stimmen)),IGDB-Nutzerbewertung ganzzahlig,Q4 (hoch),1016,71,100,0.7913385827,0.5127952756,0.2795275591
+h4_igdbcrit,igdb_aggregated_rating,IGDB-Kritikerbewertung,IGDB-Kritikerbewertung vorhanden,Q1 (niedrig),1370,10,65.875,0.6569343066,0.4693430657,0.3335766423
+h4_igdbcrit,igdb_aggregated_rating,IGDB-Kritikerbewertung,IGDB-Kritikerbewertung vorhanden,Q2,1390,66,74.92307692,0.7431654676,0.5978417266,0.4690647482
+h4_igdbcrit,igdb_aggregated_rating,IGDB-Kritikerbewertung,IGDB-Kritikerbewertung vorhanden,Q3,1434,75,80,0.7531380753,0.6192468619,0.4986052999
+h4_igdbcrit,igdb_aggregated_rating,IGDB-Kritikerbewertung,IGDB-Kritikerbewertung vorhanden,Q4 (hoch),1336,80.09090909,100,0.8675149701,0.7799401198,0.6818862275
+h4_ph_max_discount_pct,ph_max_discount_pct,maximaler Rabatt,"Preishistorie, volles Fenster",Q1 (niedrig),107,0,60.01000167,0.9813084112,0.953271028,0.9158878505
+h4_ph_max_discount_pct,ph_max_discount_pct,maximaler Rabatt,"Preishistorie, volles Fenster",Q2,107,60.01500375,72.03601801,1,0.953271028,0.9158878505
+h4_ph_max_discount_pct,ph_max_discount_pct,maximaler Rabatt,"Preishistorie, volles Fenster",Q3,113,75.01250208,80.04002001,0.9911504425,0.9911504425,0.982300885
+h4_ph_max_discount_pct,ph_max_discount_pct,maximaler Rabatt,"Preishistorie, volles Fenster",Q4 (hoch),107,80.05336891,96.69889963,1,0.9906542056,0.9906542056
+h4_ph_share_months_on_sale,ph_share_months_on_sale,Anteil Monate mit Rabatt,Preishistorie,Q1 (niedrig),144,0,0.7857142857,0.9930555556,0.9305555556,0.8888888889
+h4_ph_share_months_on_sale,ph_share_months_on_sale,Anteil Monate mit Rabatt,Preishistorie,Q2,130,0.7916666667,0.8695652174,0.9615384615,0.8769230769,0.8153846154
+h4_ph_share_months_on_sale,ph_share_months_on_sale,Anteil Monate mit Rabatt,Preishistorie,Q3,155,0.875,0.9473684211,0.9806451613,0.9419354839,0.8838709677
+h4_ph_share_months_on_sale,ph_share_months_on_sale,Anteil Monate mit Rabatt,Preishistorie,Q4 (hoch),144,0.95,1,0.9861111111,0.9513888889,0.9305555556

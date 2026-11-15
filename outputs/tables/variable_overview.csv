@@ -1,31 +1,65 @@
 ﻿Variable,Beschreibung,Typ,Rolle
-owners_low,Untere Grenze der Besitzer-Spanne,metrisch,Zielgroesse (Schwellen)
-owners_mid,Mittelpunkt der Besitzer-Spanne,metrisch,Zielgroesse (log-transformiert)
-log_owners,log10(owners_mid),metrisch,Zielgroesse in Korrelationen/Tests
-peak_ccu,Peak Concurrent Players,metrisch,ergaenzende Zielgroesse
-release_year,Veroeffentlichungsjahr,metrisch,Kontrollvariable / F1
-n_platforms,Anzahl unterstuetzter Plattformen,metrisch,F1
-genre_*,Genre-Indikatoren,binaer,F1
-mode,Single-/Multiplayer-Kategorie,kategorial,F1
-price,Aktueller Preis in USD,metrisch,F2
-is_free,Free-to-Play-Indikator,binaer,F2
-discount,Aktueller Rabatt in Prozent,metrisch,F2
+owners_low,Untere Grenze der SteamSpy-Besitzerklasse (Stand ca. Anfang Juni 2025),ordinal (Klassengrenze),Zielgröße (Erfolgsschwellen)
+owners_mid,Mittelpunkt der Besitzerklasse,ordinal (13 Klassenmitten),Zielgröße in Mann-Whitney/Cliff's δ und Kruskal-Wallis (rangbasiert)
+log_owners,log10(owners_mid),ordinal (13 Werte),Zielgröße in Spearman-Korrelationen; für Rangverfahren gleichwertig zu owners_mid (monotone Transformation)
+owners_zero,"Besitzerangabe '0 - 0' (fehlend, nicht zufällig verteilt)",binär,Ausschluss; Sensitivitätsanalyse
+steamspy_missing,SteamSpy-Lücke: 0 Reviews trotz Steam-Recommendations > 0,binär,Ausschluss (Besitzer/Reviews/Peak auf NaN)
+peak_ccu,"Höchste Zahl gleichzeitiger Spieler am Vortag des SteamSpy-Abrufs (ca. Anfang Juni 2025), kein Allzeit-Peak",metrisch,"ergänzende Zielgröße (Momentaufnahme, nur Peak > 0)"
+release_year,Jahr des aktuellen Steam-Store-Datums (bei Early-Access-Absolventen Datum der Vollversion),metrisch,Kontrollvariable (Alter/Kohorte)
+release_year_alt,Früheres von Steam-Jahr und IGDB-Erstveröffentlichungsjahr (IGDB-Treffer oder Namens-Lookup); bei Portierungen obere Schranke des Alters auf Steam,metrisch,Sensitivität der Alterskontrolle
+release_shifted,"IGDB-Erstveröffentlichung mehr als ein Jahr vor dem Steam-Jahr (überwiegend Neuauflagen/Portierungen, seltener frühere Veröffentlichung außerhalb von Steam; Early-Access-Absolventen nur teilweise, da IGDB sie teils auf die Vollversion datiert); stammt nur aus dem Namens-Lookup, weil IGDB-Treffer höchstens 1 Jahr Abstand haben",binär,Sensitivität (Ausschluss)
+market_entry_year,"Geschätztes Jahr des Markteintritts: Minimum aus Store-Jahr, AppID-Jahr (falls AppID unter dem Median des Jahrgangs 3 Jahre früher) und Jahr des ersten Preismonats (falls > 1 Monat vor dem Store-Datum); nur ohne aktuelle Early-Access-Markierung",metrisch,Sensitivität der Alterskontrolle (Early Access)
+ea_graduate_proxy,Hinweis auf früheren Markteintritt (entry_proxy_appid oder entry_proxy_ph); mischt Early-Access-Absolventen und lange vorab angekündigte Titel,binär,Sensitivität (Ausschluss)
+age_years,Jahre zwischen Store-Datum und SteamSpy-Stichtag (01.06.2025),metrisch,Kontrollvariable (deskriptiv)
+n_platforms,Anzahl unterstützter Plattformen,metrisch,F1
+platform_combo,"Plattformkombination (W, W+M, W+L, W+M+L)",kategorial,F1
+genre_*,Steam-Standardgenres,binär,F1
+mode,"Single-/Multiplayer aus Steam-Kategorien (Multiplayer: Multi-player, PvP, Co-op, Shared/Split Screen, MMO, LAN, Cross-Platform, Remote Play Together)",kategorial,F1
+price_current,"Tagespreis zum Store-Snapshot (ca. Anfang März 2026) in USD, ggf. rabattiert",metrisch,nur Sensitivität (Tagespreis)
+list_price,"Rekonstruierter Listenpreis = Tagespreis / (1 - Rabatt/100), auf Preispunkte x,99/ganze Dollar gesetzt; Tagespreis, wenn die Rabattangabe dem Tagespreis widerspricht (list_price_conflict); Untergrenze, da der Rabatt teils fehlt; fehlend bei 100 % Rabatt und bei Tagespreis 0 trotz Rabatt 1–99 %",metrisch,F2 (Preisniveau)
+list_price_conflict,"Rabattangabe widerspricht dem Tagespreis (Tagespreis exakt x,99/ganzer Dollar, rekonstruierter Wert neben keinem Preispunkt); Tagespreis als Listenpreis übernommen",binär,Datenqualität
+price_class,Preisklasse nach Listenpreis ('Free' = Listenpreis 0; fehlend ohne bestimmbaren Listenpreis),ordinal,F2
+price_class_current,Preisklasse nach Tagespreis,ordinal,nur Sensitivität
+is_free,kostenlos (Listenpreis 0); nicht: Tagespreis 0 durch 100 % Rabatt oder Tagespreis 0 trotz Rabatt 1–99 %,binär,F2 (Tests nur auf Spielen mit bestimmbarem Listenpreis)
+price_zero_with_discount,Tagespreis 0 trotz Rabatt 1–99 % (Datenfehler der Quelle); Listenpreis dort fehlend,binär,Datenqualität
+f2p_tag,Steam-Genre 'Free To Play',binär,F2 (Sensitivität)
+price_outlier,Listenpreis > 100 USD,binär,in Preisniveau-Analysen ausgeschlossen
+price_cluster,"Listenpreis exakt 54,99 USD bei Release ab 2024 (Serien von Kleinstspielen)",binär,in der Preisübersicht getrennt ausgewiesen; in den Tests enthalten (Sensitivität ohne)
+discount,"Rabatt zum Store-Snapshot in Prozent (teils fehlend, daher Untergrenze)",metrisch,F2
+has_discount,Rabatt > 0 zum Store-Snapshot,binär,F2
 dlc_count,Anzahl DLCs,metrisch,F2
-wilson,Wilson-Untergrenze der positiven Bewertungen,metrisch,F3
-positive_ratio,Anteil positiver Bewertungen,metrisch,F3 (Robustheit)
+positive_ratio,Anteil positiver Steam-Reviews (SteamSpy-Stand ca. Juni 2025),metrisch,F3 (primäres Maß der Nutzerbewertung)
+wilson,Wilson-Untergrenze des Anteils positiver Reviews,metrisch,nur Diagnose (stark vom Review-Volumen abhängig)
+review_count,Anzahl Reviews (Positive + Negative),metrisch,Stichprobenrestriktion (mind. 10) und Diagnose der Volumenabhängigkeit; kein inhaltlicher Prädiktor
 metacritic,Metacritic-Score aus FronkonGames,metrisch,Vergleichswert
-mc_metascore,Externer Metacritic-Kritikerscore,metrisch,F3 (externe Quelle)
-mc_user_score,Externer Metacritic-Nutzerscore,metrisch,F3 (externe Quelle)
-igdb_rating,IGDB-Nutzerbewertung,metrisch,externe Validierung
-igdb_aggregated_rating,IGDB-Kritikerbewertung,metrisch,externe Validierung
-igdb_multiplayer,IGDB: Multiplayer-Modus,binaer,externe Validierung
-igdb_singleplayer,IGDB: Singleplayer-Modus,binaer,externe Validierung
-igdb_n_genres,Anzahl IGDB-Genres,metrisch,externe Validierung
-ph_max_discount_pct,Maximaler Preisnachlass in der Preishistorie,metrisch,F2 (externe Quelle)
-ph_share_months_on_sale,Anteil Monate mit Rabatt,metrisch,F2 (externe Quelle)
-ph_price_changes_total,Preisaenderungen in der Preishistorie,metrisch,F2 (externe Quelle)
-n_sources,Anzahl verfuegbarer Datenquellen,metrisch,Datenabdeckung
-review_count,Anzahl Reviews,metrisch,"nur Stichprobenrestriktion, kein Praediktor"
-success_top25,Erfolg: oberes Quartil der Besitzer,binaer,Erfolgsziel (deskriptiv)
-success_top10,Erfolg: obere 10-%-Schwelle,binaer,Robustheitsziel
-success_100k,Erfolg: mind. 100.000 Besitzer,binaer,Robustheitsziel
+mc_metascore,Externer Metacritic-Kritikerscore,metrisch,F3 (Kritikerbewertung)
+mc_user_score,Externer Metacritic-Nutzerscore,metrisch,F3 (nur wo vorhanden)
+mc_match_stage,"Match-Stufe Metacritic (1 = Name + Jahr, 2 = eindeutiger Name, Steam-Jahr >= MC-Jahr - 1)",kategorial,Matching-Diagnose
+igdb_match_stage,"Match-Stufe IGDB (1 = Name + Jahr, 2 = eindeutiger Name +/- 1 Jahr, 3 = eindeutiger Name, IGDB undatiert)",kategorial,"Matching-Diagnose, Selektionstests"
+igdb_rating,IGDB-Nutzerbewertung (0 = Platzhalter -> fehlend),metrisch,H4 (externe Konsistenzprüfung)
+igdb_rating_integer,IGDB-Nutzerbewertung ganzzahlig (Hinweis auf sehr wenige Stimmen; IGDB-Datei ohne Stimmenzahl),binär (fehlend ohne Nutzerbewertung),Stratifizierung der IGDB-Nutzerbewertung
+igdb_aggregated_rating,IGDB-Kritikerbewertung (0 = Platzhalter -> fehlend),metrisch,H4 (externe Konsistenzprüfung)
+igdb_has_modes,IGDB-Treffer mit Spielmodus-Angabe,binär,Basis der IGDB-Modus-Anteile und -Tests
+igdb_multiplayer,"IGDB: Multiplayer, Co-operative, Split screen, MMO oder Battle Royale (analog Steam)",binär (fehlend ohne Modusangabe),"H4 (Konsistenz mit Steam, keine unabhängige Bestätigung)"
+igdb_singleplayer,IGDB: Singleplayer-Modus,binär (fehlend ohne Modusangabe),H4 (Konsistenz mit Steam)
+igdb_coop,IGDB: Co-operative oder Split screen,binär (fehlend ohne Modusangabe),H4 (Konsistenz mit Steam)
+igdb_mmo,IGDB: Massively Multiplayer Online (MMO),binär (fehlend ohne Modusangabe),H4 (Konsistenz mit Steam)
+igdb_genre_*,"IGDB-Genres (exakte IGDB-Bezeichnungen, inkl. Pinball)",binär (fehlend ohne Genreangabe),H4 (Konsistenz mit Steam)
+igdb_n_genres,Anzahl IGDB-Genres (fehlend ohne Genreangabe),metrisch,H4 (Dokumentationstiefe)
+igdb_pc_like,"IGDB-Eintrag mit PC-naher Plattform (Windows, Mac, Linux, SteamVR); fehlend ohne Plattformangabe",binär,Matching-Diagnose
+igdb_first_release_year,"IGDB-Erstveröffentlichungsjahr: Jahr des datierten Treffers, sonst Namens-Lookup (igdb_year_from_lookup)",metrisch,Basis für release_year_alt/release_shifted
+ph_price_changes_per_month,Preisänderungen je Beobachtungsmonat (Preishistorie),metrisch,H4 (externe Quelle)
+ph_days_on_sale_per_month,Rabatttage je Beobachtungsmonat (bezogen auf den statischen Basispreis der Quelle),metrisch,H4 (externe Quelle)
+ph_share_months_on_sale,Anteil der Beobachtungsmonate mit Rabatt,metrisch,H4 (externe Quelle)
+ph_max_discount_pct,Maximaler Preisnachlass gegenüber dem Basispreis (nur bei vollem Beobachtungsfenster interpretierbar),metrisch,H4 (externe Quelle)
+ph_mean_monthly_max_discount_pct,Mittel der monatlichen Höchstrabatte (aus dem monatlichen Tiefstpreis; Monate ohne Rabatt mit 0); kein mittlerer Rabatt je Verkaufstag,metrisch,H4 (externe Quelle)
+ph_months,"Beobachtete Monate in der Preishistorie (Nov. 2023 bis Okt. 2025, 2025-11 verworfen)",metrisch,Kontrollvariable (Fensterlänge)
+ph_full_window,"Volles Beobachtungsfenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025, 24 bzw. 23 Monate)",binär,Teilmenge für Preishistorie-Tests
+ph_lowest_above_base,Tiefstpreis eines Monats über dem statischen Basispreis (Rabatt dort nicht bestimmbar),binär,Sensitivität (Ausschluss)
+n_sources,Anzahl verfügbarer Datenquellen,metrisch,Datenabdeckung
+english_supported,"Englisch in 'Supported languages' (False auch bei fehlender Sprachangabe, siehe languages_listed)",binär,Selektionstests
+languages_listed,Sprachangabe vorhanden,binär,Selektionstests (Basis für english_supported)
+success_top25,Erfolg: mind. 20.000 Besitzer (oberes Quartil),binär,Hauptzielgröße
+success_50k,Erfolg: mind. 50.000 Besitzer,binär,Robustheitsziel
+success_100k,Erfolg: mind. 100.000 Besitzer,binär,Robustheitsziel
+success_peak_top25,Peak CCU im oberen Quartil der Spiele mit Peak CCU > 0 (Schwelle siehe success_thresholds.csv),binär (fehlend außerhalb Peak > 0),nicht ausgewertet (nur dokumentiert)

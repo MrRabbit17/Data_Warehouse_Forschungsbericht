@@ -1,0 +1,101 @@
+﻿Kennung,Merkmal,Variante,N,Effekt,Effekt_typ,CI_unten,CI_oben,p,konvergiert
+rel_genre_action_0,Genre: Action,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,1.106927712,adjustierte Odds Ratio,1.072774198,1.142168558,2.109686964e-10,True
+rel_genre_action_1,Genre: Action,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,1.102117966,adjustierte Odds Ratio,1.067251981,1.138122985,3.061060583e-09,True
+rel_genre_action_2,Genre: Action,Jahr-FE mit release_year_alt,91052,1.115230947,adjustierte Odds Ratio,1.080873941,1.150680037,8.425407257e-12,True
+rel_genre_action_3,Genre: Action,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,1.082692835,adjustierte Odds Ratio,1.048399244,1.118108185,1.311152813e-06,True
+rel_genre_action_4,Genre: Action,Jahr-FE mit market_entry_year,91052,1.093392142,adjustierte Odds Ratio,1.059499618,1.128368859,2.736830704e-08,True
+rel_genre_adventure_5,Genre: Adventure,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,1.294013821,adjustierte Odds Ratio,1.253925249,1.335384044,5.47502384e-58,True
+rel_genre_adventure_6,Genre: Adventure,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,1.307919733,adjustierte Odds Ratio,1.266384764,1.350816968,9.380811736e-60,True
+rel_genre_adventure_7,Genre: Adventure,Jahr-FE mit release_year_alt,91052,1.284116099,adjustierte Odds Ratio,1.24435104,1.32515191,9.77180145e-55,True
+rel_genre_adventure_8,Genre: Adventure,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,1.295961022,adjustierte Odds Ratio,1.254783555,1.338489785,8.489388982e-56,True
+rel_genre_adventure_9,Genre: Adventure,Jahr-FE mit market_entry_year,91052,1.291452238,adjustierte Odds Ratio,1.251265427,1.332929727,1.242619753e-56,True
+rel_genre_casual_10,Genre: Casual,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,0.5895878191,adjustierte Odds Ratio,0.5708935614,0.6088942317,1.304950747e-226,True
+rel_genre_casual_11,Genre: Casual,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,0.5998656175,adjustierte Odds Ratio,0.5804120652,0.6199711906,9.283265649e-203,True
+rel_genre_casual_12,Genre: Casual,Jahr-FE mit release_year_alt,91052,0.5899716294,adjustierte Odds Ratio,0.5712565432,0.6092998454,7.565589581e-226,True
+rel_genre_casual_13,Genre: Casual,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,0.6057497761,adjustierte Odds Ratio,0.586123595,0.6260331343,1.57132618e-195,True
+rel_genre_casual_14,Genre: Casual,Jahr-FE mit market_entry_year,91052,0.5981530938,adjustierte Odds Ratio,0.5791171905,0.6178147179,6.192699225e-213,True
+rel_genre_indie_15,Genre: Indie,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,0.8346995711,adjustierte Odds Ratio,0.8063809785,0.8640126598,1.065986719e-24,True
+rel_genre_indie_16,Genre: Indie,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,0.8653207883,adjustierte Odds Ratio,0.8348189735,0.8969370492,2.77411184e-15,True
+rel_genre_indie_17,Genre: Indie,Jahr-FE mit release_year_alt,91052,0.8624848834,adjustierte Odds Ratio,0.8329336531,0.8930845469,9.040003728e-17,True
+rel_genre_indie_18,Genre: Indie,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,0.8338691273,adjustierte Odds Ratio,0.804897826,0.8638832148,7.503384433e-24,True
+rel_genre_indie_19,Genre: Indie,Jahr-FE mit market_entry_year,91052,0.8238417704,adjustierte Odds Ratio,0.7957472252,0.8529282177,6.937638075e-28,True
+rel_genre_massively_multiplayer_20,Genre: Massively Multiplayer,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,2.280722917,adjustierte Odds Ratio,2.066557975,2.517082553,2.334997429e-60,True
+rel_genre_massively_multiplayer_21,Genre: Massively Multiplayer,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,2.181396675,adjustierte Odds Ratio,1.969860682,2.415648729,8.940052917e-51,True
+rel_genre_massively_multiplayer_22,Genre: Massively Multiplayer,Jahr-FE mit release_year_alt,91052,2.202799851,adjustierte Odds Ratio,1.994563693,2.43277625,8.935079973e-55,True
+rel_genre_massively_multiplayer_23,Genre: Massively Multiplayer,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,2.197701331,adjustierte Odds Ratio,1.98481204,2.433424951,7.924073781e-52,True
+rel_genre_massively_multiplayer_24,Genre: Massively Multiplayer,Jahr-FE mit market_entry_year,91052,2.225555607,adjustierte Odds Ratio,2.015211371,2.457855205,3.467865158e-56,True
+rel_genre_rpg_25,Genre: RPG,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,1.812780578,adjustierte Odds Ratio,1.744863728,1.883341015,9.570596832e-205,True
+rel_genre_rpg_26,Genre: RPG,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,1.803017011,adjustierte Odds Ratio,1.733835257,1.874959186,1.235215925e-191,True
+rel_genre_rpg_27,Genre: RPG,Jahr-FE mit release_year_alt,91052,1.802446884,adjustierte Odds Ratio,1.734834582,1.872694263,2.249965732e-200,True
+rel_genre_rpg_28,Genre: RPG,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,1.79616529,adjustierte Odds Ratio,1.726918786,1.868188461,2.158136085e-187,True
+rel_genre_rpg_29,Genre: RPG,Jahr-FE mit market_entry_year,91052,1.802823461,adjustierte Odds Ratio,1.7349736,1.873326737,3.479073663e-199,True
+rel_genre_racing_30,Genre: Racing,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,0.8388464302,adjustierte Odds Ratio,0.7698865416,0.9139831592,5.946026903e-05,True
+rel_genre_racing_31,Genre: Racing,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,0.8409517127,adjustierte Odds Ratio,0.769890984,0.9185713272,0.0001202745704,True
+rel_genre_racing_32,Genre: Racing,Jahr-FE mit release_year_alt,91052,0.8293755103,adjustierte Odds Ratio,0.7613119122,0.9035242007,1.851493857e-05,True
+rel_genre_racing_33,Genre: Racing,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,0.8304666643,adjustierte Odds Ratio,0.7603734336,0.9070212741,3.64162109e-05,True
+rel_genre_racing_34,Genre: Racing,Jahr-FE mit market_entry_year,91052,0.8356339727,adjustierte Odds Ratio,0.7666493363,0.9108259842,4.413914844e-05,True
+rel_genre_simulation_35,Genre: Simulation,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,1.038796763,adjustierte Odds Ratio,0.9998106975,1.07930303,0.05114470292,True
+rel_genre_simulation_36,Genre: Simulation,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,1.033853721,adjustierte Odds Ratio,0.9940490647,1.075252273,0.09651173765,True
+rel_genre_simulation_37,Genre: Simulation,Jahr-FE mit release_year_alt,91052,1.03096229,adjustierte Odds Ratio,0.9922347459,1.071201394,0.1185447652,True
+rel_genre_simulation_38,Genre: Simulation,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,0.9970649288,adjustierte Odds Ratio,0.9583831762,1.037307934,0.8842379688,True
+rel_genre_simulation_39,Genre: Simulation,Jahr-FE mit market_entry_year,91052,1.031070433,adjustierte Odds Ratio,0.9921970679,1.07146682,0.1186517486,True
+rel_genre_sports_40,Genre: Sports,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,0.7552491418,adjustierte Odds Ratio,0.6977631881,0.8174711363,3.666034917e-12,True
+rel_genre_sports_41,Genre: Sports,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,0.7651842922,adjustierte Odds Ratio,0.7056284049,0.8297667682,9.554325517e-11,True
+rel_genre_sports_42,Genre: Sports,Jahr-FE mit release_year_alt,91052,0.7470617999,adjustierte Odds Ratio,0.6901519701,0.808664406,5.468169351e-13,True
+rel_genre_sports_43,Genre: Sports,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,0.7542197365,adjustierte Odds Ratio,0.6954418768,0.8179654259,9.502610683e-12,True
+rel_genre_sports_44,Genre: Sports,Jahr-FE mit market_entry_year,91052,0.7518002279,adjustierte Odds Ratio,0.6944002547,0.813944953,1.919618121e-12,True
+rel_genre_strategy_45,Genre: Strategy,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,1.346507623,adjustierte Odds Ratio,1.296528683,1.398413164,1.264818057e-53,True
+rel_genre_strategy_46,Genre: Strategy,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,1.334513339,adjustierte Odds Ratio,1.283615024,1.38742989,6.33442929e-48,True
+rel_genre_strategy_47,Genre: Strategy,Jahr-FE mit release_year_alt,91052,1.33799677,adjustierte Odds Ratio,1.288380375,1.389523925,1.557946995e-51,True
+rel_genre_strategy_48,Genre: Strategy,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,1.315085701,adjustierte Odds Ratio,1.264827329,1.367341108,3.505264823e-43,True
+rel_genre_strategy_49,Genre: Strategy,Jahr-FE mit market_entry_year,91052,1.335948585,adjustierte Odds Ratio,1.286114464,1.38771367,2.01432857e-50,True
+rel_single_player_50,Spielmodus: Singleplayer,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,0.692866347,adjustierte Odds Ratio,0.6420443069,0.7477112867,3.723579799e-21,True
+rel_single_player_51,Spielmodus: Singleplayer,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,0.7121418021,adjustierte Odds Ratio,0.6584881897,0.7701671105,1.990720086e-17,True
+rel_single_player_52,Spielmodus: Singleplayer,Jahr-FE mit release_year_alt,91052,0.6974879523,adjustierte Odds Ratio,0.6462661306,0.7527695181,2.089900239e-20,True
+rel_single_player_53,Spielmodus: Singleplayer,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,0.6976546284,adjustierte Odds Ratio,0.6451223094,0.7544646548,1.988197582e-19,True
+rel_single_player_54,Spielmodus: Singleplayer,Jahr-FE mit market_entry_year,91052,0.699674203,adjustierte Odds Ratio,0.6481109054,0.7553398442,6.031432877e-20,True
+rel_multi_player_55,Spielmodus: Multiplayer,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,1.702959281,adjustierte Odds Ratio,1.639654859,1.768707784,5.195612091e-167,True
+rel_multi_player_56,Spielmodus: Multiplayer,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,1.661988428,adjustierte Odds Ratio,1.59831756,1.728195701,2.594991137e-143,True
+rel_multi_player_57,Spielmodus: Multiplayer,Jahr-FE mit release_year_alt,91052,1.696256039,adjustierte Odds Ratio,1.633361414,1.761572501,2.012267979e-165,True
+rel_multi_player_58,Spielmodus: Multiplayer,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,1.616129087,adjustierte Odds Ratio,1.553926538,1.680821557,5.532077312e-127,True
+rel_multi_player_59,Spielmodus: Multiplayer,Jahr-FE mit market_entry_year,91052,1.652247811,adjustierte Odds Ratio,1.590481534,1.716412779,3.944470656e-147,True
+rel_coop_60,Spielmodus: Koop,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,2.022461162,adjustierte Odds Ratio,1.926891446,2.122770933,7.182083573e-179,True
+rel_coop_61,Spielmodus: Koop,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,1.977968829,adjustierte Odds Ratio,1.881927814,2.078911135,6.768532592e-159,True
+rel_coop_62,Spielmodus: Koop,Jahr-FE mit release_year_alt,91052,2.00974108,adjustierte Odds Ratio,1.914864762,2.109318261,4.606055217e-176,True
+rel_coop_63,Spielmodus: Koop,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,1.88697253,adjustierte Odds Ratio,1.793824939,1.984956979,1.87640984e-133,True
+rel_coop_64,Spielmodus: Koop,Jahr-FE mit market_entry_year,91052,1.949955097,adjustierte Odds Ratio,1.857238046,2.047300769,5.261041554e-159,True
+rel_pvp_65,Spielmodus: PvP,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,1.485254477,adjustierte Odds Ratio,1.418338408,1.555327593,1.785915316e-63,True
+rel_pvp_66,Spielmodus: PvP,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,1.433141827,adjustierte Odds Ratio,1.366361777,1.503185709,1.932078544e-49,True
+rel_pvp_67,Spielmodus: PvP,Jahr-FE mit release_year_alt,91052,1.439120121,adjustierte Odds Ratio,1.374015702,1.507309357,1.358479738e-53,True
+rel_pvp_68,Spielmodus: PvP,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,1.427902362,adjustierte Odds Ratio,1.361242052,1.49782704,2.689130118e-48,True
+rel_pvp_69,Spielmodus: PvP,Jahr-FE mit market_entry_year,91052,1.440186781,adjustierte Odds Ratio,1.374919962,1.508551786,1.282385194e-53,True
+rel_mmo_70,Spielmodus: MMO,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,3.444011048,adjustierte Odds Ratio,2.985634098,3.972761465,1.364527837e-64,True
+rel_mmo_71,Spielmodus: MMO,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,3.206084307,adjustierte Odds Ratio,2.759088398,3.725497375,3.137467714e-52,True
+rel_mmo_72,Spielmodus: MMO,Jahr-FE mit release_year_alt,91052,3.201043983,adjustierte Odds Ratio,2.770515408,3.698475219,3.806019418e-56,True
+rel_mmo_73,Spielmodus: MMO,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,3.281291274,adjustierte Odds Ratio,2.828669453,3.80633814,1.765689745e-55,True
+rel_mmo_74,Spielmodus: MMO,Jahr-FE mit market_entry_year,91052,3.298074617,adjustierte Odds Ratio,2.856054627,3.808504248,2.09532077e-59,True
+rel_mac_75,Plattform: macOS,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,1.375232742,adjustierte Odds Ratio,1.323884578,1.428572496,1.591007413e-60,True
+rel_mac_76,Plattform: macOS,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,1.400591854,adjustierte Odds Ratio,1.347016249,1.456298351,2.724963905e-64,True
+rel_mac_77,Plattform: macOS,Jahr-FE mit release_year_alt,91052,1.403296617,adjustierte Odds Ratio,1.351148263,1.457457668,7.590719941e-69,True
+rel_mac_78,Plattform: macOS,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,1.366710044,adjustierte Odds Ratio,1.314367373,1.421137181,2.084021841e-55,True
+rel_mac_79,Plattform: macOS,Jahr-FE mit market_entry_year,91052,1.346827775,adjustierte Odds Ratio,1.296259168,1.399369124,1.663741237e-52,True
+rel_linux_80,Plattform: Linux,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,1.222365345,adjustierte Odds Ratio,1.170298319,1.276748853,1.555635023e-19,True
+rel_linux_81,Plattform: Linux,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,1.244608832,adjustierte Odds Ratio,1.190400204,1.30128602,5.919328752e-22,True
+rel_linux_82,Plattform: Linux,Jahr-FE mit release_year_alt,91052,1.253343824,adjustierte Odds Ratio,1.200345215,1.308682471,1.262620464e-24,True
+rel_linux_83,Plattform: Linux,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,1.218548236,adjustierte Odds Ratio,1.1652204,1.27431669,4.837047101e-18,True
+rel_linux_84,Plattform: Linux,Jahr-FE mit market_entry_year,91052,1.196083143,adjustierte Odds Ratio,1.144807237,1.249655697,1.15339287e-15,True
+rel_multi_platform_85,Mehr als eine Plattform,"Hauptmodell (Jahr-FE, Steam-Jahr)",91052,1.298130023,adjustierte Odds Ratio,1.252248889,1.345692196,7.71193078e-46,True
+rel_multi_platform_86,Mehr als eine Plattform,ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87573,1.320868917,adjustierte Odds Ratio,1.273057129,1.370476357,1.598903595e-49,True
+rel_multi_platform_87,Mehr als eine Plattform,Jahr-FE mit release_year_alt,91052,1.326408056,adjustierte Odds Ratio,1.279728183,1.374790642,7.178742025e-54,True
+rel_multi_platform_88,Mehr als eine Plattform,ohne EA-Absolventen-Proxy (früherer Markteintritt),88449,1.295523198,adjustierte Odds Ratio,1.248541555,1.344272724,6.006764074e-43,True
+rel_multi_platform_89,Mehr als eine Plattform,Jahr-FE mit market_entry_year,91052,1.274267851,adjustierte Odds Ratio,1.228979274,1.321225338,2.303993783e-39,True
+rel_is_free_90,kostenlos (Listenpreis 0),"Hauptmodell (Jahr-FE, Steam-Jahr)",91018,1.809825678,adjustierte Odds Ratio,1.726777762,1.896867714,2.912737356e-135,True
+rel_is_free_91,kostenlos (Listenpreis 0),ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),87544,1.789011753,adjustierte Odds Ratio,1.705208479,1.876933579,8.121180716e-125,True
+rel_is_free_92,kostenlos (Listenpreis 0),Jahr-FE mit release_year_alt,91018,1.801613438,adjustierte Odds Ratio,1.718800506,1.888416352,9.112103391e-133,True
+rel_is_free_93,kostenlos (Listenpreis 0),ohne EA-Absolventen-Proxy (früherer Markteintritt),88415,1.845074017,adjustierte Odds Ratio,1.758956923,1.935407334,3.306857015e-139,True
+rel_is_free_94,kostenlos (Listenpreis 0),Jahr-FE mit market_entry_year,91018,1.801308746,adjustierte Odds Ratio,1.718376752,1.88824319,2.909579742e-132,True
+rel_has_discount_95,Rabatt aktiv (kostenpflichtig),"Hauptmodell (Jahr-FE, Steam-Jahr)",81525,2.455815815,adjustierte Odds Ratio,2.372850642,2.541681812,0,True
+rel_has_discount_96,Rabatt aktiv (kostenpflichtig),ohne release_shifted (IGDB-Jahr < Steam-Jahr − 1),78368,2.454453789,adjustierte Odds Ratio,2.369360153,2.542603494,0,True
+rel_has_discount_97,Rabatt aktiv (kostenpflichtig),Jahr-FE mit release_year_alt,81525,2.419303221,adjustierte Odds Ratio,2.337897281,2.503543727,0,True
+rel_has_discount_98,Rabatt aktiv (kostenpflichtig),ohne EA-Absolventen-Proxy (früherer Markteintritt),79131,2.376028864,adjustierte Odds Ratio,2.293853788,2.461147782,0,True
+rel_has_discount_99,Rabatt aktiv (kostenpflichtig),Jahr-FE mit market_entry_year,81525,2.431988683,adjustierte Odds Ratio,2.349672747,2.517188387,0,True

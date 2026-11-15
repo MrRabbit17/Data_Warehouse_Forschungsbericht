@@ -1,2 +1,5 @@
 __pycache__/
 *.py[cod]
+# Rohdaten (ca. 400 MB) werden ueber kagglehub geladen und per SHA-256 geprueft;
+# eine lokale Kopie unter data/raw/ wird nicht versioniert.
+data/raw/
