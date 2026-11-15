@@ -1,15 +1,20 @@
-﻿Schritt,Basis,N,Anteil_am_Rohdatensatz,Entfernt_gegenueber_Vorzeile
-Rohdatensatz,sequenzielle Bereinigung,125855,1.0,0.0
-Besitzerangabe vorhanden (nicht '0 - 0'),sequenzielle Bereinigung,101276,0.8047038258313138,24579.0
-Veroeffentlichung 1997-2025,sequenzielle Bereinigung,100976,0.8023201303086885,300.0
-ohne Demo/Playtest/Soundtrack/DLC usw.,sequenzielle Bereinigung,100874,0.801509673830996,102.0
-ohne Software/Utilities,sequenzielle Bereinigung,99799,0.7929680982082555,1075.0
-Analysestichprobe (ohne Namens-/Editionsduplikate),sequenzielle Bereinigung,99397,0.7897739462079377,402.0
-"Teilstichprobe: mind. 10 Reviews (F3, Bewertungsanalysen)",Teilmenge der Analysestichprobe,55806,0.44341504111874774,
-Teilstichprobe: mind. 50 Reviews (Robustheit F3),Teilmenge der Analysestichprobe,30214,0.24006992173533034,
-Teilstichprobe: FronkonGames-Metacritic vorhanden (nur Vergleich),Teilmenge der Analysestichprobe,4169,0.0331254221127488,
-Teilstichprobe: Peak CCU > 0 (ergaenzende Zielgroesse),Teilmenge der Analysestichprobe,19301,0.15335902427396608,
-Teilstichprobe: IGDB-Match vorhanden,Teilmenge der Analysestichprobe,66354,0.5272257756942513,
-Teilstichprobe: externe Metacritic-Daten vorhanden,Teilmenge der Analysestichprobe,3056,0.024281911723809144,
-Teilstichprobe: Preishistorie vorhanden,Teilmenge der Analysestichprobe,645,0.005124945373644273,
-Teilstichprobe: alle vier Datenquellen vorhanden,Teilmenge der Analysestichprobe,290,0.002304239005204402,
+﻿Kennung,Schritt,Basis,N,Anteil_am_Rohdatensatz,Entfernt_gegenueber_Vorzeile,Anteil_an_Analysestichprobe
+raw,Rohdatensatz,sequenzielle Bereinigung,125855,1,0,
+owners_present,Besitzerangabe vorhanden (nicht '0 - 0'),sequenzielle Bereinigung,101276,0.8047038258,24579,
+released_before_cutoff,Veröffentlichung 1997 bis vor dem SteamSpy-Stichtag (01.06.2025),sequenzielle Bereinigung,93414,0.7422351118,7862,
+steamspy_present,SteamSpy-Daten vorhanden (ohne SteamSpy-Lücke: 0 Reviews trotz Steam-Recommendations),sequenzielle Bereinigung,92477,0.7347900362,937,
+no_non_game_name,ohne Demo/Playtest/Soundtrack/DLC/Testserver usw.,sequenzielle Bereinigung,92376,0.7339875253,101,
+no_software,ohne Software (Software-Genre ohne Steam-Standardgenre),sequenzielle Bereinigung,91154,0.7242779389,1222,
+analytic_sample,Analysestichprobe (ohne Duplikate: Name + Jahr + Entwickler),sequenzielle Bereinigung,91052,0.7234674824,102,
+removed_after_cutoff,darunter entfernt: veröffentlicht ab dem SteamSpy-Stichtag (01.06.2025),Information zur Zeile 'Veröffentlichung',7862,0.062468714,,
+removed_after_cutoff_with_steamspy,davon trotzdem mit SteamSpy-Daten (v. a. Early-Access-Absolventen mit späterem Store-Datum),Information zur Zeile 'Veröffentlichung',580,0.00460847801,,
+removed_before_1997_or_no_date,darunter entfernt: vor 1997 oder ohne Release-Datum,Information zur Zeile 'Veröffentlichung',0,0,,
+rating_sample,Teilstichprobe: mind. 10 Reviews (Bewertungsanalysen),Teilmenge der Analysestichprobe,55408,0.4402526717,,0.6085313887
+rating_sample_50,Teilstichprobe: mind. 50 Reviews (Robustheit),Teilmenge der Analysestichprobe,29943,0.2379166501,,0.3288560383
+meta_sample,Teilstichprobe: FronkonGames-Metacritic vorhanden (nur Vergleich),Teilmenge der Analysestichprobe,4095,0.03253744388,,0.0449743004
+peak_sample,Teilstichprobe: Peak CCU > 0 (ergänzende Zielgröße),Teilmenge der Analysestichprobe,18387,0.1460966986,,0.201939551
+igdb_sample,Teilstichprobe: IGDB-Match vorhanden,Teilmenge der Analysestichprobe,70747,0.5621310238,,0.776995563
+mc_external_sample,Teilstichprobe: externe Metacritic-Daten vorhanden,Teilmenge der Analysestichprobe,4070,0.03233880259,,0.04469973202
+price_history_sample,Teilstichprobe: Preishistorie vorhanden,Teilmenge der Analysestichprobe,573,0.004552858448,,0.006293107235
+multi_source_sample,Teilstichprobe: alle vier Datenquellen vorhanden,Teilmenge der Analysestichprobe,324,0.002574391164,,0.003558406185
+sample_with_owners_zero,Sensitivitätsstichprobe: Analysestichprobe plus Einträge mit '0 - 0',Erweiterung der Analysestichprobe,98241,0.7805887728,,1.078954883

@@ -1,0 +1,3 @@
+﻿Basis,N,N_FG,N_extern,N_beide,N_beide_Stufe1,N_beide_Stufe2,N_nur_FG,N_nur_FG_Name_im_MC_PC_Teil,N_nur_extern,N_exakt_gleich,Anteil_exakt_gleich,Spearman_rho,Median_abs_Diff,Max_abs_Diff
+Analysestichprobe,91052,4095,4070,2728,2120,608,1367,175,1342,2657,0.973973607,0.9924393694,0,34
+alle aufbereiteten Spiele,125855,4258,4224,2769,2153,616,1489,231,1455,2691,0.9718309859,0.9925413575,0,34

@@ -1,6 +1,8 @@
-﻿Rabattgruppe,N,Erfolgsquote,CI_unten,CI_oben,Median_Besitzer
-kein Rabatt,49615,0.17543081729315732,0.17210934746472625,0.17880254299670265,10000.0
-1-25 %,4972,0.18181818181818182,0.17134437643938213,0.19278327389176655,10000.0
-26-50 %,14568,0.2565211422295442,0.2494943764021807,0.2636762808515854,10000.0
-51-75 %,12491,0.3624209430790169,0.35403451656394763,0.3708919651903558,10000.0
-76-100 %,8191,0.4491515077524112,0.4384059466883165,0.45994474085263853,10000.0
+﻿Kennung,Rabattgruppe,Basis,N,Anteil_an_Basis,Erfolgsquote,CI_unten,CI_oben,Erfolgsquote_standardisiert,CI_unten_std,CI_oben_std,Anteil_ab_100k,Anteil_ab_1Mio,Mittleres_Alter,Hinweis
+d0,kein Rabatt,"nur kostenpflichtige Spiele (Listenpreis > 0, ohne Preisausreißer > 100 USD)",45557,0.5588101809,0.1901354347,0.1865582531,0.1937648688,0.1974688207,0.1940224961,0.2009151452,0.04249621353,0.003292578528,4.126077112,"Rabatt zum Store-Snapshot (ca. März 2026), teils nicht erfasst: Untergrenze"
+d1_25,1-25 %,"nur kostenpflichtige Spiele (Listenpreis > 0, ohne Preisausreißer > 100 USD)",3214,0.03942348973,0.2678904792,0.2528636181,0.2834715249,0.3371712959,0.3178374684,0.3565051234,0.09116365899,0.01337896702,2.282938395,"Rabatt zum Store-Snapshot (ca. März 2026), teils nicht erfasst: Untergrenze"
+d26_50,26-50 %,"nur kostenpflichtige Spiele (Listenpreis > 0, ohne Preisausreißer > 100 USD)",12753,0.1564305428,0.2872265349,0.2794386304,0.2951425841,0.3212804576,0.3127632994,0.3297976157,0.1020152121,0.01285971928,3.102685486,"Rabatt zum Store-Snapshot (ca. März 2026), teils nicht erfasst: Untergrenze"
+d51_75,51-75 %,"nur kostenpflichtige Spiele (Listenpreis > 0, ohne Preisausreißer > 100 USD)",11981,0.1469610549,0.3766797429,0.3680440961,0.3853944446,0.3561300837,0.3481823921,0.3640777753,0.1622569068,0.0308822302,4.496210083,"Rabatt zum Store-Snapshot (ca. März 2026), teils nicht erfasst: Untergrenze"
+d76_100,76-100 %,"nur kostenpflichtige Spiele (Listenpreis > 0, ohne Preisausreißer > 100 USD)",8020,0.09837473168,0.4582294264,0.4473474076,0.4691514411,0.3546646685,0.3447358427,0.3645934943,0.2093516209,0.03990024938,5.738408978,"Rabatt zum Store-Snapshot (ca. März 2026), teils nicht erfasst: Untergrenze"
+d_any,Rabatt aktiv (1-100 %),"nur kostenpflichtige Spiele (Listenpreis > 0, ohne Preisausreißer > 100 USD)",35968,0.4411898191,0.3534252669,0.348500918,0.3583809214,0.3531845617,0.348443952,0.3579251714,0.1450455961,0.02493883452,4.081323538,"Rabatt zum Store-Snapshot (ca. März 2026), teils nicht erfasst: Untergrenze"
+paid_all,alle kostenpflichtigen Spiele,"nur kostenpflichtige Spiele (Listenpreis > 0, ohne Preisausreißer > 100 USD)",81525,1,0.2621772462,0.2591694112,0.2652074926,0.2638442824,0.2609963486,0.2666922163,0.08773995707,0.01284268629,4.106332291,"Erfolgsquote der Analysestichprobe insgesamt: 27,6 %"

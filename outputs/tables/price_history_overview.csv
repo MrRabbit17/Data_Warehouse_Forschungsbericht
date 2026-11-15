@@ -1,13 +1,21 @@
-﻿Preismerkmal,Quartil,N,Erfolgsquote,CI_unten,CI_oben,Median_Besitzer
-Maximaler Rabatt,Q1 (niedrig),162,0.6790123456790124,0.603691568067858,0.7460400395315959,150000.0
-Maximaler Rabatt,Q2,161,0.9254658385093167,0.8742496167888762,0.9568519821664048,350000.0
-Maximaler Rabatt,Q3,161,0.9813664596273292,0.9466544229682271,0.9936430065067258,1500000.0
-Maximaler Rabatt,Q4 (hoch),161,0.9937888198757764,0.9656604381231965,0.9989027314672388,1500000.0
-Anteil Monate mit Rabatt,Q1 (niedrig),162,0.8641975308641975,0.8029444927922917,0.9085784330134938,350000.0
-Anteil Monate mit Rabatt,Q2,161,0.9316770186335404,0.8818100526848196,0.9614244163282026,750000.0
-Anteil Monate mit Rabatt,Q3,161,0.9751552795031055,0.9378676444810962,0.9902969149361153,750000.0
-Anteil Monate mit Rabatt,Q4 (hoch),161,0.8074534161490683,0.7396712252594928,0.8609058425987028,750000.0
-Preisänderungen,Q1 (niedrig),162,0.6111111111111112,0.5342978115628693,0.6827769793609298,35000.0
-Preisänderungen,Q2,161,0.9813664596273292,0.9466544229682271,0.9936430065067258,750000.0
-Preisänderungen,Q3,161,0.9937888198757764,0.9656604381231965,0.9989027314672388,1500000.0
-Preisänderungen,Q4 (hoch),161,0.9937888198757764,0.9656604381231965,0.9989027314672388,1500000.0
+﻿Preismerkmal,Variable,Basis,Quartil,N,Wert_min,Wert_max,Erfolgsquote,CI_unten,CI_oben,Anteil_ab_100k,Anteil_ab_1Mio,Mittleres_Alter,Median_Monate
+Preisänderungen je Monat,ph_price_changes_per_month,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q1 (niedrig),111,0.08333333333,1.260869565,0.990990991,0.9507266674,0.9984079145,0.954954955,0.4684684685,6.350504505,23
+Preisänderungen je Monat,ph_price_changes_per_month,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q2,99,1.291666667,1.434782609,0.9898989899,0.9449846854,0.9982146927,0.9595959596,0.5353535354,6.107868687,23
+Preisänderungen je Monat,ph_price_changes_per_month,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q3,112,1.458333333,1.583333333,0.9910714286,0.9511515317,0.9984221453,0.9464285714,0.6428571429,6.317044643,24
+Preisänderungen je Monat,ph_price_changes_per_month,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q4 (hoch),112,1.608695652,2.304347826,1,0.9668386529,1,0.9464285714,0.5267857143,4.876946429,23
+Anteil Monate mit Rabatt,ph_share_months_on_sale,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q1 (niedrig),116,0,0.7916666667,1,0.9679454935,1,0.974137931,0.4655172414,6.182672414,24
+Anteil Monate mit Rabatt,ph_share_months_on_sale,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q2,106,0.8260869565,0.875,0.9905660377,0.948486452,0.9983327283,0.9433962264,0.5377358491,6.442169811,24
+Anteil Monate mit Rabatt,ph_share_months_on_sale,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q3,94,0.9130434783,0.9166666667,0.9893617021,0.942177087,0.9981196043,0.9042553191,0.5957446809,6.083861702,24
+Anteil Monate mit Rabatt,ph_share_months_on_sale,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q4 (hoch),118,0.9565217391,1,0.9915254237,0.9535544276,0.9985024595,0.9745762712,0.5847457627,5.011601695,23
+Rabatttage je Monat,ph_days_on_sale_per_month,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q1 (niedrig),108,0,5.041666667,0.9907407407,0.9494065448,0.9983636391,0.9537037037,0.4814814815,6.109666667,23
+Rabatttage je Monat,ph_days_on_sale_per_month,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q2,105,5.083333333,5.958333333,1,0.9647059231,1,0.9047619048,0.5047619048,5.938590476,24
+Rabatttage je Monat,ph_days_on_sale_per_month,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q3,113,6,7.458333333,1,0.9671224678,1,0.982300885,0.5486725664,5.819123894,23
+Rabatttage je Monat,ph_days_on_sale_per_month,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q4 (hoch),108,7.5,15.75,0.9814814815,0.934980952,0.9949067757,0.962962963,0.6388888889,5.762546296,24
+Mittlerer monatlicher Maximalrabatt,ph_mean_monthly_max_discount_pct,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q1 (niedrig),108,0,39.80914813,0.9907407407,0.9494065448,0.9983636391,0.9074074074,0.3333333333,3.765861111,23
+Mittlerer monatlicher Maximalrabatt,ph_mean_monthly_max_discount_pct,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q2,109,40.45118631,53.78585724,0.9908256881,0.9498543754,0.9983786687,0.9266055046,0.4403669725,5.233568807,24
+Mittlerer monatlicher Maximalrabatt,ph_mean_monthly_max_discount_pct,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q3,108,54.35688557,66.15310963,0.9907407407,0.9494065448,0.9983636391,0.9814814815,0.6111111111,7.240861111,24
+Mittlerer monatlicher Maximalrabatt,ph_mean_monthly_max_discount_pct,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q4 (hoch),109,66.26656664,88.29029967,1,0.9659570262,1,0.9908256881,0.7889908257,7.377311927,24
+Maximaler Rabatt,ph_max_discount_pct,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q1 (niedrig),107,0,60.01000167,0.9813084112,0.9343961469,0.9948590352,0.9158878505,0.3925233645,3.990962617,23
+Maximaler Rabatt,ph_max_discount_pct,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q2,107,60.01500375,72.03601801,1,0.965342762,1,0.9158878505,0.476635514,5.12128972,24
+Maximaler Rabatt,ph_max_discount_pct,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q3,113,75.01250208,80.04002001,0.9911504425,0.9515691321,0.9984361239,0.982300885,0.592920354,7.063575221,24
+Maximaler Rabatt,ph_max_discount_pct,"Preishistorie, volles Fenster (Beginn Nov. oder Dez. 2023 bis Okt. 2025)",Q4 (hoch),107,80.05336891,96.69889963,1,0.965342762,1,0.9906542056,0.7102803738,7.384271028,23
