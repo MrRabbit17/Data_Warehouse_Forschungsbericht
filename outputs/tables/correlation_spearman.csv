@@ -1,18 +1,108 @@
-﻿Variable,log_owners,log_peak_ccu,release_year,n_platforms,n_genres,price,discount,dlc_count,wilson,positive_ratio,review_count,metacritic,mc_metascore,igdb_rating,igdb_aggregated_rating,ph_max_discount_pct,ph_share_months_on_sale
-log_owners,1.0,0.4689506193398493,-0.3248325861376052,0.10152825515486319,-0.00818149925320082,-0.03830078201739136,0.16973294219617405,0.2541539793637752,0.34995176260973077,-0.03899002596380821,0.5831532637012952,0.31444499121171476,0.3073868642101969,0.24112631947014868,0.2704588195386852,0.5001266019780789,0.05010112808185349
-log_peak_ccu,0.4689506193398493,1.0,-0.08538375157878293,0.0946427900714193,-0.011962423496709201,0.15157319655202633,0.221536686147955,0.2956524754749194,0.466227020530291,0.062333755947230944,0.5211987722420008,0.4471930201331014,0.4329882098501918,0.3391226226296071,0.369896932170375,0.19674463860237598,0.012491784961556267
-release_year,-0.3248325861376052,-0.08538375157878293,1.0,-0.12318943753674776,0.0422010255843169,0.16337221796305398,-0.007527449864678207,-0.0707815934981376,-0.05494915967077534,0.2515311053540284,-0.46907239009097135,0.19854709753420527,0.16843772055297965,0.1769724520022465,0.17649698880784906,-0.7102062553165415,-0.030772422081534356
-n_platforms,0.10152825515486319,0.0946427900714193,-0.12318943753674776,1.0,0.014808627160364391,0.02633979554671789,0.04883877412467079,0.11408327740793955,0.17811340285894794,0.07545886429847583,0.1270087997519648,0.04762478893233384,0.10531143544792301,0.10468486189022333,0.055090701397912535,0.1363049275215999,0.022983467997061306
-n_genres,-0.00818149925320082,-0.011962423496709201,0.0422010255843169,0.014808627160364391,1.0,-0.0033121446028920526,0.0002244473369618994,0.01538494031034485,-0.031104311573482136,-0.059652467077034387,0.029943086102757605,-0.036553595685419764,0.012966939047184293,-0.07202414199350565,0.007658419916827914,-0.19732043460721305,0.025956645074946653
-price,-0.03830078201739136,0.15157319655202633,0.16337221796305398,0.02633979554671789,-0.0033121446028920526,1.0,-0.07871788037489091,0.09862934888764979,0.0736668612316325,0.0686262845695553,-0.010378213828024768,0.23047328462667013,0.1898748615551458,0.1914441357482935,0.17765686219189553,-0.5973184708012511,-0.17107174913218764
-discount,0.16973294219617405,0.221536686147955,-0.007527449864678207,0.04883877412467079,0.0002244473369618994,-0.07871788037489091,1.0,0.15732413864160488,0.20383340746665957,-0.00016991138886342626,0.2236219266285692,-0.04225640450329151,-0.0744820696825413,0.09972261799250165,0.031749842743088785,0.7734661424929209,0.09539363333895066
-dlc_count,0.2541539793637752,0.2956524754749194,-0.0707815934981376,0.11408327740793955,0.01538494031034485,0.09862934888764979,0.15732413864160488,1.0,0.2923669654746485,0.04148239709525219,0.280694368015749,0.19591466292744844,0.16850036368254961,0.22925488801135638,0.18932382160187325,0.26391763250295164,0.016105347955811155
-wilson,0.34995176260973077,0.466227020530291,-0.05494915967077534,0.17811340285894794,-0.031104311573482136,0.0736668612316325,0.20383340746665957,0.2923669654746485,1.0,0.5288187394834036,0.7303792920112679,0.6142307049513558,0.6401242123541089,0.6558792215193417,0.45957197618511164,-0.11293875094632132,0.07736656264989873
-positive_ratio,-0.03899002596380821,0.062333755947230944,0.2515311053540284,0.07545886429847583,-0.059652467077034387,0.0686262845695553,-0.00016991138886342626,0.04148239709525219,0.5288187394834036,1.0,-0.07493230023133612,0.5836207487521338,0.6191671594415205,0.6479559302904174,0.40725625515652736,-0.14712024964159223,0.0750591442378515
-review_count,0.5831532637012952,0.5211987722420008,-0.46907239009097135,0.1270087997519648,0.029943086102757605,-0.010378213828024768,0.2236219266285692,0.280694368015749,0.7303792920112679,-0.07493230023133612,1.0,0.39228010714720346,0.40480037292780446,0.34027772307429627,0.3313379042762982,0.45241161142492997,0.04073192107041641
-metacritic,0.31444499121171476,0.4471930201331014,0.19854709753420527,0.04762478893233384,-0.036553595685419764,0.23047328462667013,-0.04225640450329151,0.19591466292744844,0.6142307049513558,0.5836207487521338,0.39228010714720346,1.0,0.9948180356970293,0.5893260357566987,0.7257508304012602,-0.1360435471222572,0.03303513213464997
-mc_metascore,0.3073868642101969,0.4329882098501918,0.16843772055297965,0.10531143544792301,0.012966939047184293,0.1898748615551458,-0.0744820696825413,0.16850036368254961,0.6401242123541089,0.6191671594415205,0.40480037292780446,0.9948180356970293,1.0,0.6116921463115838,0.741418291700338,-0.07135929485556426,-0.043335926588869346
-igdb_rating,0.24112631947014868,0.3391226226296071,0.1769724520022465,0.10468486189022333,-0.07202414199350565,0.1914441357482935,0.09972261799250165,0.22925488801135638,0.6558792215193417,0.6479559302904174,0.34027772307429627,0.5893260357566987,0.6116921463115838,1.0,0.4413565872635436,-0.03108761829027899,0.028506430153985664
-igdb_aggregated_rating,0.2704588195386852,0.369896932170375,0.17649698880784906,0.055090701397912535,0.007658419916827914,0.17765686219189553,0.031749842743088785,0.18932382160187325,0.45957197618511164,0.40725625515652736,0.3313379042762982,0.7257508304012602,0.741418291700338,0.4413565872635436,1.0,-0.21145627496529623,-0.056233397296148735
-ph_max_discount_pct,0.5001266019780789,0.19674463860237598,-0.7102062553165415,0.1363049275215999,-0.19732043460721305,-0.5973184708012511,0.7734661424929209,0.26391763250295164,-0.11293875094632132,-0.14712024964159223,0.45241161142492997,-0.1360435471222572,-0.07135929485556426,-0.03108761829027899,-0.21145627496529623,1.0,0.09955985252920263
-ph_share_months_on_sale,0.05010112808185349,0.012491784961556267,-0.030772422081534356,0.022983467997061306,0.025956645074946653,-0.17107174913218764,0.09539363333895066,0.016105347955811155,0.07736656264989873,0.0750591442378515,0.04073192107041641,0.03303513213464997,-0.043335926588869346,0.028506430153985664,-0.056233397296148735,0.09955985252920263,1.0
+﻿Matrix,Basis,Variable_1,Variable_2,rho,N
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_owners,log_peak_ccu,0.4892221424,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_owners,release_year,-0.2715660244,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_owners,n_platforms,0.09575738658,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_owners,n_genres,-0.05150673685,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_owners,dlc_count,0.2759869774,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_owners,list_price,0.2141574744,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_owners,discount,0.2226481075,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_owners,positive_ratio,0.0002178237756,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_owners,wilson,0.281438388,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_peak_ccu,release_year,0.06031816681,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_peak_ccu,n_platforms,0.05293105717,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_peak_ccu,n_genres,-0.05237936397,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_peak_ccu,dlc_count,0.2969243457,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_peak_ccu,list_price,0.3936845644,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_peak_ccu,discount,0.2040581996,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_peak_ccu,positive_ratio,0.1632783357,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",log_peak_ccu,wilson,0.4163436273,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",release_year,n_platforms,-0.1700567902,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",release_year,n_genres,0.09305045658,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",release_year,dlc_count,-0.01027983867,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",release_year,list_price,0.07470393401,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",release_year,discount,-0.05575914572,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",release_year,positive_ratio,0.2774220599,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",release_year,wilson,0.1431700785,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",n_platforms,n_genres,0.00694823427,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",n_platforms,dlc_count,0.1121727243,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",n_platforms,list_price,0.03312126629,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",n_platforms,discount,0.02206041776,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",n_platforms,positive_ratio,0.1113087878,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",n_platforms,wilson,0.1520946917,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",n_genres,dlc_count,0.001538616498,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",n_genres,list_price,-0.04136198686,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",n_genres,discount,-0.02920068536,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",n_genres,positive_ratio,-0.07828389177,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",n_genres,wilson,-0.07732152646,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",dlc_count,list_price,0.255205701,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",dlc_count,discount,0.1471912693,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",dlc_count,positive_ratio,0.09290337711,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",dlc_count,wilson,0.2442672425,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",list_price,discount,0.3525594574,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",list_price,positive_ratio,0.0564388887,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",list_price,wilson,0.20383654,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",discount,positive_ratio,-0.01588880214,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",discount,wilson,0.09981785726,48260
+Steam,"Bewertungsstichprobe (>= 10 Reviews), kostenpflichtig, ohne Preisausreißer, vollständige Fälle",positive_ratio,wilson,0.8741881287,48260
+IGDB,"IGDB-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,release_year,-0.2562234389,70747
+IGDB,"IGDB-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,positive_ratio,-0.005637104767,45115
+IGDB,"IGDB-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,igdb_rating,0.2413813584,13480
+IGDB,"IGDB-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,igdb_aggregated_rating,0.2788925799,5530
+IGDB,"IGDB-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,igdb_n_genres,0.1887543629,67669
+IGDB,"IGDB-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",release_year,positive_ratio,0.2882237784,45115
+IGDB,"IGDB-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",release_year,igdb_rating,0.1681545282,13480
+IGDB,"IGDB-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",release_year,igdb_aggregated_rating,0.1629241944,5530
+IGDB,"IGDB-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",release_year,igdb_n_genres,-0.0340094949,67669
+IGDB,"IGDB-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",positive_ratio,igdb_rating,0.6418820195,13401
+IGDB,"IGDB-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",positive_ratio,igdb_aggregated_rating,0.4227831505,5465
+IGDB,"IGDB-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",positive_ratio,igdb_n_genres,0.0595097834,43855
+IGDB,"IGDB-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",igdb_rating,igdb_aggregated_rating,0.4454640273,4118
+IGDB,"IGDB-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",igdb_rating,igdb_n_genres,0.128930319,13351
+IGDB,"IGDB-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",igdb_aggregated_rating,igdb_n_genres,0.0623979045,5525
+Metacritic,"externe Metacritic-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,release_year,-0.2048178527,4070
+Metacritic,"externe Metacritic-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,positive_ratio,0.2367316489,4053
+Metacritic,"externe Metacritic-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,mc_metascore,0.3468404283,4070
+Metacritic,"externe Metacritic-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,mc_user_score,0.2288047114,3789
+Metacritic,"externe Metacritic-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",release_year,positive_ratio,0.1050239433,4053
+Metacritic,"externe Metacritic-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",release_year,mc_metascore,0.112551489,4070
+Metacritic,"externe Metacritic-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",release_year,mc_user_score,-0.1017560129,3789
+Metacritic,"externe Metacritic-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",positive_ratio,mc_metascore,0.5846209409,4053
+Metacritic,"externe Metacritic-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",positive_ratio,mc_user_score,0.6068966007,3774
+Metacritic,"externe Metacritic-Teilstichprobe, paarweise (Positive Ratio nur ab 10 Reviews)",mc_metascore,mc_user_score,0.5291514095,3789
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,release_year,-0.4439687044,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,positive_ratio,0.1451990221,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,ph_base_price,0.03378409581,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,ph_price_changes_per_month,0.03759769712,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,ph_share_months_on_sale,0.1039806346,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,ph_days_on_sale_per_month,0.1141967917,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,ph_mean_monthly_max_discount_pct,0.3126589561,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",log_owners,ph_max_discount_pct,0.2347986654,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",release_year,positive_ratio,-0.08346458921,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",release_year,ph_base_price,0.2249988102,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",release_year,ph_price_changes_per_month,0.1210193608,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",release_year,ph_share_months_on_sale,0.08461820314,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",release_year,ph_days_on_sale_per_month,0.0621536417,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",release_year,ph_mean_monthly_max_discount_pct,-0.4542415999,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",release_year,ph_max_discount_pct,-0.4404233492,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",positive_ratio,ph_base_price,-0.3326837355,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",positive_ratio,ph_price_changes_per_month,0.01084583783,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",positive_ratio,ph_share_months_on_sale,0.04304249408,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",positive_ratio,ph_days_on_sale_per_month,-0.06762630315,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",positive_ratio,ph_mean_monthly_max_discount_pct,-0.1441373122,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",positive_ratio,ph_max_discount_pct,-0.1415338487,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",ph_base_price,ph_price_changes_per_month,0.01294819686,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",ph_base_price,ph_share_months_on_sale,0.1261120669,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",ph_base_price,ph_days_on_sale_per_month,0.08117599815,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",ph_base_price,ph_mean_monthly_max_discount_pct,0.2046691214,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",ph_base_price,ph_max_discount_pct,0.08463957198,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",ph_price_changes_per_month,ph_share_months_on_sale,0.6514012954,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",ph_price_changes_per_month,ph_days_on_sale_per_month,0.5734862963,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",ph_price_changes_per_month,ph_mean_monthly_max_discount_pct,0.3172258196,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",ph_price_changes_per_month,ph_max_discount_pct,0.1219141092,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",ph_share_months_on_sale,ph_days_on_sale_per_month,0.6678649035,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",ph_share_months_on_sale,ph_mean_monthly_max_discount_pct,0.419775761,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",ph_share_months_on_sale,ph_max_discount_pct,0.0832196019,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",ph_days_on_sale_per_month,ph_mean_monthly_max_discount_pct,0.334145759,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",ph_days_on_sale_per_month,ph_max_discount_pct,0.1278579602,434
+Preishistorie,"Preishistorie mit vollem Fenster, paarweise (Positive Ratio nur ab 10 Reviews)",ph_mean_monthly_max_discount_pct,ph_max_discount_pct,0.8195623017,434
+"Steam, nur Peak > 0","wie Steam-Matrix, nur Peak CCU > 0 (in der Steam-Matrix sind 67,7 % der Fälle Peak = 0)",log_owners,log_peak_ccu,0.5647265103,15582

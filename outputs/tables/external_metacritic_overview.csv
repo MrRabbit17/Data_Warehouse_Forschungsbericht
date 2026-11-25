@@ -1,9 +1,9 @@
-﻿Bewertungsmaß,Quartil,N,Erfolgsquote,CI_unten,CI_oben,Median_Besitzer
-Metacritic-Kritikerscore,Q1 (niedrig),764,0.8547120418848168,0.8279492409093001,0.8779256422110284,150000.0
-Metacritic-Kritikerscore,Q2,764,0.900523560209424,0.8772551906496253,0.9197843452722216,150000.0
-Metacritic-Kritikerscore,Q3,764,0.8926701570680629,0.8687240500567552,0.9126872596705458,350000.0
-Metacritic-Kritikerscore,Q4 (hoch),764,0.9057591623036649,0.8829645757903092,0.9244937775945684,750000.0
-Metacritic-Nutzerscore,Q1 (niedrig),764,0.8520942408376964,0.8251609141136101,0.8755045602752031,150000.0
-Metacritic-Nutzerscore,Q2,764,0.8848167539267016,0.8602291143180951,0.9055539692146597,150000.0
-Metacritic-Nutzerscore,Q3,764,0.9162303664921466,0.894442087837239,0.9338539004737001,350000.0
-Metacritic-Nutzerscore,Q4 (hoch),764,0.900523560209424,0.8772551906496253,0.9197843452722216,350000.0
+﻿Bewertungsmaß,Variable,Basis,Quartil,N,Wert_min,Wert_max,Erfolgsquote,CI_unten,CI_oben,Anteil_ab_100k,Anteil_ab_1Mio,Mittleres_Alter
+Metacritic-Kritikerscore,mc_metascore,externe Metacritic-Teilstichprobe,Q1 (niedrig),1000,19,67,0.82,0.7949777671,0.8425731075,0.472,0.066,7.952419
+Metacritic-Kritikerscore,mc_metascore,externe Metacritic-Teilstichprobe,Q2,1066,68,74,0.8902439024,0.8700594833,0.9076258393,0.595684803,0.1285178236,7.203552533
+Metacritic-Kritikerscore,mc_metascore,externe Metacritic-Teilstichprobe,Q3,1062,75,80,0.9058380414,0.8867810852,0.9219695905,0.6854990584,0.1798493409,6.671002825
+Metacritic-Kritikerscore,mc_metascore,externe Metacritic-Teilstichprobe,Q4 (hoch),942,81,96,0.9299363057,0.9118295336,0.9445507746,0.8025477707,0.364118896,6.77694586
+Metacritic-Nutzerscore,mc_user_score,externe Metacritic-Teilstichprobe mit Nutzerscore,Q1 (niedrig),951,0.9,6.2,0.880126183,0.8579378356,0.8992559303,0.5615141956,0.1335436383,6.71680021
+Metacritic-Nutzerscore,mc_user_score,externe Metacritic-Teilstichprobe mit Nutzerscore,Q2,1008,6.3,7.1,0.9047619048,0.8850731544,0.9213772958,0.6418650794,0.1537698413,7.225485119
+Metacritic-Nutzerscore,mc_user_score,externe Metacritic-Teilstichprobe mit Nutzerscore,Q3,869,7.2,7.7,0.9240506329,0.9045107325,0.9398579585,0.7215189873,0.1864211738,7.520311853
+Metacritic-Nutzerscore,mc_user_score,externe Metacritic-Teilstichprobe mit Nutzerscore,Q4 (hoch),961,7.8,9.7,0.9427679501,0.9262425616,0.95576763,0.7845993757,0.3017689906,8.143554631

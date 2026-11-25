@@ -1,0 +1,14 @@
+﻿Kennung,Art,Merkmal,IGDB,Steam,Stichprobe,N,Anteil_IGDB,Anteil_Steam,N_beide,N_nur_IGDB,N_nur_Steam,Anteil_identisch,Kappa,PABAK
+agree_igdb_singleplayer_single_player,Modus,Singleplayer,igdb_singleplayer,single_player,IGDB-Treffer mit Modusangabe,57663,0.9653157137,0.9641884744,55404,259,194,0.9921440092,0.8844904571,0.9842880183
+agree_igdb_multiplayer_multi_player,Modus,Multiplayer,igdb_multiplayer,multi_player,IGDB-Treffer mit Modusangabe,57663,0.1936943968,0.1988796976,10674,495,794,0.9776459775,0.929154124,0.955291955
+agree_igdb_coop_coop,Modus,Koop,igdb_coop,coop,IGDB-Treffer mit Modusangabe,57663,0.1108683211,0.107347866,5549,844,641,0.9742469174,0.8675343117,0.9484938349
+agree_igdb_mmo_mmo,Modus,MMO,igdb_mmo,mmo,IGDB-Treffer mit Modusangabe,57663,0.0155559024,0.008393597281,436,461,48,0.9911728491,0.6273633563,0.9823456983
+agree_igdb_genre_adventure_genre_adventure,Genre,Adventure,igdb_genre_adventure,genre_adventure,IGDB-Treffer mit Genreangabe,67669,0.4449895816,0.4217145222,27335,2777,1202,0.941199072,0.8803368178,0.8823981439
+agree_igdb_genre_indie_genre_indie,Genre,Indie,igdb_genre_indie,genre_indie,IGDB-Treffer mit Genreangabe,67669,0.7895639067,0.7822045545,51709,1720,1222,0.9565236667,0.8708243245,0.9130473333
+agree_igdb_genre_racing_genre_racing,Genre,Racing,igdb_genre_racing,genre_racing,IGDB-Treffer mit Genreangabe,67669,0.04015132483,0.03837798697,2482,235,115,0.9948277646,0.9314458619,0.9896555291
+agree_igdb_genre_role_playing_rpg_genre_rpg,Genre,RPG,igdb_genre_role_playing_rpg,genre_rpg,IGDB-Treffer mit Genreangabe,67669,0.1660435354,0.181220352,9958,1278,2305,0.9470510869,0.8155623216,0.8941021738
+agree_igdb_genre_simulator_genre_simulation,Genre,Simulation/Simulator,igdb_genre_simulator,genre_simulation,IGDB-Treffer mit Genreangabe,67669,0.2156231066,0.2062096381,13203,1388,751,0.9683902526,0.9050489219,0.9367805051
+agree_igdb_genre_sport_genre_sports,Genre,Sports/Sport,igdb_genre_sport,genre_sports,IGDB-Treffer mit Genreangabe,67669,0.04675700838,0.04564867221,2929,235,160,0.9941627629,0.9337707838,0.9883255257
+agree_igdb_strategy_any_genre_strategy,Genre,"Strategy (Strategy, RTS, TBS)",igdb_strategy_any,genre_strategy,IGDB-Treffer mit Genreangabe,67669,0.2164358864,0.2038747432,13183,1463,613,0.9693212549,0.9076105622,0.9386425099
+agree_igdb_action_like_genre_action,Genre,"Action (näherungsweise: Shooter, Fighting, Hack and slash, Platform)",igdb_action_like,genre_action,IGDB-Treffer mit Genreangabe,67669,0.1347736778,0.4356056688,7587,1533,21890,0.6538592265,0.2358299005,0.3077184531
+agree_igdb_mmo_genre_massively_multiplayer,Modus/Genre,MMO (IGDB-Modus) vs. Steam-Genre Massively Multiplayer,igdb_mmo,genre_massively_multiplayer,IGDB-Treffer mit Modusangabe,57663,0.0155559024,0.01881622531,756,141,329,0.9918491927,0.7587570785,0.9836983854

@@ -1,5 +1,5 @@
-﻿Kriterium,Schwelle_owners_low,Anteil_der_analysestichprobe
-Top 25 % (oberes Quartil),20000.0,0.2547964224272362
-Top 10 % (Perzentilschwelle),50000.0,0.14102035272694347
-Mindestens 100.000 Besitzer,100000.0,0.08766864191072166
-Peak CCU oberes Quartil,,0.2522667219315061
+﻿Kennung,Kriterium,Variable,Schwelle,Basis,N_Basis,N_erfolgreich,Anteil,Anteil_an_Analysestichprobe,Hinweis
+success_top25,Oberes Quartil: mind. 20.000 Besitzer (Hauptdefinition),owners_low,20000,Analysestichprobe,91052,25127,0.2759631859,0.2759631859,75-%-Quantil von owners_low = 20.000; wegen der Besitzerklassen weicht der Anteil von 25 % ab
+success_50k,Mindestens 50.000 Besitzer (Robustheit),owners_low,50000,Analysestichprobe,91052,13896,0.1526160875,0.1526160875,"90-%-Quantil von owners_low = 50.000; keine 'Top 10 %', sondern der tatsächliche Anteil"
+success_100k,Mindestens 100.000 Besitzer (Robustheit),owners_low,100000,Analysestichprobe,91052,8626,0.09473707332,0.09473707332,
+success_peak_top25,"Peak CCU oberes Quartil (nur Spiele mit Peak CCU > 0; nur dokumentiert, nicht ausgewertet)",peak_ccu,15,Analysestichprobe mit Peak CCU > 0,18387,4624,0.2514820253,0.05078416729,"in keiner Analyse verwendet; Peak CCU wird zweiteilig ausgewertet (Peak > 0 und Intensität). Peak CCU = gleichzeitige Spieler am Vortag des SteamSpy-Abrufs (ca. Anfang Juni 2025), kein Allzeit-Peak; außerhalb von Peak CCU > 0 nicht definiert"

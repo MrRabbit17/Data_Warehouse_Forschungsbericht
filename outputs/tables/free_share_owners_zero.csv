@@ -1,0 +1,5 @@
+﻿Kennung,Basis,N,N_kostenlos,Anteil_kostenlos,N_F2P_Tag,Anteil_F2P_Tag,Erfolgsquote,Hinweis
+raw,Rohdatensatz (alle Einträge),125855,26622,0.2115291407,12605,0.1001549402,,"inkl. Nicht-Spiele, Software, Releases ab Stichtag"
+with_owners_zero,Analysestichprobe + Einträge mit Besitzer „0 - 0“,98241,15513,0.1579075946,10183,0.1036532609,0.2557689763,„0 - 0“ als Nicht-Erfolg gezählt
+analytic,Analysestichprobe (ohne „0 - 0“),91052,9306,0.1022053332,5599,0.06149233405,0.2759631859,Primäranalyse
+owners_zero_only,nur Einträge mit Besitzer „0 - 0“,7189,6207,0.8634024204,4584,0.6376408402,0,in der Primäranalyse ausgeschlossen
